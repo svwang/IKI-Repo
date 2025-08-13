@@ -1,0 +1,87 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Kegiatan Perusahaan IKISHIPYARD
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col items-center py-10 px-4">
+  <h1 class="text-3xl font-extrabold mb-10 text-center max-w-6xl w-full">
+   Kegiatan Perusahaan
+  </h1>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl w-full">
+   <!-- Image 1 -->
+   <div class="cursor-pointer group rounded-lg overflow-hidden shadow-md bg-white">
+    <img alt="Photo showing Kegiatan Perusahaan 1 activity with shipyard workers and equipment" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" src="image/kegiatan1.jpg" tabindex="0"/>
+   </div>
+   <!-- Image 2 -->
+   <div class="cursor-pointer group rounded-lg overflow-hidden shadow-md bg-white">
+    <img alt="Photo showing Kegiatan Perusahaan 2 activity with shipbuilding process and cranes" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" src="image/kegiatan2.jpg" tabindex="0"/>
+   </div>
+   <!-- Image 3 -->
+   <div class="cursor-pointer group rounded-lg overflow-hidden shadow-md bg-white">
+    <img alt="Photo showing Kegiatan Perusahaan 3 activity with shipyard infrastructure and workers" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" src="image/kegiatan3.jpg" tabindex="0"/>
+   </div>
+   <!-- Image 4 -->
+   <div class="cursor-pointer group rounded-lg overflow-hidden shadow-md bg-white">
+    <img alt="Photo showing Kegiatan Perusahaan 4 activity with shipyard machinery and workers" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" src="image/kegiatan4.jpg" tabindex="0"/>
+   </div>
+   <!-- Image 5 -->
+   <div class="cursor-pointer group rounded-lg overflow-hidden shadow-md bg-white">
+    <img alt="Photo showing Kegiatan Perusahaan 5 activity with shipyard dock and vessels" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" src="image/kegiatan5.jpg" tabindex="0"/>
+   </div>
+  </div>
+  <!-- Modal for enlarged image -->
+  <div aria-modal="true" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" id="image-modal" role="dialog">
+   <button aria-label="Close image modal" class="absolute top-4 right-4 text-white text-3xl font-bold focus:outline-none" id="modal-close">
+    ×
+   </button>
+   <img alt="" class="max-w-full max-h-full rounded-lg shadow-lg" id="modal-image" src=""/>
+  </div>
+  <script>
+   const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalClose = document.getElementById('modal-close');
+
+    document.querySelectorAll('div.cursor-pointer img').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modalImage.alt = img.alt;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+      img.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          img.click();
+        }
+      });
+    });
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modalImage.src = '';
+      modalImage.alt = '';
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  </script>
+ </body>
+</html>

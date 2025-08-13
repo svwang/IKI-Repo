@@ -1,171 +1,90 @@
-<html lang="id">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Sumber Daya Manusia - Ikishi Shipyard
-  </title>
-  <script src="https://cdn.tailwindcss.com">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sumber Daya Manusia IKISHIPYARD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center py-10 px-4">
+  <h1 class="text-3xl font-extrabold mb-10 text-center max-w-6xl w-full">
+    Sumber Daya Manusia
+  </h1>
+  <div class="max-w-6xl w-full flex flex-col md:flex-row gap-10">
+    <!-- Text list and totals -->
+    <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+      <div>
+        <h2 class="text-xl font-semibold mb-6">Bidang Sumber Daya Manusia</h2>
+        <ul class="list-disc list-inside space-y-3 text-gray-800 text-lg mb-8">
+          <li>Manajemen</li>
+          <li>Teknisi</li>
+          <li>Operator</li>
+          <li>Administrasi</li>
+          <li>Lainnya</li>
+        </ul>
+      </div>
+      <div class="border-t border-gray-300 pt-4 text-gray-700 text-base space-y-1">
+        <p><span class="font-semibold">Total Employee:</span> 357 Person</p>
+        <p><span class="font-semibold">Makassar:</span> 280 Person</p>
+        <p><span class="font-semibold">Bitung:</span> 77 Person</p>
+      </div>
+    </div>
+    <!-- Chart and explanation -->
+    <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+      <canvas id="sdmChart" class="w-full max-w-md" aria-label="Chart showing distribution of Sumber Daya Manusia categories" role="img"></canvas>
+      <div class="mt-6 w-full max-w-md text-gray-700 text-base space-y-2">
+        <p><span class="font-semibold">Penjelasan Diagram:</span></p>
+        <ul class="list-disc list-inside">
+          <li>Produksi = 53.6%</li>
+          <li>Produksi Tak Langsung = 20.87%</li>
+          <li>Administrasi = 25.53%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('sdmChart').getContext('2d');
+    const sdmChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Produksi', 'Produksi Tak Langsung', 'Administrasi'],
+        datasets: [{
+          label: 'Persentase',
+          data: [53.6, 20.87, 25.53],
+          backgroundColor: [
+            '#2563EB', // blue-600
+            '#60A5FA', // blue-400
+            '#1E40AF'  // blue-800
+          ],
+          borderWidth: 1,
+          borderColor: '#fff',
+          hoverOffset: 20
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              font: {
+                size: 14,
+                weight: 'bold'
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed + '%';
+              }
+            }
+          }
+        }
+      }
+    });
   </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
-  <style>
-   body {
-      font-family: "Poppins", sans-serif;
-    }
-  </style>
- </head>
- <body class="bg-gray-100 min-h-screen flex flex-col">
-  <!-- Header -->
-  <header class="bg-white shadow sticky top-0 z-50">
-   <div class="container mx-auto flex items-center justify-between px-6 py-4 md:py-5">
-    <a class="flex items-center space-x-3" href="#">
-     <img alt="Ikishi Shipyard logo, blue and white shipyard emblem" class="w-12 h-12 object-contain" src="https://placehold.co/48x48/png?text=Logo"/>
-     <span class="text-2xl font-semibold text-blue-700">
-      Ikishi Shipyard
-     </span>
-    </a>
-    <nav aria-label="Primary Navigation" class="hidden md:flex space-x-10 font-semibold text-gray-700 text-lg">
-     <a class="hover:text-blue-700 transition" href="#">
-      Beranda
-     </a>
-     <a class="hover:text-blue-700 transition" href="#">
-      Profil
-     </a>
-     <a class="hover:text-blue-700 transition" href="#">
-      Produk
-     </a>
-     <a aria-current="page" class="text-blue-700 border-b-4 border-blue-700 pb-1 transition font-extrabold" href="#">
-      Sumber Daya Manusia
-     </a>
-     <a class="hover:text-blue-700 transition" href="#">
-      Kontak
-     </a>
-    </nav>
-    <button aria-label="Toggle menu" class="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-700" id="menu-btn">
-     <i class="fas fa-bars fa-lg">
-     </i>
-    </button>
-   </div>
-   <nav aria-label="Mobile Navigation" class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
-    <a class="block px-6 py-3 text-gray-700 font-medium hover:bg-blue-50 border-b border-gray-200" href="#">
-     Beranda
-    </a>
-    <a class="block px-6 py-3 text-gray-700 font-medium hover:bg-blue-50 border-b border-gray-200" href="#">
-     Profil
-    </a>
-    <a class="block px-6 py-3 text-gray-700 font-medium hover:bg-blue-50 border-b border-gray-200" href="#">
-     Produk
-    </a>
-    <a class="block px-6 py-3 text-blue-700 font-semibold border-l-4 border-blue-700 bg-blue-50" href="#">
-     Sumber Daya Manusia
-    </a>
-    <a class="block px-6 py-3 text-gray-700 font-medium hover:bg-blue-50 border-t border-gray-200" href="#">
-     Kontak
-    </a>
-   </nav>
-  </header>
-  <!-- Hero -->
-  
-  <!-- Content vertical stack -->
-  <main class="container mx-auto px-6 py-12 space-y-16 max-w-4xl">
-   <!-- Tim Profesional -->
-   <section class="bg-white rounded-xl shadow-lg p-8">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-4 border-blue-700 inline-block pb-1">
-     Tim Profesional Kami
-    </h2>
-    <p class="text-gray-700 leading-relaxed mb-8 text-lg">
-     Ikishi Shipyard didukung oleh tenaga kerja yang ahli dan berpengalaman di bidang pembuatan kapal. Setiap anggota tim kami memiliki keahlian khusus yang memastikan setiap kapal yang kami produksi memenuhi standar kualitas tertinggi.
-    </p>
-    <div class="space-y-12">
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Engineer inspecting ship blueprint with safety helmet and tablet in shipyard" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Engineer+Inspecting+Ship+Blueprint+with+Helmet+and+Tablet"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Insinyur Kapal
-       </h3>
-       <p class="text-gray-600 mt-2 text-lg max-w-xl">
-        Merancang dan memastikan struktur kapal sesuai dengan standar keselamatan dan efisiensi.
-       </p>
-      </div>
-     </div>
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Skilled welder working on ship hull with sparks flying in a shipyard workshop" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Skilled+Welder+Working+on+Ship+Hull+with+Sparks"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Tukang Las
-       </h3>
-       <p class="text-gray-600 mt-2 text-lg max-w-xl">
-        Mengelas bagian kapal dengan presisi tinggi untuk memastikan kekuatan dan ketahanan.
-       </p>
-      </div>
-     </div>
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Shipyard supervisor overseeing work with clipboard and safety vest in shipyard" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Shipyard+Supervisor+Overseeing+Work+with+Clipboard"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Supervisor Lapangan
-       </h3>
-       <p class="text-gray-600 mt-2 text-lg max-w-xl">
-        Memastikan proses produksi berjalan lancar dan sesuai jadwal.
-       </p>
-      </div>
-     </div>
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Ship painter applying protective coating on ship hull with spray gun" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Ship+Painter+Applying+Protective+Coating"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Pelukis Kapal
-       </h3>
-       <p class="text-gray-600 mt-2 text-lg max-w-xl">
-        Melindungi kapal dari korosi dengan cat dan pelapis berkualitas tinggi.
-       </p>
-      </div>
-     </div>
-    </div>
-   </section>
-   <!-- Pelatihan dan Pengembangan -->
-   <section class="bg-white rounded-xl shadow-lg p-8">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-4 border-blue-700 inline-block pb-1">
-     Pelatihan dan Pengembangan
-    </h2>
-    <p class="text-gray-700 leading-relaxed mb-8 text-lg max-w-3xl mx-auto text-center">
-     Kami berkomitmen untuk terus meningkatkan kemampuan sumber daya manusia kami melalui pelatihan rutin dan pengembangan keterampilan. Hal ini memastikan bahwa setiap pekerja kami selalu mengikuti teknologi terbaru dan praktik terbaik di industri kapal.
-    </p>
-    <img alt="Training session for shipyard workers with instructor explaining shipbuilding techniques" class="rounded-xl shadow-md w-full object-cover max-w-4xl mx-auto" loading="lazy" src="https://placehold.co/900x320/png?text=Training+Session+for+Shipyard+Workers+with+Instructor"/>
-   </section>
-   <!-- Keselamatan Kerja -->
-   <section class="bg-white rounded-xl shadow-lg p-8">
-    <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-4 border-blue-700 inline-block pb-1">
-     Keselamatan Kerja
-    </h2>
-    <p class="text-gray-700 leading-relaxed mb-8 text-lg max-w-3xl mx-auto text-center">
-     Keselamatan adalah prioritas utama kami. Semua pekerja dilengkapi dengan alat pelindung diri dan mengikuti prosedur keselamatan yang ketat untuk memastikan lingkungan kerja yang aman dan sehat.
-    </p>
-    <div class="space-y-12 max-w-4xl mx-auto">
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Worker wearing safety helmet and vest in shipyard environment" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Worker+Wearing+Safety+Helmet+and+Vest"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Alat Pelindung Diri
-       </h3>
-      </div>
-     </div>
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Safety signage and instructions posted in shipyard for workers" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Safety+Signage+and+Instructions+Posted+in+Shipyard"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Petunjuk Keselamatan
-       </h3>
-      </div>
-     </div>
-     <div class="flex flex-col md:flex-row md:space-x-8 items-center">
-      <img alt="Emergency drill for shipyard workers practicing safety procedures" class="rounded-xl shadow-md object-cover w-full md:w-64 h-48" loading="lazy" src="https://placehold.co/320x220/png?text=Emergency+Drill+for+Shipyard+Workers"/>
-      <div class="mt-4 md:mt-0 text-center md:text-left">
-       <h3 class="font-semibold text-2xl text-blue-700">
-        Latihan Darurat
-       </h3>
-      </div>
-     </div>
-    </div>
-   </section>
+</body>
+</html>
