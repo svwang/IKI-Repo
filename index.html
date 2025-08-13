@@ -1,627 +1,530 @@
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Ikishi Shipyard
-  </title>
-  <link rel="icon" href="img/logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css">
- </head>
- <body class="bg-gray-50 text-gray-800">
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed w-full z-30 border-b border-gray-200" role="navigation">
-        <div class="max-w-8xl mx-auto px-6 py-4 flex items-center justify-between flex-nowrap">      
-            <!-- Logo & Text -->
-            <a href="#" class="flex flex-col items-start flex-shrink-0">
-            <div class="flex flex-row items-center space-x-5 mb-2">
-                <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" class="rounded-lg object-contain" style="width: 100px;"/>
-                <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-14 h-14 rounded-lg object-contain" />
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Ikishi Shipyard</title>
+    <link rel="icon" href="img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-30 border-b border-gray-200" role="navigation">
+      <div class="max-w-8xl mx-auto px-6 py-4 flex items-center justify-between flex-nowrap">
+        <!-- Logo & Text -->
+        <a href="#" class="flex flex-col items-start flex-shrink-0">
+          <div class="flex flex-row items-center space-x-5 mb-2">
+            <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" class="rounded-lg object-contain" style="width: 100px" />
+            <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-14 h-14 rounded-lg object-contain" />
+          </div>
+          <span class="font-semibold text-blue-900 tracking-wide select-none text-center leading-tight text-base md:text-lg"> PT INDUSTRI KAPAL INDONESIA (Persero) </span>
+          <p class="text-xs md:text-sm text-gray-600 text-center mt-1">Shipbuilding. Docking & Related Industry</p>
+        </a>
+
+        <!-- Menu Utama -->
+        <ul class="hidden md:flex space-x-5 font-semibold text-gray-700 text-base lg:text-lg flex-shrink-0" role="menubar">
+          <li><a href="#" class="hover:text-blue-600 transition">Beranda</a></li>
+
+          <!-- Dropdown Perusahaan -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Perusahaan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50">
+              <div class="grid grid-cols-3 gap-x-8">
+                <a href="profile.html" class="block py-3 border-b border-gray-200">Profil</a>
+                <a href="sejarah.html" class="block py-3 border-b border-gray-200">Sejarah</a>
+                <a href="visi&misi.html" class="block py-3 border-b border-gray-200">Visi Misi</a>
+
+                <a href="manajemen.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Manajemen</a>
+                <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Struktur Organisasi</a>
+                <a href="kegiatan_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Kegiatan Perusahaan</a>
+
+                <a href="sdm.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Sumber Daya Manusia</a>
+                <a href="fasilitas.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Fasilitas</a>
+                <a href="peralatan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Peralatan</a>
+
+                <a href="parnert_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Partner Perusahaan</a>
+                <a href="klien_kami.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Klien Kami</a>
+                <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lokasi</a>
+
+                <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lain-lainnya</a>
+              </div>
             </div>
-            <span class="font-semibold text-blue-900 tracking-wide select-none text-center leading-tight text-base md:text-lg">
-                PT INDUSTRI KAPAL INDONESIA (Persero)
-            </span>
-            <p class="text-xs md:text-sm text-gray-600 text-center mt-1">
-                Shipbuilding. Docking & Related Industry
-            </p>
+          </li>
+
+          <!-- Dropdown Produk -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Produk</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100">Bangunan Baru</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Perbaikan</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Stell Construction & Related Industry</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Fiberglass</a>
+            </div>
+          </li>
+
+          <!-- Dropdown Pelanggan -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Pelanggan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Regitrasi Pelanggan</a>
+              <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100">Ketersediaan Dock</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download Form</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hubungi Kami</a>
+            </div>
+          </li>
+
+          <!-- Dropdown Informasi -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Informasi</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Berita</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Karir</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Customer Testimonials</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Galery</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Lelang</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kementrian BUMN</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Whistleblower</a>
+            </div>
+          </li>
+
+          <li><a href="#e-ppid" class="hover:text-blue-600 transition">E-PPID</a></li>
+        </ul>
+
+        <!-- Language Selector -->
+        <div class="relative group hidden md:block flex-shrink-0">
+          <button class="flex items-center space-x-5 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition">
+            <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3" />
+            <span class="text-sm font-medium text-gray-700">ID</span>
+            <i class="fas fa-chevron-down text-gray-500 text-xs"></i>
+          </button>
+          <div class="absolute right-0 mt-2 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform -translate-y-2 transition-all z-50">
+            <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
+              <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+              <span class="text-sm text-gray-700">ID</span>
             </a>
-
-            <!-- Menu Utama -->
-            <ul class="hidden md:flex space-x-5 font-semibold text-gray-700 text-base lg:text-lg flex-shrink-0" role="menubar">
-                <li><a href="#" class="hover:text-blue-600 transition">Beranda</a></li>
-
-                <!-- Dropdown Perusahaan -->
-                <li class="relative" data-dd>
-                  <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                      <span>Perusahaan</span>
-                      <i class="fas fa-chevron-down text-xs"></i>
-                  </button>
-
-                  <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50">
-                      <div class="grid grid-cols-3 gap-x-8">
-                      <a href="profile.html" class="block py-3 border-b border-gray-200">Profil</a>
-                      <a href="sejarah.html" class="block py-3 border-b border-gray-200">Sejarah</a>
-                      <a href="visi&misi.html" class="block py-3 border-b border-gray-200">Visi Misi</a>
-                      
-                      <a href="manajemen.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Manajemen</a>
-                      <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Struktur Organisasi</a>
-                      <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Kegiatan Perusahaan</a>
-                      
-                      <a href="sdm.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Sumber Daya Manusia</a>
-                      <a href="fasilitas.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Fasilitas</a>
-                      <a href="peralatan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Peralatan</a>
-                      
-                      <a href="parnert_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Partner Perusahaan</a>
-                      <a href="klien_kami.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Klien Kami</a>
-                      <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lokasi</a>
-
-                      <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lain-lainnya</a>
-                      </div>
-                  </div>
-                </li>
-
-                <!-- Dropdown Produk -->
-                <li class="relative" data-dd>
-                    <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Produk</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-
-                    <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100">Bangunan Baru</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Perbaikan</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Stell Construction & Related Industry</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Fiberglass</a>
-                    </div>
-                </li>
-
-                <!-- Dropdown Pelanggan -->
-                <li class="relative" data-dd>
-                    <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Pelanggan</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-
-                    <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Regitrasi Pelanggan</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Ketersediaan Dock</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download Form</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hubungi Kami</a>
-                    </div>
-                </li>
-
-                <!-- Dropdown Informasi -->
-                <li class="relative" data-dd>
-                    <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Informasi</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-
-                    <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Berita</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Karir</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Customer Testimonials</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Galery</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Lelang</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kementrian BUMN</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Whistleblower</a>
-                    </div>
-                </li>
-
-                <li><a href="#e-ppid" class="hover:text-blue-600 transition">E-PPID</a></li>
-            </ul>
-
-
-            <!-- Language Selector -->
-            <div class="relative group hidden md:block flex-shrink-0">
-            <button class="flex items-center space-x-5 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition">
-                <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3">
-                <span class="text-sm font-medium text-gray-700">ID</span>
-                <i class="fas fa-chevron-down text-gray-500 text-xs"></i>
-            </button>
-            <div class="absolute right-0 mt-2 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform -translate-y-2 transition-all z-50">
-                <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
-                <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3">
-                <span class="text-sm text-gray-700">ID</span>
-                </a>
-                <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
-                <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3">
-                <span class="text-sm text-gray-700">EN</span>
-                </a>
-            </div>
-            </div>
-
-            <!-- Hamburger Button -->
-            <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden focus:outline-none text-gray-700 hover:text-blue-600" id="menu-btn">
-            <i class="fas fa-bars fa-lg"></i>
-            </button>
+            <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
+              <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+              <span class="text-sm text-gray-700">EN</span>
+            </a>
+          </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-white shadow-md border-t border-gray-200" id="mobile-menu">
-            <ul class="flex flex-col space-y-4 px-6 py-6 font-semibold text-gray-700 text-lg" role="menu">
-                <li><a href="#" class="block hover:text-blue-600 transition">Beranda</a></li>
-                
-                <!-- Perusahaan Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Perusahaan</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="profile.html" class="block">Profil</a>
-                        <a href="#" class="block">Sejarah</a>
-                        <a href="#" class="block">Visi Misi</a>
-                        <a href="#" class="block">Manajemen</a>
-                        <a href="#" class="block">Struktur Organisasi</a>
-                        <a href="#" class="block">Kegiatan Perusahaan</a>
-                        <a href="#" class="block">Sumber Daya Manusia</a>
-                        <a href="#" class="block">Fasilitas</a>
-                        <a href="#" class="block">Peralatan</a>
-                        <a href="#" class="block">Partner Perusahaan</a>
-                        <a href="#" class="block">Klien Kami</a>
-                        <a href="#" class="block">Lokasi</a>
-                        <a href="#" class="block">Lain-lain</a>
-                    </div>
-                </li>
-                
-                <!-- Produk Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Produk</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="#" class="block">Bangunan Baru</a>
-                        <a href="#" class="block">Perbaikan</a>
-                        <a href="#" class="block">Stell Construction & Related Industry</a>
-                        <a href="#" class="block">Fiberglass</a>
-                    </div>
-                </li>
-                
-                <!-- Pelanggan Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Pelanggan</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="#" class="block">Regitrasi Pelanggan</a>
-                        <a href="#" class="block">Ketersediaan Dock</a>
-                        <a href="#" class="block">Download Form</a>
-                        <a href="#" class="block">Hubungi Kami</a>
-                    </div>
-                </li>
-                
-                <!-- Informasi Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Informasi</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="#" class="block">Berita</a>
-                        <a href="#" class="block">Karir</a>
-                        <a href="#" class="block">Customer Testimonials</a>
-                        <a href="#" class="block">Galery</a>
-                        <a href="#" class="block">Lelang</a>
-                        <a href="#" class="block">Kementrian BUMN</a>
-                        <a href="#" class="block">Download</a>
-                        <a href="#" class="block">Whistleblower</a>
-                    </div>
-                </li>
-                
-                <li><a href="#e-ppid" class="block hover:text-blue-600 transition">E-PPID</a></li>
-                
-                <!-- Language Selector Mobile -->
-                <li class="pt-4 border-t border-gray-200">
-                    <div class="flex items-center space-x-3">
-                        <span class="font-medium">Language:</span>
-                        <div class="flex space-x-2">
-                            <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
-                                <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3">
-                                <span class="text-sm">ID</span>
-                            </a>
-                            <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
-                                <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3">
-                                <span class="text-sm">EN</span>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+        <!-- Hamburger Button -->
+        <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden focus:outline-none text-gray-700 hover:text-blue-600" id="menu-btn">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="hidden md:hidden bg-white shadow-md border-t border-gray-200" id="mobile-menu">
+        <ul class="flex flex-col space-y-4 px-6 py-6 font-semibold text-gray-700 text-lg" role="menu">
+          <li><a href="#" class="block hover:text-blue-600 transition">Beranda</a></li>
+
+          <!-- Perusahaan Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Perusahaan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="profile.html" class="block">Profil</a>
+              <a href="#" class="block">Sejarah</a>
+              <a href="#" class="block">Visi Misi</a>
+              <a href="#" class="block">Manajemen</a>
+              <a href="#" class="block">Struktur Organisasi</a>
+              <a href="#" class="block">Kegiatan Perusahaan</a>
+              <a href="#" class="block">Sumber Daya Manusia</a>
+              <a href="#" class="block">Fasilitas</a>
+              <a href="#" class="block">Peralatan</a>
+              <a href="#" class="block">Partner Perusahaan</a>
+              <a href="#" class="block">Klien Kami</a>
+              <a href="#" class="block">Lokasi</a>
+              <a href="#" class="block">Lain-lain</a>
+            </div>
+          </li>
+
+          <!-- Produk Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Produk</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="#" class="block">Bangunan Baru</a>
+              <a href="#" class="block">Perbaikan</a>
+              <a href="#" class="block">Stell Construction & Related Industry</a>
+              <a href="#" class="block">Fiberglass</a>
+            </div>
+          </li>
+
+          <!-- Pelanggan Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Pelanggan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="#" class="block">Regitrasi Pelanggan</a>
+              <a href="#" class="block">Ketersediaan Dock</a>
+              <a href="#" class="block">Download Form</a>
+              <a href="#" class="block">Hubungi Kami</a>
+            </div>
+          </li>
+
+          <!-- Informasi Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Informasi</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="#" class="block">Berita</a>
+              <a href="#" class="block">Karir</a>
+              <a href="#" class="block">Customer Testimonials</a>
+              <a href="#" class="block">Galery</a>
+              <a href="#" class="block">Lelang</a>
+              <a href="#" class="block">Kementrian BUMN</a>
+              <a href="#" class="block">Download</a>
+              <a href="#" class="block">Whistleblower</a>
+            </div>
+          </li>
+
+          <li><a href="#e-ppid" class="block hover:text-blue-600 transition">E-PPID</a></li>
+
+          <!-- Language Selector Mobile -->
+          <li class="pt-4 border-t border-gray-200">
+            <div class="flex items-center space-x-3">
+              <span class="font-medium">Language:</span>
+              <div class="flex space-x-2">
+                <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
+                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                  <span class="text-sm">ID</span>
+                </a>
+                <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                  <span class="text-sm">EN</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-28 bg-gradient-to-r from-blue-600 to-blue-900 text-white" id="home">
+      <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2 space-y-8">
+          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
+            IKI Shipyard
+            <br />
+            <span class="text-red-500"> Membangun Kapal Terbaik </span>
+          </h1>
+          <p class="text-xl max-w-xl leading-relaxed font-medium">
+            PT Industri Kapal Indonesia (Persero) adalah galangan kapal terbesar di timur Indonesia yang fokus pada pembangunan dan perbaikan berbagai jenis kapal dengan teknologi modern dan tenaga ahli berpengalaman.
+          </p>
+          <a class="inline-block bg-red-500 text-blue-900 font-semibold px-10 py-4 rounded-3xl shadow-lg hover:bg-red-400 transition" href="#contact">
+            <div class="text-white">Hubungi Kami</div>
+          </a>
         </div>
-  </nav>
-    
-  <!-- Hero Section -->
-  <section class="pt-28 bg-gradient-to-r from-blue-600 to-blue-900 text-white" id="home">
-   <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
-    <div class="md:w-1/2 space-y-8">
-     <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
-      IKI Shipyard
-      <br/>
-      <span class="text-red-500">
-       Membangun Kapal Terbaik
-      </span>
-     </h1>
-     <p class="text-xl max-w-xl leading-relaxed font-medium">
-      PT Industri Kapal Indonesia (Persero) adalah galangan kapal terbesar di timur Indonesia yang fokus pada pembangunan dan perbaikan berbagai jenis kapal dengan teknologi modern dan tenaga ahli berpengalaman.
-     </p>
-     <a class="inline-block bg-red-500 text-blue-900 font-semibold px-10 py-4 rounded-3xl shadow-lg hover:bg-red-400 transition" href="#contact">
-      <div class="text-white">
-        Hubungi Kami
+        <div class="md:w-1/2">
+          <img alt="Modern shipyard with cranes and ships under construction during sunset, showing large vessels and workers" class="rounded-3xl shadow-2xl w-full object-cover" loading="lazy" src="img/thumnail1.jpg" />
+        </div>
       </div>
-     </a>
-    </div>
-    <div class="md:w-1/2">
-     <img alt="Modern shipyard with cranes and ships under construction during sunset, showing large vessels and workers" class="rounded-3xl shadow-2xl w-full object-cover" loading="lazy" src="img/thumnail1.jpg"/>
-    </div>
-   </div>
-  </section>
+    </section>
 
-  <!-- About Us Section -->
-  <section class="max-w-7xl mx-auto px-6 py-20" id="about">
-   <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center tracking-wide">
-    Tentang Kami
-   </h2>
-   <div class="grid md:grid-cols-2 gap-16 items-center">
-    <img alt="Shipyard workers welding and assembling a large ship hull in a modern facility with safety gear" data-aos="fade-right" class="rounded-3xl shadow-lg" loading="lazy" src="img/PT-Industri-Kapal-Indonesia.jpg"/>
-    <div class="space-y-6 text-gray-700 text-lg leading-relaxed font-medium" data-aos="fade-left">
-     <p>
-      Ikishi Shipyard adalah galangan kapal yang telah berpengalaman lebih
-          dari 30 tahun dalam industri pembuatan dan perbaikan kapal. Kami
-          mengutamakan kualitas, inovasi, dan keselamatan dalam setiap proyek
-          yang kami kerjakan.
-     </p>
-     <p>
-      Kami melayani pembangunan kapal komersial, kapal khusus, serta
-          perbaikan dan pemeliharaan kapal dengan tenaga ahli profesional dan
-          teknologi terkini.
-     </p>
-     <p>
-      Komitmen kami adalah memberikan solusi terbaik yang sesuai dengan
-          kebutuhan pelanggan dan standar internasional.
-     </p>
-    </div>
-   </div>
-  </section>
-
-  <!-- Services Section -->
-  <section class="bg-white py-20" id="services">
-   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">
-     Layanan Kami
-    </h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
-
-     <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
-      <div class="text-blue-700 text-6xl mb-8">
-       <i class="fas fa-ship">
-       </i>
+    <!-- About Us Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20" id="about">
+      <h2 class="text-4xl font-bold text-blue-900 mb-12 text-center tracking-wide">Tentang Kami</h2>
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <img alt="Shipyard workers welding and assembling a large ship hull in a modern facility with safety gear" data-aos="fade-right" class="rounded-3xl shadow-lg" loading="lazy" src="img/PT-Industri-Kapal-Indonesia.jpg" />
+        <div class="space-y-6 text-gray-700 text-lg leading-relaxed font-medium" data-aos="fade-left">
+          <p>Ikishi Shipyard adalah galangan kapal yang telah berpengalaman lebih dari 30 tahun dalam industri pembuatan dan perbaikan kapal. Kami mengutamakan kualitas, inovasi, dan keselamatan dalam setiap proyek yang kami kerjakan.</p>
+          <p>Kami melayani pembangunan kapal komersial, kapal khusus, serta perbaikan dan pemeliharaan kapal dengan tenaga ahli profesional dan teknologi terkini.</p>
+          <p>Komitmen kami adalah memberikan solusi terbaik yang sesuai dengan kebutuhan pelanggan dan standar internasional.</p>
+        </div>
       </div>
-      <h3 class="text-2xl font-semibold mb-4">
-       Pembuatan Kapal
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Layanan pembuatan kapal custom untuk kapal komersial dan pribadi
-            dengan teknologi dan material terbaru.
-      </p>
-     </div>
+    </section>
 
-     <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
-      <div class="text-blue-700 text-6xl mb-8">
-       <i class="fas fa-tools">
-       </i>
+    <!-- Services Section -->
+    <section class="bg-white py-20" id="services">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">Layanan Kami</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
+          <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
+            <div class="text-blue-700 text-6xl mb-8">
+              <i class="fas fa-ship"> </i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4">Pembuatan Kapal</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Layanan pembuatan kapal custom untuk kapal komersial dan pribadi dengan teknologi dan material terbaru.</p>
+          </div>
+
+          <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
+            <div class="text-blue-700 text-6xl mb-8">
+              <i class="fas fa-tools"> </i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4">Perbaikan Kapal</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Layanan perbaikan dan pemeliharaan kapal secara menyeluruh untuk menjaga performa dan keamanan kapal Anda.</p>
+          </div>
+
+          <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
+            <div class="text-blue-700 text-6xl mb-8">
+              <i class="fas fa-cogs"> </i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4">Engineering</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Solusi engineering inovatif termasuk desain, retrofit, dan integrasi sistem kapal.</p>
+          </div>
+
+          <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
+            <div class="text-blue-700 text-6xl mb-8">
+              <i class="fas fa-water"> </i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4">Docking &amp; Dry Dock</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Fasilitas docking modern untuk inspeksi, perbaikan, dan pemeliharaan kapal.</p>
+          </div>
+
+          <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
+            <div class="text-blue-700 text-6xl mb-8">
+              <i class="fas fa-truck-loading"> </i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4">Logistik</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Manajemen logistik dan rantai pasok yang efisien untuk mendukung operasi galangan kapal.</p>
+          </div>
+
+          <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
+            <div class="text-blue-700 text-6xl mb-8">
+              <i class="fas fa-hands-helping"> </i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-4">Konsultasi</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Layanan konsultasi ahli untuk mengoptimalkan proyek pembangunan dan perbaikan kapal Anda.</p>
+          </div>
+        </div>
       </div>
-      <h3 class="text-2xl font-semibold mb-4">
-       Perbaikan Kapal
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Layanan perbaikan dan pemeliharaan kapal secara menyeluruh untuk
-            menjaga performa dan keamanan kapal Anda.
-      </p>
-     </div>
+    </section>
 
-     <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
-      <div class="text-blue-700 text-6xl mb-8">
-       <i class="fas fa-cogs">
-       </i>
+    <!-- Projects Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20" id="projects">
+      <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">Proyek Kami</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
+          <img
+            alt="Large cargo ship docked at Ikishi Shipyard with cranes unloading containers and workers"
+            class="w-full h-52 object-cover"
+            loading="lazy"
+            src="https://placehold.co/600x400/png?text=Kapal+Kargo+besar+berlabuh+di+galangan+Ikishi+dengan+crane+dan+kontainer"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-3 text-blue-700">Pembuatan Kapal Kargo</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Sukses membangun kapal kargo sepanjang 150 meter dengan efisiensi bahan bakar yang tinggi.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
+          <img
+            alt="Modern fishing vessel docked with crew preparing nets and equipment"
+            class="w-full h-52 object-cover"
+            loading="lazy"
+            src="https://placehold.co/600x400/png?text=Kapal+ikan+modern+berlabuh+dengan+awak+menyiapkan+peralatan+dan+jaring"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-3 text-blue-700">Perbaikan Kapal Ikan</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Perbaikan dan upgrade menyeluruh kapal ikan untuk meningkatkan daya tahan dan performa.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
+          <img
+            alt="Luxury yacht with sleek design docked at Ikishi Shipyard under bright sky"
+            class="w-full h-52 object-cover"
+            loading="lazy"
+            src="https://placehold.co/600x400/png?text=Yacht+mewah+dengan+desain+elegan+berlabuh+di+galangan+Ikishi"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-3 text-blue-700">Pembuatan Yacht Mewah</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Yacht mewah custom dengan fasilitas modern dan desain elegan.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
+          <img
+            alt="Engineers working on ship engine systems inside a modern shipyard workshop"
+            class="w-full h-52 object-cover"
+            loading="lazy"
+            src="https://placehold.co/600x400/png?text=Insinyur+sedang+memeriksa+sistem+mesin+kapal+di+workshop+modern"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-3 text-blue-700">Upgrade Engineering</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Retrofit dan upgrade sistem mesin kapal sesuai standar lingkungan terbaru.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
+          <img
+            alt="Dry dock facility with a large ship undergoing maintenance and inspection"
+            class="w-full h-52 object-cover"
+            loading="lazy"
+            src="https://placehold.co/600x400/png?text=Fasilitas+dry+dock+dengan+kapal+besar+sedang+perawatan+dan+inspeksi"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-3 text-blue-700">Perawatan Dry Dock</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Menyediakan layanan dry dock yang aman dan efisien untuk inspeksi dan perbaikan kapal.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
+          <img
+            alt="Logistics team coordinating shipment and supply chain for shipyard operations"
+            class="w-full h-52 object-cover"
+            loading="lazy"
+            src="https://placehold.co/600x400/png?text=Tim+logistik+sedang+koordinasi+pengiriman+dan+rantai+pasok+untuk+operasi+galangan"
+          />
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-3 text-blue-700">Dukungan Logistik</h3>
+            <p class="text-gray-700 leading-relaxed font-medium">Manajemen logistik dan rantai pasok yang terintegrasi untuk mendukung proyek pembangunan kapal.</p>
+          </div>
+        </div>
       </div>
-      <h3 class="text-2xl font-semibold mb-4">
-       Engineering
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Solusi engineering inovatif termasuk desain, retrofit, dan
-            integrasi sistem kapal.
-      </p>
-     </div>
+    </section>
 
-     <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
-      <div class="text-blue-700 text-6xl mb-8">
-       <i class="fas fa-water">
-       </i>
+    <!-- News Section -->
+    <section class="bg-blue-50 py-20" id="news">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">Berita Terbaru</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
+          <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-out">
+            <img
+              alt="Construction workers expanding Ikishi Shipyard facilities with cranes and scaffolding"
+              class="w-full h-44 object-cover"
+              loading="lazy"
+              src="https://placehold.co/600x350/png?text=Ekspansi+Galangan+Kapal+Ikishi+dengan+crane+dan+scaffolding"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-blue-700">Ekspansi Galangan Kapal Ikishi</h3>
+              <p class="text-gray-700 text-sm leading-relaxed font-medium">Ikishi Shipyard sedang melakukan ekspansi fasilitas untuk meningkatkan kapasitas dan kualitas layanan.</p>
+              <time class="block mt-4 text-xs text-gray-400 font-mono" datetime="2024-05-10"> 10 Mei 2024 </time>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-out">
+            <img
+              alt="New eco-friendly vessel launched at Ikishi Shipyard with green technology"
+              class="w-full h-44 object-cover"
+              loading="lazy"
+              src="https://placehold.co/600x350/png?text=Peluncuran+Kapal+Ramah+Lingkungan+di+Ikishi+Shipyard"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-blue-700">Peluncuran Kapal Ramah Lingkungan</h3>
+              <p class="text-gray-700 text-sm leading-relaxed font-medium">Memperkenalkan kapal ramah lingkungan terbaru yang mengurangi emisi dan konsumsi bahan bakar.</p>
+              <time class="block mt-4 text-xs text-gray-400 font-mono" datetime="2024-04-22"> 22 April 2024 </time>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-out">
+            <img alt="Ikishi Shipyard team receiving industry award at a formal ceremony" class="w-full h-44 object-cover" loading="lazy" src="https://placehold.co/600x350/png?text=Tim+Ikishi+Shipyard+menerima+penghargaan+industri" />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-blue-700">Penghargaan Industri</h3>
+              <p class="text-gray-700 text-sm leading-relaxed font-medium">Kami menerima Penghargaan Maritime Excellence atas kualitas pembangunan kapal yang luar biasa.</p>
+              <time class="block mt-4 text-xs text-gray-400 font-mono" datetime="2024-03-15"> 15 Maret 2024 </time>
+            </div>
+          </article>
+        </div>
       </div>
-      <h3 class="text-2xl font-semibold mb-4">
-       Docking &amp; Dry Dock
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Fasilitas docking modern untuk inspeksi, perbaikan, dan
-            pemeliharaan kapal.
-      </p>
-     </div>
+    </section>
 
-     <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
-      <div class="text-blue-700 text-6xl mb-8">
-       <i class="fas fa-truck-loading">
-       </i>
+    <!-- Contact Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20" id="contact">
+      <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">Hubungi Kami</h2>
+      <div class="grid md:grid-cols-2 gap-16">
+        <form action="#" class="bg-white rounded-3xl shadow-lg p-12 space-y-8" method="POST" novalidate="">
+          <div>
+            <label class="block text-gray-700 font-semibold mb-3 text-lg" for="name"> Nama </label>
+            <input class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg" id="name" name="name" placeholder="Nama lengkap Anda" required="" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-semibold mb-3 text-lg" for="email"> Email </label>
+            <input class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg" id="email" name="email" placeholder="email@domain.com" required="" type="email" />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-semibold mb-3 text-lg" for="message"> Pesan </label>
+            <textarea
+              class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg resize-none"
+              id="message"
+              name="message"
+              placeholder="Tulis pesan Anda di sini"
+              required=""
+              rows="6"
+            ></textarea>
+          </div>
+          <button class="w-full bg-blue-700 text-white font-semibold py-4 rounded-3xl hover:bg-blue-800 transition text-lg" type="submit">Kirim Pesan</button>
+        </form>
+        <div class="space-y-12 text-gray-700 text-lg font-medium">
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Alamat</h3>
+            <p>Jl. Raya Pelabuhan No. 123, Surabaya, Indonesia</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Telepon</h3>
+            <p>+62 31 1234 5678</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Email</h3>
+            <p>info@ikishipyard.co.id</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Ikuti Kami</h3>
+            <div class="flex space-x-8 text-blue-700 text-3xl">
+              <a aria-label="Facebook" class="hover:text-blue-900 transition" href="#">
+                <i class="fab fa-facebook-square"> </i>
+              </a>
+              <a aria-label="Twitter" class="hover:text-blue-900 transition" href="#">
+                <i class="fab fa-twitter-square"> </i>
+              </a>
+              <a aria-label="Instagram" class="hover:text-blue-900 transition" href="#">
+                <i class="fab fa-instagram-square"> </i>
+              </a>
+              <a aria-label="LinkedIn" class="hover:text-blue-900 transition" href="#">
+                <i class="fab fa-linkedin"> </i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="text-2xl font-semibold mb-4">
-       Logistik
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Manajemen logistik dan rantai pasok yang efisien untuk mendukung
-            operasi galangan kapal.
-      </p>
-     </div>
+    </section>
 
-     <div class="bg-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition cursor-default" data-aos="fade-up">
-      <div class="text-blue-700 text-6xl mb-8">
-       <i class="fas fa-hands-helping">
-       </i>
-      </div>
-      <h3 class="text-2xl font-semibold mb-4">
-       Konsultasi
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Layanan konsultasi ahli untuk mengoptimalkan proyek pembangunan
-            dan perbaikan kapal Anda.
-      </p>
-     </div>
-
-    </div>
-   </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="max-w-7xl mx-auto px-6 py-20" id="projects">
-   <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">
-    Proyek Kami
-   </h2>
-   <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
-    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
-     <img alt="Large cargo ship docked at Ikishi Shipyard with cranes unloading containers and workers" class="w-full h-52 object-cover" loading="lazy" src="https://placehold.co/600x400/png?text=Kapal+Kargo+besar+berlabuh+di+galangan+Ikishi+dengan+crane+dan+kontainer"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-3 text-blue-700">
-       Pembuatan Kapal Kargo
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Sukses membangun kapal kargo sepanjang 150 meter dengan efisiensi
-            bahan bakar yang tinggi.
-      </p>
-     </div>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
-     <img alt="Modern fishing vessel docked with crew preparing nets and equipment" class="w-full h-52 object-cover" loading="lazy" src="https://placehold.co/600x400/png?text=Kapal+ikan+modern+berlabuh+dengan+awak+menyiapkan+peralatan+dan+jaring"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-3 text-blue-700">
-       Perbaikan Kapal Ikan
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Perbaikan dan upgrade menyeluruh kapal ikan untuk meningkatkan
-            daya tahan dan performa.
-      </p>
-     </div>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
-     <img alt="Luxury yacht with sleek design docked at Ikishi Shipyard under bright sky" class="w-full h-52 object-cover" loading="lazy" src="https://placehold.co/600x400/png?text=Yacht+mewah+dengan+desain+elegan+berlabuh+di+galangan+Ikishi"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-3 text-blue-700">
-       Pembuatan Yacht Mewah
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Yacht mewah custom dengan fasilitas modern dan desain elegan.
-      </p>
-     </div>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
-     <img alt="Engineers working on ship engine systems inside a modern shipyard workshop" class="w-full h-52 object-cover" loading="lazy" src="https://placehold.co/600x400/png?text=Insinyur+sedang+memeriksa+sistem+mesin+kapal+di+workshop+modern"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-3 text-blue-700">
-       Upgrade Engineering
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Retrofit dan upgrade sistem mesin kapal sesuai standar lingkungan
-            terbaru.
-      </p>
-     </div>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
-     <img alt="Dry dock facility with a large ship undergoing maintenance and inspection" class="w-full h-52 object-cover" loading="lazy" src="https://placehold.co/600x400/png?text=Fasilitas+dry+dock+dengan+kapal+besar+sedang+perawatan+dan+inspeksi"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-3 text-blue-700">
-       Perawatan Dry Dock
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Menyediakan layanan dry dock yang aman dan efisien untuk inspeksi
-            dan perbaikan kapal.
-      </p>
-     </div>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-in">
-     <img alt="Logistics team coordinating shipment and supply chain for shipyard operations" class="w-full h-52 object-cover" loading="lazy" src="https://placehold.co/600x400/png?text=Tim+logistik+sedang+koordinasi+pengiriman+dan+rantai+pasok+untuk+operasi+galangan"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-3 text-blue-700">
-       Dukungan Logistik
-      </h3>
-      <p class="text-gray-700 leading-relaxed font-medium">
-       Manajemen logistik dan rantai pasok yang terintegrasi untuk
-            mendukung proyek pembangunan kapal.
-      </p>
-     </div>
-    </div>
-
-   </div>
-  </section>
-
-  <!-- News Section -->
-  <section class="bg-blue-50 py-20" id="news">
-   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">
-     Berita Terbaru
-    </h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
-     <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-out">
-      <img alt="Construction workers expanding Ikishi Shipyard facilities with cranes and scaffolding" class="w-full h-44 object-cover" loading="lazy" src="https://placehold.co/600x350/png?text=Ekspansi+Galangan+Kapal+Ikishi+dengan+crane+dan+scaffolding"/>
-      <div class="p-6">
-       <h3 class="text-xl font-semibold mb-3 text-blue-700">
-        Ekspansi Galangan Kapal Ikishi
-       </h3>
-       <p class="text-gray-700 text-sm leading-relaxed font-medium">
-        Ikishi Shipyard sedang melakukan ekspansi fasilitas untuk
-              meningkatkan kapasitas dan kualitas layanan.
-       </p>
-       <time class="block mt-4 text-xs text-gray-400 font-mono" datetime="2024-05-10">
-        10 Mei 2024
-       </time>
-      </div>
-     </article>
-
-     <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-out">
-      <img alt="New eco-friendly vessel launched at Ikishi Shipyard with green technology" class="w-full h-44 object-cover" loading="lazy" src="https://placehold.co/600x350/png?text=Peluncuran+Kapal+Ramah+Lingkungan+di+Ikishi+Shipyard"/>
-      <div class="p-6">
-       <h3 class="text-xl font-semibold mb-3 text-blue-700">
-        Peluncuran Kapal Ramah Lingkungan
-       </h3>
-       <p class="text-gray-700 text-sm leading-relaxed font-medium">
-        Memperkenalkan kapal ramah lingkungan terbaru yang mengurangi
-              emisi dan konsumsi bahan bakar.
-       </p>
-       <time class="block mt-4 text-xs text-gray-400 font-mono" datetime="2024-04-22">
-        22 April 2024
-       </time>
-      </div>
-     </article>
-
-     <article class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition" data-aos="zoom-out">
-      <img alt="Ikishi Shipyard team receiving industry award at a formal ceremony" class="w-full h-44 object-cover" loading="lazy" src="https://placehold.co/600x350/png?text=Tim+Ikishi+Shipyard+menerima+penghargaan+industri"/>
-      <div class="p-6">
-       <h3 class="text-xl font-semibold mb-3 text-blue-700">
-        Penghargaan Industri
-       </h3>
-       <p class="text-gray-700 text-sm leading-relaxed font-medium">
-        Kami menerima Penghargaan Maritime Excellence atas kualitas
-              pembangunan kapal yang luar biasa.
-       </p>
-       <time class="block mt-4 text-xs text-gray-400 font-mono" datetime="2024-03-15">
-        15 Maret 2024
-       </time>
-      </div>
-     </article>
-    </div>
-   </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="max-w-7xl mx-auto px-6 py-20" id="contact">
-   <h2 class="text-4xl font-bold text-blue-900 mb-16 text-center tracking-wide">
-    Hubungi Kami
-   </h2>
-   <div class="grid md:grid-cols-2 gap-16">
-    <form action="#" class="bg-white rounded-3xl shadow-lg p-12 space-y-8" method="POST" novalidate="">
-     <div>
-      <label class="block text-gray-700 font-semibold mb-3 text-lg" for="name">
-       Nama
-      </label>
-      <input class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg" id="name" name="name" placeholder="Nama lengkap Anda" required="" type="text"/>
-     </div>
-     <div>
-      <label class="block text-gray-700 font-semibold mb-3 text-lg" for="email">
-       Email
-      </label>
-      <input class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg" id="email" name="email" placeholder="email@domain.com" required="" type="email"/>
-     </div>
-     <div>
-      <label class="block text-gray-700 font-semibold mb-3 text-lg" for="message">
-       Pesan
-      </label>
-      <textarea class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg resize-none" id="message" name="message" placeholder="Tulis pesan Anda di sini" required="" rows="6"></textarea>
-     </div>
-     <button class="w-full bg-blue-700 text-white font-semibold py-4 rounded-3xl hover:bg-blue-800 transition text-lg" type="submit">
-      Kirim Pesan
-     </button>
-    </form>
-    <div class="space-y-12 text-gray-700 text-lg font-medium">
-     <div>
-      <h3 class="text-2xl font-semibold text-blue-700 mb-3">
-       Alamat
-      </h3>
-      <p>
-       Jl. Raya Pelabuhan No. 123, Surabaya, Indonesia
-      </p>
-     </div>
-     <div>
-      <h3 class="text-2xl font-semibold text-blue-700 mb-3">
-       Telepon
-      </h3>
-      <p>
-       +62 31 1234 5678
-      </p>
-     </div>
-     <div>
-      <h3 class="text-2xl font-semibold text-blue-700 mb-3">
-       Email
-      </h3>
-      <p>
-       info@ikishipyard.co.id
-      </p>
-     </div>
-     <div>
-      <h3 class="text-2xl font-semibold text-blue-700 mb-3">
-       Ikuti Kami
-      </h3>
-      <div class="flex space-x-8 text-blue-700 text-3xl">
-       <a aria-label="Facebook" class="hover:text-blue-900 transition" href="#">
-        <i class="fab fa-facebook-square">
-        </i>
-       </a>
-       <a aria-label="Twitter" class="hover:text-blue-900 transition" href="#">
-        <i class="fab fa-twitter-square">
-        </i>
-       </a>
-       <a aria-label="Instagram" class="hover:text-blue-900 transition" href="#">
-        <i class="fab fa-instagram-square">
-        </i>
-       </a>
-       <a aria-label="LinkedIn" class="hover:text-blue-900 transition" href="#">
-        <i class="fab fa-linkedin">
-        </i>
-       </a>
-      </div>
-     </div>
-    </div>
-   </div>
-  </section>
-
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d69579.13809146652!2d119.42719706060133!3d-5.107694743609401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbefd7015efb613%3A0x9b711cc9e94b7c4d!2sPT%20Industri%20Kapal%20Indonesia%20(Persero)!5e0!3m2!1sid!2sid!4v1754970484331!5m2!1sid!2sid" width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  <!-- Footer -->
-  <footer class="bg-blue-900 text-blue-200 py-8 mt-20">
-   <div class="max-w-7xl mx-auto px-6 text-center text-sm select-none">
-    © 2024 Ikishi Shipyard. All rights reserved.
-   </div>
-  </footer>
- </body>
- <script src="js/script.js"></script>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d69579.13809146652!2d119.42719706060133!3d-5.107694743609401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbefd7015efb613%3A0x9b711cc9e94b7c4d!2sPT%20Industri%20Kapal%20Indonesia%20(Persero)!5e0!3m2!1sid!2sid!4v1754970484331!5m2!1sid!2sid"
+      width="100%"
+      height="650"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-blue-200 py-8 mt-20">
+      <div class="max-w-7xl mx-auto px-6 text-center text-sm select-none">© 2024 Ikishi Shipyard. All rights reserved.</div>
+    </footer>
+  </body>
+  <script src="js/script.js"></script>
 </html>
-
-
