@@ -1,90 +1,90 @@
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sumber Daya Manusia IKISHIPYARD</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-gray-50 min-h-screen flex flex-col items-center py-10 px-4">
-  <h1 class="text-3xl font-extrabold mb-10 text-center max-w-6xl w-full">
-    Sumber Daya Manusia
-  </h1>
-  <div class="max-w-6xl w-full flex flex-col md:flex-row gap-10">
-    <!-- Text list and totals -->
-    <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
-      <div>
-        <h2 class="text-xl font-semibold mb-6">Bidang Sumber Daya Manusia</h2>
-        <ul class="list-disc list-inside space-y-3 text-gray-800 text-lg mb-8">
-          <li>Manajemen</li>
-          <li>Teknisi</li>
-          <li>Operator</li>
-          <li>Administrasi</li>
-          <li>Lainnya</li>
-        </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sumber Daya Manusia IKISHIPYARD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex flex-col items-center py-10 px-4">
+    <h1 class="text-3xl font-extrabold mb-10 text-center max-w-6xl w-full">Sumber Daya Manusia</h1>
+    <div class="max-w-6xl w-full flex flex-col md:flex-row gap-10">
+      <!-- Text list and totals -->
+      <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+        <div>
+          <h2 class="text-xl font-semibold mb-6">Bidang Sumber Daya Manusia</h2>
+          <ul class="list-disc list-inside space-y-3 text-gray-800 text-lg mb-8">
+            <li>Manajemen</li>
+            <li>Teknisi</li>
+            <li>Operator</li>
+            <li>Administrasi</li>
+            <li>Lainnyaa</li>
+          </ul>
+        </div>
+        <div class="border-t border-gray-300 pt-4 text-gray-700 text-base space-y-1">
+          <p><span class="font-semibold">Total Employee:</span> 357 Person</p>
+          <p><span class="font-semibold">Makassar:</span> 280 Person</p>
+          <p><span class="font-semibold">Bitung:</span> 77 Person</p>
+        </div>
       </div>
-      <div class="border-t border-gray-300 pt-4 text-gray-700 text-base space-y-1">
-        <p><span class="font-semibold">Total Employee:</span> 357 Person</p>
-        <p><span class="font-semibold">Makassar:</span> 280 Person</p>
-        <p><span class="font-semibold">Bitung:</span> 77 Person</p>
+      <!-- Chart and explanation -->
+      <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+        <canvas id="sdmChart" class="w-full max-w-md" aria-label="Chart showing distribution of Sumber Daya Manusia categories" role="img"></canvas>
+        <div class="mt-6 w-full max-w-md text-gray-700 text-base space-y-2">
+          <p><span class="font-semibold">Penjelasan Diagram:</span></p>
+          <ul class="list-disc list-inside">
+            <li>Produksi = 53.6%</li>
+            <li>Produksi Tak Langsung = 20.87%</li>
+            <li>Administrasi = 25.53%</li>
+          </ul>
+        </div>
       </div>
     </div>
-    <!-- Chart and explanation -->
-    <div class="md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
-      <canvas id="sdmChart" class="w-full max-w-md" aria-label="Chart showing distribution of Sumber Daya Manusia categories" role="img"></canvas>
-      <div class="mt-6 w-full max-w-md text-gray-700 text-base space-y-2">
-        <p><span class="font-semibold">Penjelasan Diagram:</span></p>
-        <ul class="list-disc list-inside">
-          <li>Produksi = 53.6%</li>
-          <li>Produksi Tak Langsung = 20.87%</li>
-          <li>Administrasi = 25.53%</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <script>
-    const ctx = document.getElementById('sdmChart').getContext('2d');
-    const sdmChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Produksi', 'Produksi Tak Langsung', 'Administrasi'],
-        datasets: [{
-          label: 'Persentase',
-          data: [53.6, 20.87, 25.53],
-          backgroundColor: [
-            '#2563EB', // blue-600
-            '#60A5FA', // blue-400
-            '#1E40AF'  // blue-800
+    <script>
+      const ctx = document.getElementById("sdmChart").getContext("2d");
+      const sdmChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Produksi", "Produksi Tak Langsung", "Administrasi"],
+          datasets: [
+            {
+              label: "Persentase",
+              data: [53.6, 20.87, 25.53],
+              backgroundColor: [
+                "#2563EB", // blue-600
+                "#60A5FA", // blue-400
+                "#1E40AF", // blue-800
+              ],
+              borderWidth: 1,
+              borderColor: "#fff",
+              hoverOffset: 20,
+            },
           ],
-          borderWidth: 1,
-          borderColor: '#fff',
-          hoverOffset: 20
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              font: {
-                size: 14,
-                weight: 'bold'
-              }
-            }
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                font: {
+                  size: 14,
+                  weight: "bold",
+                },
+              },
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function (context) {
+                  return context.label + ": " + context.parsed + "%";
+                },
+              },
+            },
           },
-          tooltip: {
-            enabled: true,
-            callbacks: {
-              label: function(context) {
-                return context.label + ': ' + context.parsed + '%';
-              }
-            }
-          }
-        }
-      }
-    });
-  </script>
-</body>
+        },
+      });
+    </script>
+  </body>
 </html>
