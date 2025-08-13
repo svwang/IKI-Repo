@@ -23,3 +23,6 @@ li.is-open > .dropdown-panel {
 li.is-open > .dropdown-trigger {
   color: #2563eb; /* biru */
 }
+.pt-50 {
+  padding-top: 200px;
+}
