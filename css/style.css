@@ -1,0 +1,25 @@
+body {
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* default: sembunyikan panel */
+  .dropdown-panel {
+    opacity: 0;
+    transform: translateY(6px) scale(.98);
+    transition: opacity .15s ease, transform .18s ease;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  /* saat terbuka */
+  li.is-open > .dropdown-panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  /* opsional: gaya tombol aktif */
+  li.is-open > .dropdown-trigger {
+    color: #2563eb; /* biru */
+  }
