@@ -1,5 +1,5 @@
-git checkout main
-git pull origin main
+git checkout Main
+git pull origin Main
 git add .
 git commit -m "Update fitur X"
-git push origin main
+git push origin Main
