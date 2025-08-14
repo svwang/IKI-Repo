@@ -20,9 +20,11 @@
           <div class="flex flex-row items-center space-x-5 mb-2">
             <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" class="rounded-lg object-contain" style="width: 100px" />
             <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-14 h-14 rounded-lg object-contain" />
+            <div class="flex flex-col items-start">
+              <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-base md:text-lg"> PT INDUSTRI KAPAL INDONESIA (Persero) </span>
+              <p class="text-xs md:text-sm text-gray-600 mt-1">Shipbuilding. Docking & Related Industry</p>
+            </div>
           </div>
-          <span class="font-semibold text-blue-900 tracking-wide select-none text-center leading-tight text-base md:text-lg"> PT INDUSTRI KAPAL INDONESIA (Persero) </span>
-          <p class="text-xs md:text-sm text-gray-600 text-center mt-1">Shipbuilding. Docking & Related Industry</p>
         </a>
 
         <!-- Menu Utama -->
@@ -233,8 +235,18 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-28 bg-gradient-to-r from-blue-600 to-blue-900 text-white" id="home">
-      <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
+    <section class="relative pt-28 text-white" id="home">
+      <!-- Background video -->
+      <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted playsinline>
+        <source src="video/shipyard.mp4" type="video/mp4" />
+        Browser Anda tidak mendukung video background.
+      </video>
+
+      <!-- Overlay warna biru semi transparan agar teks tetap jelas -->
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-300/70 to-blue-900/70"></div>
+
+      <!-- Content -->
+      <div class="relative max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
         <div class="md:w-1/2 space-y-8">
           <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
             IKI Shipyard
@@ -249,7 +261,7 @@
           </a>
         </div>
         <div class="md:w-1/2">
-          <img alt="Modern shipyard with cranes and ships under construction during sunset, showing large vessels and workers" class="rounded-3xl shadow-2xl w-full object-cover" loading="lazy" src="img/thumnail1.jpg" />
+          <!-- Bisa tambahkan gambar pendukung atau kosongkan -->
         </div>
       </div>
     </section>

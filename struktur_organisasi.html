@@ -1,337 +1,306 @@
 <html class="scroll-smooth" lang="id">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Sejarah - PT Ikishi Shipyard
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link rel="icon" href="img/logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css">
- </head>
- <body class="bg-white text-gray-800">
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed w-full z-30 border-b border-gray-200" role="navigation">
-        <div class="max-w-8xl mx-auto px-6 py-4 flex items-center justify-between flex-nowrap">      
-            <!-- Logo & Text -->
-            <a href="#" class="flex flex-col items-start flex-shrink-0">
-            <div class="flex flex-row items-center space-x-5 mb-2">
-                <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" class="rounded-lg object-contain" style="width: 100px;"/>
-                <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-14 h-14 rounded-lg object-contain" />
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Sejarah - PT Ikishi Shipyard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-white text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-30 border-b border-gray-200" role="navigation">
+      <div class="max-w-8xl mx-auto px-6 py-4 flex items-center justify-between flex-nowrap">
+        <!-- Logo & Text -->
+        <a href="#" class="flex flex-col items-start flex-shrink-0">
+          <div class="flex flex-row items-center space-x-5 mb-2">
+            <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" class="rounded-lg object-contain" style="width: 100px" />
+            <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-14 h-14 rounded-lg object-contain" />
+            <div class="flex flex-col items-start">
+              <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-base md:text-lg"> PT INDUSTRI KAPAL INDONESIA (Persero) </span>
+              <p class="text-xs md:text-sm text-gray-600 mt-1">Shipbuilding. Docking & Related Industry</p>
             </div>
-            <span class="font-semibold text-blue-900 tracking-wide select-none text-center leading-tight text-base md:text-lg">
-                PT INDUSTRI KAPAL INDONESIA (Persero)
-            </span>
-            <p class="text-xs md:text-sm text-gray-600 text-center mt-1">
-                Shipbuilding. Docking & Related Industry
-            </p>
+          </div>
+        </a>
+
+        <!-- Menu Utama -->
+        <ul class="hidden md:flex space-x-5 font-semibold text-gray-700 text-base lg:text-lg flex-shrink-0" role="menubar">
+          <li><a href="index.html" class="hover:text-blue-600 transition">Beranda</a></li>
+
+          <!-- Dropdown Perusahaan -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Perusahaan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50">
+              <div class="grid grid-cols-3 gap-x-8">
+                <a href="profile.html" class="block py-3 border-b border-gray-200">Profil</a>
+                <a href="sejarah.html" class="block py-3 border-b border-gray-200">Sejarah</a>
+                <a href="visi&misi.html" class="block py-3 border-b border-gray-200">Visi Misi</a>
+
+                <a href="manajemen.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Manajemen</a>
+                <a href="struktur_organisasi.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Struktur Organisasi</a>
+                <a href="kegiatan_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Kegiatan Perusahaan</a>
+
+                <a href="sdm.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Sumber Daya Manusia</a>
+                <a href="fasilitas.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Fasilitas</a>
+                <a href="peralatan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Peralatan</a>
+
+                <a href="parnert_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Partner Perusahaan</a>
+                <a href="klien_kami.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Klien Kami</a>
+                <a href="lokasi.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lokasi</a>
+
+                <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lain-lainnya</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Dropdown Produk -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Produk</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100">Bangunan Baru</a>
+              <a href="perbaikian.html" class="block px-4 py-2 hover:bg-gray-100">Perbaikan</a>
+              <a href="scri.html" class="block px-4 py-2 hover:bg-gray-100">Stell Construction & Related Industry</a>
+              <a href="fiberglass.html" class="block px-4 py-2 hover:bg-gray-100">Fiberglass</a>
+            </div>
+          </li>
+
+          <!-- Dropdown Pelanggan -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Pelanggan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Regitrasi Pelanggan</a>
+              <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100">Ketersediaan Dock</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download Form</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hubungi Kami</a>
+            </div>
+          </li>
+
+          <!-- Dropdown Informasi -->
+          <li class="relative" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
+              <span>Informasi</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Berita</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Karir</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Customer Testimonials</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Galery</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Lelang</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kementrian BUMN</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Whistleblower</a>
+            </div>
+          </li>
+
+          <li><a href="#e-ppid" class="hover:text-blue-600 transition">E-PPID</a></li>
+        </ul>
+
+        <!-- Language Selector -->
+        <div class="relative group hidden md:block flex-shrink-0">
+          <button class="flex items-center space-x-5 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition">
+            <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3" />
+            <span class="text-sm font-medium text-gray-700">ID</span>
+            <i class="fas fa-chevron-down text-gray-500 text-xs"></i>
+          </button>
+          <div class="absolute right-0 mt-2 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform -translate-y-2 transition-all z-50">
+            <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
+              <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+              <span class="text-sm text-gray-700">ID</span>
             </a>
-
-            <!-- Menu Utama -->
-            <ul class="hidden md:flex space-x-5 font-semibold text-gray-700 text-base lg:text-lg flex-shrink-0" role="menubar">
-                <li><a href="index.html" class="hover:text-blue-600 transition">Beranda</a></li>
-
-                <!-- Dropdown Perusahaan -->
-                <li class="relative" data-dd>
-                  <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                      <span>Perusahaan</span>
-                      <i class="fas fa-chevron-down text-xs"></i>
-                  </button>
-
-                  <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50">
-                      <div class="grid grid-cols-3 gap-x-8">
-                      <a href="profile.html" class="block py-3 border-b border-gray-200">Profil</a>
-                      <a href="sejarah.html" class="block py-3 border-b border-gray-200">Sejarah</a>
-                      <a href="visi&misi.html" class="block py-3 border-b border-gray-200">Visi Misi</a>
-                      
-                      <a href="manajemen.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Manajemen</a>
-                      <a href="struktur_organisasi.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Struktur Organisasi</a>
-                      <a href="kegiatan_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Kegiatan Perusahaan</a>
-                      
-                      <a href="sdm.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Sumber Daya Manusia</a>
-                      <a href="fasilitas.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Fasilitas</a>
-                      <a href="peralatan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Peralatan</a>
-                      
-                      <a href="parnert_perusahaan.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Partner Perusahaan</a>
-                      <a href="klien_kami.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Klien Kami</a>
-                      <a href="lokasi.html" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lokasi</a>
-
-                      <a href="#" class="hover:text-blue-600 border-b border-gray-200 pb-1">Lain-lainnya</a>
-                      </div>
-                  </div>
-                </li>
-
-                <!-- Dropdown Produk -->
-                <li class="relative" data-dd>
-                    <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Produk</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-
-                    <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100">Bangunan Baru</a>
-                        <a href="perbaikian.html" class="block px-4 py-2 hover:bg-gray-100">Perbaikan</a>
-                        <a href="scri.html" class="block px-4 py-2 hover:bg-gray-100">Stell Construction & Related Industry</a>
-                        <a href="fiberglass.html" class="block px-4 py-2 hover:bg-gray-100">Fiberglass</a>
-                    </div>
-                </li>
-
-                <!-- Dropdown Pelanggan -->
-                <li class="relative" data-dd>
-                    <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Pelanggan</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-
-                    <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Regitrasi Pelanggan</a>
-                        <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100">Ketersediaan Dock</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download Form</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hubungi Kami</a>
-                    </div>
-                </li>
-
-                <!-- Dropdown Informasi -->
-                <li class="relative" data-dd>
-                    <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Informasi</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-
-                    <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Berita</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Karir</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Customer Testimonials</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Galery</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Lelang</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kementrian BUMN</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Download</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Whistleblower</a>
-                    </div>
-                </li>
-
-                <li><a href="#e-ppid" class="hover:text-blue-600 transition">E-PPID</a></li>
-            </ul>
-
-
-            <!-- Language Selector -->
-            <div class="relative group hidden md:block flex-shrink-0">
-            <button class="flex items-center space-x-5 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition">
-                <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3">
-                <span class="text-sm font-medium text-gray-700">ID</span>
-                <i class="fas fa-chevron-down text-gray-500 text-xs"></i>
-            </button>
-            <div class="absolute right-0 mt-2 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform -translate-y-2 transition-all z-50">
-                <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
-                <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3">
-                <span class="text-sm text-gray-700">ID</span>
-                </a>
-                <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
-                <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3">
-                <span class="text-sm text-gray-700">EN</span>
-                </a>
-            </div>
-            </div>
-
-            <!-- Hamburger Button -->
-            <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden focus:outline-none text-gray-700 hover:text-blue-600" id="menu-btn">
-            <i class="fas fa-bars fa-lg"></i>
-            </button>
+            <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100">
+              <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+              <span class="text-sm text-gray-700">EN</span>
+            </a>
+          </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-white shadow-md border-t border-gray-200" id="mobile-menu">
-            <ul class="flex flex-col space-y-4 px-6 py-6 font-semibold text-gray-700 text-lg" role="menu">
-                <li><a href="#" class="block hover:text-blue-600 transition">Beranda</a></li>
-                
-                <!-- Perusahaan Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Perusahaan</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="profile.html" class="block">Profil</a>
-                        <a href="#" class="block">Sejarah</a>
-                        <a href="#" class="block">Visi Misi</a>
-                        <a href="#" class="block">Manajemen</a>
-                        <a href="#" class="block">Struktur Organisasi</a>
-                        <a href="#" class="block">Kegiatan Perusahaan</a>
-                        <a href="#" class="block">Sumber Daya Manusia</a>
-                        <a href="#" class="block">Fasilitas</a>
-                        <a href="#" class="block">Peralatan</a>
-                        <a href="#" class="block">Partner Perusahaan</a>
-                        <a href="#" class="block">Klien Kami</a>
-                        <a href="#" class="block">Lokasi</a>
-                        <a href="#" class="block">Lain-lain</a>
-                    </div>
-                </li>
-                
-                <!-- Produk Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Produk</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="#" class="block">Bangunan Baru</a>
-                        <a href="#" class="block">Perbaikan</a>
-                        <a href="#" class="block">Stell Construction & Related Industry</a>
-                        <a href="#" class="block">Fiberglass</a>
-                    </div>
-                </li>
-                
-                <!-- Pelanggan Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Pelanggan</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="#" class="block">Regitrasi Pelanggan</a>
-                        <a href="#" class="block">Ketersediaan Dock</a>
-                        <a href="#" class="block">Download Form</a>
-                        <a href="#" class="block">Hubungi Kami</a>
-                    </div>
-                </li>
-                
-                <!-- Informasi Mobile -->
-                <li>
-                    <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
-                        <span>Informasi</span>
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
-                        <a href="#" class="block">Berita</a>
-                        <a href="#" class="block">Karir</a>
-                        <a href="#" class="block">Customer Testimonials</a>
-                        <a href="#" class="block">Galery</a>
-                        <a href="#" class="block">Lelang</a>
-                        <a href="#" class="block">Kementrian BUMN</a>
-                        <a href="#" class="block">Download</a>
-                        <a href="#" class="block">Whistleblower</a>
-                    </div>
-                </li>
-                
-                <li><a href="#e-ppid" class="block hover:text-blue-600 transition">E-PPID</a></li>
-                
-                <!-- Language Selector Mobile -->
-                <li class="pt-4 border-t border-gray-200">
-                    <div class="flex items-center space-x-3">
-                        <span class="font-medium">Language:</span>
-                        <div class="flex space-x-2">
-                            <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
-                                <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3">
-                                <span class="text-sm">ID</span>
-                            </a>
-                            <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
-                                <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3">
-                                <span class="text-sm">EN</span>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+        <!-- Hamburger Button -->
+        <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" class="md:hidden focus:outline-none text-gray-700 hover:text-blue-600" id="menu-btn">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="hidden md:hidden bg-white shadow-md border-t border-gray-200" id="mobile-menu">
+        <ul class="flex flex-col space-y-4 px-6 py-6 font-semibold text-gray-700 text-lg" role="menu">
+          <li><a href="#" class="block hover:text-blue-600 transition">Beranda</a></li>
+
+          <!-- Perusahaan Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Perusahaan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="profile.html" class="block">Profil</a>
+              <a href="#" class="block">Sejarah</a>
+              <a href="#" class="block">Visi Misi</a>
+              <a href="#" class="block">Manajemen</a>
+              <a href="#" class="block">Struktur Organisasi</a>
+              <a href="#" class="block">Kegiatan Perusahaan</a>
+              <a href="#" class="block">Sumber Daya Manusia</a>
+              <a href="#" class="block">Fasilitas</a>
+              <a href="#" class="block">Peralatan</a>
+              <a href="#" class="block">Partner Perusahaan</a>
+              <a href="#" class="block">Klien Kami</a>
+              <a href="#" class="block">Lokasi</a>
+              <a href="#" class="block">Lain-lain</a>
+            </div>
+          </li>
+
+          <!-- Produk Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Produk</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="#" class="block">Bangunan Baru</a>
+              <a href="#" class="block">Perbaikan</a>
+              <a href="#" class="block">Stell Construction & Related Industry</a>
+              <a href="#" class="block">Fiberglass</a>
+            </div>
+          </li>
+
+          <!-- Pelanggan Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Pelanggan</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="#" class="block">Regitrasi Pelanggan</a>
+              <a href="#" class="block">Ketersediaan Dock</a>
+              <a href="#" class="block">Download Form</a>
+              <a href="#" class="block">Hubungi Kami</a>
+            </div>
+          </li>
+
+          <!-- Informasi Mobile -->
+          <li>
+            <button class="dropdown-trigger-mobile flex items-center justify-between w-full hover:text-blue-600 transition" aria-expanded="false">
+              <span>Informasi</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 mt-2 space-y-3">
+              <a href="#" class="block">Berita</a>
+              <a href="#" class="block">Karir</a>
+              <a href="#" class="block">Customer Testimonials</a>
+              <a href="#" class="block">Galery</a>
+              <a href="#" class="block">Lelang</a>
+              <a href="#" class="block">Kementrian BUMN</a>
+              <a href="#" class="block">Download</a>
+              <a href="#" class="block">Whistleblower</a>
+            </div>
+          </li>
+
+          <li><a href="#e-ppid" class="block hover:text-blue-600 transition">E-PPID</a></li>
+
+          <!-- Language Selector Mobile -->
+          <li class="pt-4 border-t border-gray-200">
+            <div class="flex items-center space-x-3">
+              <span class="font-medium">Language:</span>
+              <div class="flex space-x-2">
+                <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
+                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                  <span class="text-sm">ID</span>
+                </a>
+                <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1 bg-gray-100 rounded-lg">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                  <span class="text-sm">EN</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="pt-24 bg-gradient-to-r from-blue-700 to-blue-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-white">
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Struktur Organisasi</h1>
+        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Suatu susunan dan hubungan antara tiap bagian</p>
+      </div>
+    </section>
+    <!-- Timeline Section -->
+    <section class="bg-gray-50 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <img src="image/struktur_organisasi.jpg" />
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-bold text-lg mb-4">PT Ikishi Shipyard</h3>
+          <p class="text-sm leading-relaxed">
+            Jl. Pelabuhan No. 123, Surabaya, Indonesia
+            <br />
+            Telp: (031) 1234567
+            <br />
+            Email: info@ikishipyard.co.id
+          </p>
         </div>
-  </nav>
-  <!-- Hero Section -->
-  <section class="pt-24 bg-gradient-to-r from-blue-700 to-blue-900">
-   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-white">
-    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
-     Struktur Organisasi
-    </h1>
-    <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">
-     Suatu susunan dan hubungan antara tiap bagian
-    </p>
-   </div>
-  </section>
-  <!-- Timeline Section -->
-  <section class="bg-gray-50 py-16">
-   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <img src="image/struktur_organisasi.jpg" >
-   </div>
-  </section>
-  <!-- Footer -->
-  <footer class="bg-blue-900 text-white py-10">
-   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div>
-     <h3 class="font-bold text-lg mb-4">
-      PT Ikishi Shipyard
-     </h3>
-     <p class="text-sm leading-relaxed">
-      Jl. Pelabuhan No. 123, Surabaya, Indonesia
-      <br/>
-      Telp: (031) 1234567
-      <br/>
-      Email: info@ikishipyard.co.id
-     </p>
-    </div>
-    <div>
-     <h3 class="font-bold text-lg mb-4">
-      Navigasi
-     </h3>
-     <ul class="space-y-2 text-sm">
-      <li>
-       <a class="hover:underline" href="/app/index">
-        Beranda
-       </a>
-      </li>
-      <li>
-       <a class="underline font-semibold" href="/app/index/sejarah">
-        Sejarah
-       </a>
-      </li>
-      <li>
-       <a class="hover:underline" href="/app/index/produk">
-        Produk
-       </a>
-      </li>
-      <li>
-       <a class="hover:underline" href="/app/index/berita">
-        Berita
-       </a>
-      </li>
-      <li>
-       <a class="hover:underline" href="/app/index/kontak">
-        Kontak
-       </a>
-      </li>
-     </ul>
-    </div>
-    <div>
-     <h3 class="font-bold text-lg mb-4">
-      Ikuti Kami
-     </h3>
-     <div class="flex space-x-6 text-xl">
-      <a aria-label="Facebook PT Ikishi Shipyard" class="hover:text-blue-400" href="https://facebook.com/ikishipyard">
-       <i class="fab fa-facebook-f">
-       </i>
-      </a>
-      <a aria-label="Twitter PT Ikishi Shipyard" class="hover:text-blue-400" href="https://twitter.com/ikishipyard">
-       <i class="fab fa-twitter">
-       </i>
-      </a>
-      <a aria-label="Instagram PT Ikishi Shipyard" class="hover:text-blue-400" href="https://instagram.com/ikishipyard">
-       <i class="fab fa-instagram">
-       </i>
-      </a>
-      <a aria-label="LinkedIn PT Ikishi Shipyard" class="hover:text-blue-400" href="https://linkedin.com/company/ikishipyard">
-       <i class="fab fa-linkedin-in">
-       </i>
-      </a>
-     </div>
-    </div>
-   </div>
-   <div class="text-center text-sm mt-8 opacity-70">
-    © 2024 PT Ikishi Shipyard. All rights reserved.
-   </div>
-  </footer>
- </body>
- <script src="js/script.js"></script>
+        <div>
+          <h3 class="font-bold text-lg mb-4">Navigasi</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a class="hover:underline" href="/app/index"> Beranda </a>
+            </li>
+            <li>
+              <a class="underline font-semibold" href="/app/index/sejarah"> Sejarah </a>
+            </li>
+            <li>
+              <a class="hover:underline" href="/app/index/produk"> Produk </a>
+            </li>
+            <li>
+              <a class="hover:underline" href="/app/index/berita"> Berita </a>
+            </li>
+            <li>
+              <a class="hover:underline" href="/app/index/kontak"> Kontak </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-4">Ikuti Kami</h3>
+          <div class="flex space-x-6 text-xl">
+            <a aria-label="Facebook PT Ikishi Shipyard" class="hover:text-blue-400" href="https://facebook.com/ikishipyard">
+              <i class="fab fa-facebook-f"> </i>
+            </a>
+            <a aria-label="Twitter PT Ikishi Shipyard" class="hover:text-blue-400" href="https://twitter.com/ikishipyard">
+              <i class="fab fa-twitter"> </i>
+            </a>
+            <a aria-label="Instagram PT Ikishi Shipyard" class="hover:text-blue-400" href="https://instagram.com/ikishipyard">
+              <i class="fab fa-instagram"> </i>
+            </a>
+            <a aria-label="LinkedIn PT Ikishi Shipyard" class="hover:text-blue-400" href="https://linkedin.com/company/ikishipyard">
+              <i class="fab fa-linkedin-in"> </i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-sm mt-8 opacity-70">© 2024 PT Ikishi Shipyard. All rights reserved.</div>
+    </footer>
+     
+  </body>
+  <script src="js/script.js"></script>
 </html>
