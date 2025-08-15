@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body class="bg-gray-50 min-h-screen flex flex-col items-center px-4">
+  <body>
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-30 border-b border-gray-200" role="navigation">
       <div class="max-w-8xl mx-auto px-6 py-4 flex items-center justify-between flex-nowrap">
@@ -241,137 +241,97 @@
 
       <!-- Konten -->
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center text-white">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Profile PT IKI Shipyard</h1>
-        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Sejarah dan perjalanan berdirinya perusahaan</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Manajemen PT IKI Shipyard</h1>
+        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Jajaran Manajemen PT IKI Shipyard</p>
       </div>
     </section>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl w-full pt-10">
-      <!-- Card 1 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Komisaris Independen" data-name="UMAR SYAH" data-pendidikan="-." data-riwayat="-." data-tempat="" tabindex="0">
-        <img alt="Portrait photo of Umar Syah, Komisaris Independen" class="rounded-t-lg w-full h-64 object-cover" src="image/umarsyah.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">UMAR SYAH</h2>
+    <!-- Tambahkan spasi antar section dan card -->
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="mt-12 flex flex-col gap-6 sm:flex-row sm:gap-8 justify-center">
+        <!-- Card 1 -->
+        <div class="flex flex-col sm:flex-row border border-gray-200 rounded-lg overflow-hidden max-w-5xl">
+          <img alt="Portrait of a man in a black suit, white shirt, red patterned tie, and glasses, with a bright office window background" class="w-full sm:w-72 object-cover" src="image/suhan ikhsan.jpg" />
+          <div class="p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-1">Simon Aloysius Mantiri</h3>
+              <a class="text-blue-700 text-sm mb-4 inline-block" href="#">Direktur Utama</a>
+              <p class="text-gray-700 text-sm leading-relaxed max-w-xl">Simon Aloysius Mantiri ditunjuk sebagai Direktur Utama PT Pertamina (Persero), berdasarkan Surat Keputusan Menteri Badan Usaha Milik Negara...</p>
+            </div>
+            <button aria-label="Open detail card" class="mt-6 w-max px-6 py-2 border border-gray-500 rounded-full text-gray-700 text-sm flex items-center gap-2 hover:bg-gray-100 transition" type="button" id="openDetailBtn">
+              Selengkapnya <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Komisaris" data-name="H. M. RUSLI" data-pendidikan="S1 Teknik Mesin" data-riwayat="Direktur PT XYZ" data-tempat="Makassar, 15 Juli 1957" tabindex="0">
-        <img alt="Portrait photo of H. M. Rusli, Komisaris" class="rounded-t-lg w-full h-64 object-cover" src="image/katno.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">KATNO</h2>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Direktur Utama" data-name="H. M. RUSDI" data-pendidikan="S2 Manajemen" data-riwayat="CEO PT ABC" data-tempat="Makassar, 20 Agustus 1960" tabindex="0">
-        <img alt="Portrait photo of H. M. Rusdi, Direktur Utama" class="rounded-t-lg w-full h-64 object-cover" src="image/mahdimanfaluthi.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">MAHDIMANFALUTHI</h2>
-        </div>
-      </div>
-      <!-- Card 4 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Direktur Keuangan" data-name="SRI WAHYUNI" data-pendidikan="S1 Akuntansi" data-riwayat="CFO PT DEF" data-tempat="Jakarta, 10 Januari 1970" tabindex="0">
-        <img alt="Portrait photo of Sri Wahyuni, Direktur Keuangan" class="rounded-t-lg w-full h-64 object-cover" src="image/suhan ikhsan.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">SUHAN IKHSAN</h2>
+
+        <!-- Card 2 -->
+        <div class="flex flex-col sm:flex-row border border-gray-200 rounded-lg overflow-hidden max-w-5xl">
+          <img alt="Portrait of a man in a black suit, white shirt, red patterned tie, and glasses, with a bright office window background" class="w-full sm:w-72 object-cover" src="image/mahdimanfaluthi.jpg" />
+          <div class="p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-1">Simon Aloysius Mantiri</h3>
+              <a class="text-blue-700 text-sm mb-4 inline-block" href="#">Direktur Utama</a>
+              <p class="text-gray-700 text-sm leading-relaxed max-w-xl">Simon Aloysius Mantiri ditunjuk sebagai Direktur Utama PT Pertamina (Persero), berdasarkan Surat Keputusan Menteri Badan Usaha Milik Negara...</p>
+            </div>
+            <button aria-label="Open detail card" class="mt-6 w-max px-6 py-2 border border-gray-500 rounded-full text-gray-700 text-sm flex items-center gap-2 hover:bg-gray-100 transition" type="button">
+              Selengkapnya <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
+
     <!-- Modal -->
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50" id="modal">
-      <div class="bg-white rounded-md max-w-md w-full shadow-lg">
-        <div class="bg-[#00147E] rounded-t-md px-5 py-3 flex justify-between items-center">
-          <h2 class="text-white font-bold text-lg" id="modal-title">Profil Manajemen</h2>
-          <button aria-label="Close" class="text-white text-xl font-bold leading-none focus:outline-none" id="modal-close">×</button>
-        </div>
-        <div class="px-6 py-5">
-          <h3 class="font-extrabold text-2xl mb-4" id="modal-name"></h3>
-          <table class="w-full border border-gray-300 text-sm">
-            <tbody>
-              <tr class="border-b border-gray-300">
-                <td class="py-2 px-3 w-1/3 font-normal">Jabatan</td>
-                <td class="py-2 px-2 w-10 text-center font-normal">:</td>
-                <td class="py-2 px-3 font-bold" id="modal-jabatan"></td>
-              </tr>
-              <tr class="border-b border-gray-300">
-                <td class="py-2 px-3 font-normal">Tempat/Tanggal Lahir</td>
-                <td class="py-2 px-2 text-center font-normal">:</td>
-                <td class="py-2 px-3 font-normal" id="modal-tempat"></td>
-              </tr>
-              <tr class="border-b border-gray-300">
-                <td class="py-2 px-3 font-normal">Pendidikan</td>
-                <td class="py-2 px-2 text-center font-normal">:</td>
-                <td class="py-2 px-3 font-normal" id="modal-pendidikan"></td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 font-normal">Riwayat Pekerjaan dan Penugasan</td>
-                <td class="py-2 px-2 text-center font-normal">:</td>
-                <td class="py-2 px-3 font-normal" id="modal-riwayat"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="bg-gray-300 rounded-b-md px-6 py-4 flex justify-end">
-          <button class="bg-blue-400 text-white font-semibold text-sm px-6 py-2 rounded focus:outline-none" id="modal-close-bottom" type="button">CLOSE</button>
+    <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden" id="detailCard">
+      <div class="bg-white rounded-lg max-w-4xl w-full shadow-lg relative overflow-auto max-h-[90vh]">
+        <button aria-label="Close detail card" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl font-bold" id="closeDetailBtn" type="button">×</button>
+        <div class="flex flex-col sm:flex-row">
+          <img
+            alt="Portrait of a man in a black suit, white shirt, red patterned tie, and glasses, with a bright office window background"
+            class="w-full sm:w-72 object-cover rounded-t-lg sm:rounded-l-lg sm:rounded-tr-none"
+            src="image/suhan ikhsan.jpg"
+          />
+          <div class="p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xl font-semibold mb-1">Simon Aloysius Mantiri</h3>
+              <a class="text-blue-700 text-sm mb-4 inline-block" href="#"> Direktur Utama </a>
+              <p class="text-gray-700 text-sm leading-relaxed max-w-xl">
+                Simon Aloysius Mantiri ditunjuk sebagai Direktur Utama PT Pertamina (Persero), berdasarkan Surat Keputusan Menteri Badan Usaha Milik Negara dan Direktur Utama Perusahaan Perseroan (Persero) PT Danantara Asset Management
+                Selaku Para Pemegang Saham Perusahaan Perseroan (Persero) PT Pertamina Nomor SK-149/MBU/06/2025 Nomor SK.011/DI-DAM/DO/2025 tanggal 12 Juni 2025 Tentang Pemberhentian, Perubahan Nomenklatur Jabatan, Pengalihan Tugas, dan
+                Pengangkatan Anggota-Anggota Direksi Perusahaan Perseroan (Persero) PT Pertamina (Persero).
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-blue-200 py-8 mt-20">
+      <div class="max-w-7xl mx-auto px-6 text-center text-sm select-none">© 2024 Ikishi Shipyard. All rights reserved.</div>
+    </footer>
     <script>
-      const modal = document.getElementById("modal");
-      const modalName = document.getElementById("modal-name");
-      const modalJabatan = document.getElementById("modal-jabatan");
-      const modalTempat = document.getElementById("modal-tempat");
-      const modalPendidikan = document.getElementById("modal-pendidikan");
-      const modalRiwayat = document.getElementById("modal-riwayat");
-      const modalCloseTop = document.getElementById("modal-close");
-      const modalCloseBottom = document.getElementById("modal-close-bottom");
+      const openBtn = document.getElementById("openDetailBtn");
+      const closeBtn = document.getElementById("closeDetailBtn");
+      const detailCard = document.getElementById("detailCard");
 
-      function openModal(data) {
-        modalName.textContent = data.name;
-        modalJabatan.textContent = data.jabatan;
-        modalTempat.textContent = data.tempat || ",";
-        modalPendidikan.textContent = data.pendidikan || "-.";
-        modalRiwayat.textContent = data.riwayat || "-.";
-        modal.classList.remove("hidden");
+      openBtn.addEventListener("click", () => {
+        detailCard.classList.remove("hidden");
+        detailCard.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
-      }
+      });
 
-      function closeModal() {
-        modal.classList.add("hidden");
+      closeBtn.addEventListener("click", () => {
+        detailCard.classList.add("hidden");
+        detailCard.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "";
-      }
-
-      document.querySelectorAll("[data-name]").forEach((card) => {
-        card.addEventListener("click", () => {
-          openModal({
-            name: card.getAttribute("data-name"),
-            jabatan: card.getAttribute("data-jabatan"),
-            tempat: card.getAttribute("data-tempat"),
-            pendidikan: card.getAttribute("data-pendidikan"),
-            riwayat: card.getAttribute("data-riwayat"),
-          });
-        });
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            card.click();
-          }
-        });
       });
 
-      modalCloseTop.addEventListener("click", closeModal);
-      modalCloseBottom.addEventListener("click", closeModal);
-
-      // Close modal on outside click
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
-
-      // Close modal on Escape key
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-          closeModal();
+      // Close modal on clicking outside the card
+      detailCard.addEventListener("click", (e) => {
+        if (e.target === detailCard) {
+          detailCard.classList.add("hidden");
+          detailCard.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
         }
       });
     </script>
