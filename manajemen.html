@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body class="bg-gray-50 min-h-screen flex flex-col items-center px-4">
+  <body class="w-full">
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-30 border-b border-gray-200" role="navigation">
       <div class="max-w-8xl mx-auto px-6 py-4 flex items-center justify-between flex-nowrap">
@@ -246,36 +246,69 @@
       </div>
     </section>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-6xl w-full pt-10">
-      <!-- Card 1 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Komisaris Independen" data-name="UMAR SYAH" data-pendidikan="-." data-riwayat="-." data-tempat="" tabindex="0">
-        <img alt="Portrait photo of Umar Syah, Komisaris Independen" class="rounded-t-lg w-full h-64 object-cover" src="image/umarsyah.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">UMAR SYAH</h2>
-        </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Komisaris" data-name="H. M. RUSLI" data-pendidikan="S1 Teknik Mesin" data-riwayat="Direktur PT XYZ" data-tempat="Makassar, 15 Juli 1957" tabindex="0">
-        <img alt="Portrait photo of H. M. Rusli, Komisaris" class="rounded-t-lg w-full h-64 object-cover" src="image/katno.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">KATNO</h2>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Direktur Utama" data-name="H. M. RUSDI" data-pendidikan="S2 Manajemen" data-riwayat="CEO PT ABC" data-tempat="Makassar, 20 Agustus 1960" tabindex="0">
-        <img alt="Portrait photo of H. M. Rusdi, Direktur Utama" class="rounded-t-lg w-full h-64 object-cover" src="image/mahdimanfaluthi.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">MAHDIMANFALUTHI</h2>
-        </div>
-      </div>
-      <!-- Card 4 -->
-      <div class="bg-white rounded-lg shadow-md cursor-pointer group" data-jabatan="Direktur Keuangan" data-name="SRI WAHYUNI" data-pendidikan="S1 Akuntansi" data-riwayat="CFO PT DEF" data-tempat="Jakarta, 10 Januari 1970" tabindex="0">
-        <img alt="Portrait photo of Sri Wahyuni, Direktur Keuangan" class="rounded-t-lg w-full h-64 object-cover" src="image/suhan ikhsan.jpg" />
-        <div class="p-4">
-          <h2 class="font-bold text-lg text-center text-gray-900">SUHAN IKHSAN</h2>
+    <div class="w-full px-4 sm:px-6 lg:px-10">
+  <div class="grid gap-6 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 pt-10 mx-auto place-items-center">
+
+    <!-- Row 1: 1 gambar (full width) -->
+    <div class="w-full sm:col-span-3 lg:col-span-4 flex justify-center">
+      <div class="bg-white rounded-lg shadow-md cursor-pointer group w-full max-w-2xl flex flex-col items-center">
+        <img alt="Portrait photo" class="rounded-t-lg w-full h-64 object-cover" src="image/umarsyah.jpg" />
+        <div class="p-4 w-full text-center">
+          <h2 class="font-bold text-lg text-gray-900">UMAR SYAH</h2>
         </div>
       </div>
     </div>
+
+    <!-- Row 2: 3 gambar -->
+    <div class="w-full flex justify-center">
+      <div class="bg-white rounded-lg shadow-md cursor-pointer group w-full max-w-xs flex flex-col items-center h-full">
+        <img alt="Portrait photo" class="rounded-t-lg w-full h-64 object-cover" src="image/katno.jpg" />
+        <div class="p-4 w-full text-center">
+          <h2 class="font-bold text-lg text-gray-900">KATNO</h2>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w-full flex justify-center">
+      <div class="bg-white rounded-lg shadow-md cursor-pointer group w-full max-w-xs flex flex-col items-center h-full">
+        <img alt="Portrait photo" class="rounded-t-lg w-full h-64 object-cover" src="image/mahdimanfaluthi.jpg" />
+        <div class="p-4 w-full text-center">
+          <h2 class="font-bold text-lg text-gray-900">MAHDIMANFALUTHI</h2>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w-full flex justify-center">
+      <div class="bg-white rounded-lg shadow-md cursor-pointer group w-full max-w-xs flex flex-col items-center h-full">
+        <img alt="Portrait photo" class="rounded-t-lg w-full h-64 object-cover" src="image/suhan ikhsan.jpg" />
+        <div class="p-4 w-full text-center">
+          <h2 class="font-bold text-lg text-gray-900">SUHAN IKHSAN</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: 2/3 gambar -->
+    <div class="w-full sm:col-span-2 flex justify-center">
+      <div class="bg-white rounded-lg shadow-md cursor-pointer group w-full max-w-xs flex flex-col items-center h-full">
+        <img alt="Portrait photo" class="rounded-t-lg w-full h-64 object-cover" src="image/katno.jpg" />
+        <div class="p-4 w-full text-center">
+          <h2 class="font-bold text-lg text-gray-900">EXAMPLE 1</h2>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w-full sm:col-span-1 flex justify-center">
+      <div class="bg-white rounded-lg shadow-md cursor-pointer group w-full max-w-xs flex flex-col items-center h-full">
+        <img alt="Portrait photo" class="rounded-t-lg w-full h-64 object-cover" src="image/mahdimanfaluthi.jpg" />
+        <div class="p-4 w-full text-center">
+          <h2 class="font-bold text-lg text-gray-900">EXAMPLE 2</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <!-- Modal -->
     <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50" id="modal">
       <div class="bg-white rounded-md max-w-md w-full shadow-lg">
