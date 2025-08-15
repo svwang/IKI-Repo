@@ -45,8 +45,76 @@ function toggleMobileDropdown(button) {
   }
 }
 
-// Mobile menu toggle
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+  const nav = document.querySelector('nav');
+  let lastScroll = 0;
+  
+  // Add necessary classes
+  nav.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'transition-all', 'duration-300');
+  
+  // Initial state - transparent with white text
+  nav.style.backgroundColor = 'transparent';
+  nav.style.boxShadow = 'none';
+  
+  // Function to update navbar colors
+  function updateNavColors(isTransparent) {
+    if (isTransparent) {
+      // Navbar transparan - teks putih
+      nav.querySelectorAll('a:not(.dropdown-panel a), button:not(.dropdown-panel button), span:not(.dropdown-panel span), i:not(.dropdown-panel i)').forEach(el => {
+        el.style.color = 'white';
+      });
+      
+      // Logo dan teks perusahaan
+      nav.querySelector('.text-blue-900').style.color = 'white';
+      nav.querySelector('.text-gray-600').style.color = 'rgba(255,255,255,0.8)';
+      
+      // Ikon hamburger
+      document.getElementById('menu-btn').querySelector('i').style.color = 'white';
+    } else {
+      // Navbar solid - teks default
+      nav.querySelectorAll('a, button, span, i').forEach(el => {
+        el.style.color = '';
+      });
+      
+      // Kembalikan warna asli logo dan teks perusahaan
+      nav.querySelector('.text-blue-900').style.color = '';
+      nav.querySelector('.text-gray-600').style.color = '';
+    }
+  }
+
+  // Set initial state
+  updateNavColors(true);
+
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    const scrollThreshold = 10;
+    
+    if (currentScroll <= scrollThreshold) {
+      // At top of page - transparent with white text
+      nav.style.backgroundColor = 'transparent';
+      nav.style.boxShadow = 'none';
+      updateNavColors(true);
+      nav.style.transform = 'translateY(0)';
+    } else {
+      // When scrolled - white background with default text colors
+      nav.style.backgroundColor = 'white';
+      nav.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+      updateNavColors(false);
+      
+      // Hide/show logic
+      if (currentScroll > lastScroll && currentScroll > nav.offsetHeight) {
+        // Scrolling down - hide navbar
+        nav.style.transform = 'translateY(-100%)';
+      } else if (currentScroll < lastScroll) {
+        // Scrolling up - show navbar
+        nav.style.transform = 'translateY(0)';
+      }
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Mobile menu toggle (existing code)
   const btn = document.getElementById("menu-btn");
   const menu = document.getElementById("mobile-menu");
 
@@ -55,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.setAttribute("aria-expanded", !expanded);
     menu.classList.toggle("hidden");
     
-    // Ganti ikon
+    // Change icon
     const icon = btn.querySelector('i');
     if (icon.classList.contains('fa-bars')) {
       icon.classList.remove('fa-bars');
@@ -66,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Close dropdowns when clicking outside
+  // Close dropdowns when clicking outside (existing code)
   document.addEventListener('click', (e) => {
     // Untuk desktop
     if (!e.target.closest('[data-dd]')) {

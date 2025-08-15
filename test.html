@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Peta Leaflet Zoom Lokasi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+// Inisialisasi peta
+var map = L.map('map').setView([-5.107422565079109, 119.43211555468012], 5); // Jakarta awal zoom-out
+
+// Gunakan tile OpenStreetMap (gratis, tanpa token)
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// Data lokasi
+var lokasi = [
+    { nama: "Makassar", koordinat: [-5.107422565079109, 119.43211555468012], info: "Sulawesi Selatan" },
+    { nama: "Bitung", koordinat: [1.4432789138300852, 125.20035269283976], info: "Sulawesi Utara" },
+    { nama: "Jakarta Pusat", koordinat: [-6.173305, 106.842448], info: "Ibu Kota Indonesia" }
+];
+
+// Tambahkan marker
+lokasi.forEach(function(l) {
+    var marker = L.marker(l.koordinat).addTo(map);
+    marker.bindPopup(`<h3>${l.nama}</h3><p>${l.info}</p>`);
+
+    // Event klik untuk zoom ke lokasi
+    marker.on('click', function() {
+        map.flyTo(l.koordinat, 14, {
+            animate: true,
+            duration: 2 // durasi animasi zoom
+        });
+        marker.openPopup();
+    });
+});
+</script>
+
+</body>
+</html>

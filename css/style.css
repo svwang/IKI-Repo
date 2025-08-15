@@ -6,6 +6,49 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+nav {
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+/* Pastikan dropdown tetap memiliki teks gelap */
+.dropdown-panel,
+.dropdown-panel button,
+.chevron-down-gray {
+  color: #374151 !important
+}
+
+/* Transisi untuk perubahan warna */
+nav a,
+nav button,
+nav span,
+nav i {
+  transition: color 0.3s ease;
+}
+
+/* Untuk memastikan dropdown juga memiliki transisi warna teks */
+.dropdown-panel a {
+  transition: color 0.3s ease;
+}
+
+/* Style untuk navbar saat di atas */
+.nav-transparent {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.nav-white-text a,
+.nav-white-text button,
+.nav-white-text span,
+.nav-white-text i {
+  color: white !important;
+}
+
+/* Style untuk navbar saat di-scroll */
+.nav-solid {
+  background-color: white !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
 /* Hero section full width fix */
 .hero-container {
   width: 100vw;
