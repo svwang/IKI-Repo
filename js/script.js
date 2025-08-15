@@ -97,73 +97,51 @@ if (typeof AOS !== 'undefined') {
   AOS.init();
 }
 
-// berita
-const container = document.getElementById('newsContainer');
-const btnLeft = document.getElementById('scrollLeft');
-const btnRight = document.getElementById('scrollRight');
 
-// Show buttons on md+ screens
-function toggleButtons() {
-  if (window.innerWidth >= 640) {
-    btnLeft.classList.remove('hidden');
-    btnRight.classList.remove('hidden');
-  } else {
-    btnLeft.classList.add('hidden');
-    btnRight.classList.add('hidden');
+// 1. Fix background image change functionality
+  const background = document.getElementById('projectBackground');
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  // Set first card's image as default background
+  if (projectCards.length > 0) {
+    const firstBg = projectCards[0].getAttribute('data-bg');
+    background.src = firstBg;
   }
-}
-toggleButtons();
-window.addEventListener('resize', toggleButtons);
-
-btnLeft.addEventListener('click', () => {
-  container.scrollBy({ left: -300, behavior: 'smooth' });
-});
-
-btnRight.addEventListener('click', () => {
-  container.scrollBy({ left: 300, behavior: 'smooth' });
-});
-
-// Optional: allow keyboard arrow keys to scroll the container when focused
-container.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') {
-    container.scrollBy({ left: 300, behavior: 'smooth' });
-  } else if (e.key === 'ArrowLeft') {
-    container.scrollBy({ left: -300, behavior: 'smooth' });
-  }
-});
-
-
-// project
-const cards = document.querySelectorAll('.project-card');
-    const background = document.getElementById('projectBackground');
-    const scrollContainer = document.getElementById('projectCards');
+  
+  // Add hover and click events for all cards
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      const newBg = this.getAttribute('data-bg');
+      background.src = newBg;
+    });
     
-    // Set first card as active initially
-    cards[0].classList.add('ring-4', 'ring-blue-500');
-    
-    // Hover effects
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        const bgImage = card.getAttribute('data-bg');
-        background.src = bgImage;
-      });
-      
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        cards.forEach(c => c.classList.remove('ring-4', 'ring-blue-500'));
-        card.classList.add('ring-4', 'ring-blue-500');
-        const bgImage = card.getAttribute('data-bg');
-        background.src = bgImage;
-        // You can add navigation logic here
-        window.location.href = card.getAttribute('href');
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      const newBg = this.getAttribute('data-bg');
+      background.src = newBg;
+      // Optional: Add active state to clicked card
+      projectCards.forEach(c => c.classList.remove('ring-2', 'ring-blue-500'));
+      this.classList.add('ring-2', 'ring-blue-500');
+    });
+  });
+
+  // 2. Fix arrow buttons functionality
+  const scrollContainer = document.getElementById('projectCards');
+  const scrollLeftBtn = document.getElementById('scrollProjectLeft');
+  const scrollRightBtn = document.getElementById('scrollProjectRight');
+  
+  if (scrollLeftBtn && scrollRightBtn) {
+    scrollLeftBtn.addEventListener('click', function() {
+      scrollContainer.scrollBy({
+        left: -300,
+        behavior: 'smooth'
       });
     });
     
-    // Scroll buttons
-    document.getElementById('scrollProjectLeft').addEventListener('click', () => {
-      scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+    scrollRightBtn.addEventListener('click', function() {
+      scrollContainer.scrollBy({
+        left: 300, 
+        behavior: 'smooth'
+      });
     });
-    
-    document.getElementById('scrollProjectRight').addEventListener('click', () => {
-      scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
-    });
+  }

@@ -1,6 +1,21 @@
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
+
+/* Hero section full width fix */
+.hero-container {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
 /* Pastikan dropdown tetap terbuka saat hover */
 .group:hover .dropdown-panel {
   opacity: 1 !important;
@@ -68,27 +83,40 @@ body {
 
 
 /* project */
-
-/* Custom styling for the overlapping effect */
-#projectCards {
-  margin-top: -80px; /* Pull cards up over the background */
-}
-
-.project-card {
-  scroll-snap-align: start;
-}
-
-/* Hide scrollbar but keep functionality */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-
-.rounded-chevron {
-  border-radius: 10px;
-}
+/* Project section specific styles */
+  #projectCards {
+    margin-top: -80px;
+    scroll-behavior: smooth;
+  }
+  
+  .project-card {
+    scroll-snap-align: start;
+    transition: all 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .rounded-chevron {
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+  
+  .rounded-chevron:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Active state for clicked card */
+  .project-card.ring-2 {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
