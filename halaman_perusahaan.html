@@ -12,7 +12,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
     <style>
         #map {
             min-height: 500px;
@@ -55,6 +54,110 @@
         .content-section.active {
             display: block;
             animation: fadeIn 0.5s ease;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-chevron-left, .nav-chevron-right {
+            cursor: pointer; /* Tambahkan cursor pointer */
+            transition: opacity 0.3s ease;
+            pointer-events: auto; /* Pastikan selalu aktif */
+        }
+        .nav-chevron-left:hover, .nav-chevron-right:hover {
+            pointer-events: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .company-nav-link {
+            min-width: max-content;
+            transition: color 0.2s ease;
+            padding: 0 1rem;
+        }
+
+        /* Ensure only about 7 items are visible at a time */
+        #nav-container {
+            scroll-behavior: smooth;
+            mask-image: linear-gradient(
+                to right,
+                transparent,
+                black 20px,
+                black calc(100% - 20px),
+                transparent
+            );
+        }
+
+        /* Custom animation for gallery items */
+        .group:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Smooth transitions */
+        .transition-transform {
+            transition-property: transform;
+        }
+        .transition-opacity {
+            transition-property: opacity;
+        }
+        .transition-shadow {
+            transition-property: box-shadow;
+        }
+
+        /* Ensure consistent image sizing */
+        .h-64 {
+            height: 16rem;
+        }
+
+        .yard-tab {
+            transition: all 0.3s ease;
+        }
+
+        .yard-content {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .facility-item {
+            transition: all 0.2s ease;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+
+        .facility-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .facility-item svg {
+            transition: all 0.2s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .grid {
+                gap: 1rem;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #nav-container {
+                mask-image: linear-gradient(
+                    to right,
+                    transparent,
+                    black 10px,
+                    black calc(100% - 10px),
+                    transparent
+                );
+            }
         }
         
     </style>
@@ -330,52 +433,72 @@
         </div>
     </section>
 
-    <!-- Secondary Navigation -->
-    <div class="bg-white shadow-sm sticky top-16 z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="overflow-x-auto">
-                <nav class="flex space-x-8" id="company-nav">
-                    <a data-target="profile" class="company-nav-link active py-4 font-medium whitespace-nowrap">
-                        Profil Perusahaan
-                    </a>
-                    <a data-target="sejarah" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Sejarah
-                    </a>
-                    <a data-target="visi-misi" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Visi & Misi
-                    </a>
-                    <a data-target="manajemen" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Manajemen
-                    </a>
-                    <a data-target="struktur" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Struktur Organisasi
-                    </a>
-                    <a data-target="kegiatan" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Kegiatan
-                    </a>
-                    <a data-target="sdm" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        SDM
-                    </a>
-                    <a data-target="fasilitas" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Fasilitas
-                    </a>
-                    <a data-target="peralatan" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Peralatan
-                    </a>
-                    <a data-target="klien_Kami" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Klien Kami
-                    </a>
-                    <a data-target="lokasi" class="company-nav-link py-4 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap">
-                        Lokasi
-                    </a>
+    <!-- Secondary Navbar -->
+    <div class="bg-white shadow-[3px_2px_24px_-1px_rgba(59,_130,_246,_0.5)] sticky top-16 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <!-- Left Chevron -->
+            <button class="absolute left-0 top-0 bottom-0 w-8 flex items-center justify-center bg-gradient-to-r from-white to-transparent z-10 opacity-0 hover:opacity-100 transition-opacity duration-200 nav-chevron-left">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            
+            <!-- Navigation Container -->
+            <div class="overflow-x-auto scrollbar-hide relative" id="nav-container">
+                <nav class="flex transition-transform duration-300" id="company-nav" style="width: max-content">
+                    <div class="flex space-x-8 nav-items-container px-8">
+                        <a data-target="profile" class="company-nav-link active py-4 px-2 font-medium whitespace-nowrap block">
+                            Profil Perusahaan
+                        </a>
+                        <a data-target="sejarah" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Sejarah
+                        </a>
+                        <a data-target="visi-misi" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Visi & Misi
+                        </a>
+                        <a data-target="manajemen" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Manajemen
+                        </a>
+                        <a data-target="struktur" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Struktur Organisasi
+                        </a>
+                        <a data-target="kegiatan" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Kegiatan
+                        </a>
+                        <a data-target="sdm" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            SDM
+                        </a>
+                        <a data-target="partners" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Partner Perusahaan
+                        </a>
+                        <a data-target="fasilitas" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Fasilitas
+                        </a>
+                        <a data-target="peralatan" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Peralatan
+                        </a>
+                        <a data-target="klien_Kami" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Klien Kami
+                        </a>
+                        <a data-target="lokasi" class="company-nav-link py-4 px-2 font-medium text-gray-600 hover:text-blue-600 whitespace-nowrap block">
+                            Lokasi
+                        </a>
+                    </div>
                 </nav>
             </div>
+            
+            <!-- Right Chevron -->
+            <button class="absolute right-0 top-0 bottom-0 w-8 flex items-center justify-center bg-gradient-to-l from-white to-transparent z-10 nav-chevron-right">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
         </div>
     </div>
 
     <!-- Main Content -->
     <main class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex flex-col md:flex-row gap-12">
+        <div class="">
             <!-- Content Sections -->
             <div >
                 <!-- Profile Section -->
@@ -526,15 +649,163 @@
 
                 <!-- Visi & Misi Section -->
                 <div id="visi-misi" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Visi & Misi</h2>
                     <div class="prose max-w-none text-gray-600">
-                        <!-- ... visi-misi content ... -->
+                        <section id="visi-misi" class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div class="text-center mb-12">
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Visi & Misi Perusahaan</h2>
+                                    <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+                                        Landasan filosofis yang menjadi pedoman dalam setiap langkah perusahaan
+                                    </p>
+                                </div>
+
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                    <!-- Visi Section -->
+                                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+                                        <div class="p-8">
+                                            <div class="flex items-center mb-6">
+                                                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-2xl font-bold text-gray-800">Visi Perusahaan</h3>
+                                            </div>
+                                            <div class="pl-16">
+                                                <p class="text-xl text-gray-700 leading-relaxed mb-6">
+                                                    "Menjadi perusahaan galangan kapal dan Engineering yang kuat dan berdaya saing tinggi di kawasan regional Asia Tenggara."
+                                                </p>
+                                                <div class="border-t border-gray-200 pt-6">
+                                                    <h4 class="font-semibold text-gray-800 mb-3">Indikator Pencapaian:</h4>
+                                                    <ul class="space-y-3 text-gray-700">
+                                                        <li class="flex items-start">
+                                                            <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                            Memiliki kapasitas produksi yang kompetitif
+                                                        </li>
+                                                        <li class="flex items-start">
+                                                            <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                            Teknologi terkini dalam pembangunan kapal
+                                                        </li>
+                                                        <li class="flex items-start">
+                                                            <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                            SDM yang profesional dan bersertifikasi
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Misi Section -->
+                                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+                                        <div class="p-8">
+                                            <div class="flex items-center mb-6">
+                                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-2xl font-bold text-gray-800">Misi Perusahaan</h3>
+                                            </div>
+                                            <div class="pl-16">
+                                                <div class="space-y-6">
+                                                    <div class="flex items-start">
+                                                        <div class="bg-blue-50 rounded-full p-2 mr-4 flex-shrink-0">
+                                                            <span class="text-blue-600 font-bold">1</span>
+                                                        </div>
+                                                        <p class="text-gray-700 leading-relaxed">
+                                                            Menyediakan layanan terbaik dengan prinsip tepat waktu, tepat mutu, dan tepat biaya untuk kepuasan pelanggan.
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex items-start">
+                                                        <div class="bg-blue-50 rounded-full p-2 mr-4 flex-shrink-0">
+                                                            <span class="text-blue-600 font-bold">2</span>
+                                                        </div>
+                                                        <p class="text-gray-700 leading-relaxed">
+                                                            Mengembangkan inovasi teknologi dalam bidang galangan kapal dan engineering untuk meningkatkan daya saing.
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex items-start">
+                                                        <div class="bg-blue-50 rounded-full p-2 mr-4 flex-shrink-0">
+                                                            <span class="text-blue-600 font-bold">3</span>
+                                                        </div>
+                                                        <p class="text-gray-700 leading-relaxed">
+                                                            Membangun SDM yang profesional melalui program pelatihan dan sertifikasi berkelanjutan.
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex items-start">
+                                                        <div class="bg-blue-50 rounded-full p-2 mr-4 flex-shrink-0">
+                                                            <span class="text-blue-600 font-bold">4</span>
+                                                        </div>
+                                                        <p class="text-gray-700 leading-relaxed">
+                                                            Menerapkan prinsip bisnis berkelanjutan yang memperhatikan aspek lingkungan dan sosial.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Values Section -->
+                                <div class="mt-16 bg-white rounded-2xl shadow-xl p-8">
+                                    <div class="text-center mb-8">
+                                        <h3 class="text-2xl font-bold text-gray-800">Nilai-Nilai Perusahaan</h3>
+                                        <p class="text-gray-600 mt-2">Prinsip dasar yang menjadi pedoman kerja kami</p>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        <div class="bg-indigo-50 p-6 rounded-xl text-center">
+                                            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-gray-800 mb-2">Integritas</h4>
+                                            <p class="text-gray-700">Menjunjung tinggi kejujuran dan etika bisnis dalam setiap tindakan</p>
+                                        </div>
+                                        <div class="bg-blue-50 p-6 rounded-xl text-center">
+                                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-gray-800 mb-2">Inovasi</h4>
+                                            <p class="text-gray-700">Terus mengembangkan solusi kreatif untuk tantangan baru</p>
+                                        </div>
+                                        <div class="bg-green-50 p-6 rounded-xl text-center">
+                                            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-gray-800 mb-2">Kolaborasi</h4>
+                                            <p class="text-gray-700">Bekerja sama untuk mencapai hasil terbaik bagi semua pihak</p>
+                                        </div>
+                                        <div class="bg-amber-50 p-6 rounded-xl text-center">
+                                            <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                </svg>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-gray-800 mb-2">Keunggulan</h4>
+                                            <p class="text-gray-700">Selalu berusaha memberikan yang terbaik dalam setiap aspek pekerjaan</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
 
                 <!-- Manajemen Section -->
-                <div id="manajemen" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Manajemen Perusahaan</h2>
+                <div id="manajemen" class="content-section">                    
                     <div class="prose max-w-none text-gray-600">
                         <div class="px-4 sm:px-6 lg:px-8">
                             <div class="mt-12 flex flex-col gap-6 sm:flex-row sm:gap-8 justify-center">
@@ -569,7 +840,7 @@
                                 </div>
                                 </div>
                             </div>
-                            </div>
+                           
 
                             <!-- Modal -->
                             <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden" id="detailCard">
@@ -600,49 +871,1125 @@
 
                 <!-- Struktur Organisasi Section -->
                 <div id="struktur" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Struktur Organisasi</h2>
-                    <div class="prose max-w-none text-gray-600">
-                        <!-- ... struktur content ... -->
+                    <div class="prose max-w-none text-gray-600 text-center">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Struktur Organisasi</h2>
+                        <div class="mt-12 flex flex-col gap-6 sm:flex-row sm:gap-8 justify-center">
+                            <img src="img/strukturorganisasi.jpg" alt="Struktur organisasi" width="85%">
+                        </div>
                     </div>
                 </div>
 
                 <!-- Kegiatan Perusahaan Section -->
                 <div id="kegiatan" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Kegiatan Perusahaan</h2>
                     <div class="prose max-w-none text-gray-600">
-                        <!-- ... kegiatan content ... -->
+                        <div id="gallery" class="py-16 bg-gray-50">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <!-- Section Header -->
+                                <div class="text-center mb-12">
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Engineering & Production Activities</h2>
+                                    <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                                        Showcasing our expertise in shipbuilding, steel construction, and industrial services
+                                    </p>
+                                </div>
+
+                                <!-- Gallery Categories -->
+                                <div class="mb-16">
+                                    <!-- Category 1 -->
+                                    <div class="mb-12">
+                                        <h3 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            Engineering, Steel Construction, Shipbuilding & Repair
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            <!-- Gallery Item 1 -->
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                                <img src="WEB-INF/images/company-act1.jpg" alt="Engineering work" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                        <p class="font-medium">Steel Construction Engineering</p>
+                                                        <button class="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors lightbox-trigger" data-src="WEB-INF/images/company-act1.jpg">
+                                                            View Larger
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Gallery Item 2 -->
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                                <img src="WEB-INF/images/company-act2.jpg" alt="Shipbuilding process" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                        <p class="font-medium">Shipbuilding Process</p>
+                                                        <button class="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors lightbox-trigger" data-src="WEB-INF/images/company-act2.jpg">
+                                                            View Larger
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Gallery Item 3 -->
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                                <img src="WEB-INF/images/company-act3.jpg" alt="Offshore engineering" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                        <p class="font-medium">Offshore Engineering</p>
+                                                        <button class="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors lightbox-trigger" data-src="WEB-INF/images/company-act3.jpg">
+                                                            View Larger
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Category 2 -->
+                                    <div>
+                                        <h3 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                            </svg>
+                                            Workshop Facilities & Equipment Production
+                                        </h3>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            <!-- Gallery Item 4 -->
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                                <img src="WEB-INF/images/company-act4.jpg" alt="Workshop inspection" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                        <p class="font-medium">Machinery Inspection</p>
+                                                        <button class="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors lightbox-trigger" data-src="WEB-INF/images/company-act4.jpg">
+                                                            View Larger
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Gallery Item 5 -->
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                                <img src="WEB-INF/images/company-act5.jpg" alt="Equipment cleaning" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                        <p class="font-medium">Equipment Maintenance</p>
+                                                        <button class="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors lightbox-trigger" data-src="WEB-INF/images/company-act5.jpg">
+                                                            View Larger
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Gallery Item 6 -->
+                                            <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                                <img src="WEB-INF/images/company-act6.jpg" alt="Production facility" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                                    <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                        <p class="font-medium">Production Facility</p>
+                                                        <button class="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors lightbox-trigger" data-src="WEB-INF/images/company-act6.jpg">
+                                                            View Larger
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lightbox Modal -->
+                            <div id="lightbox-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+                                <div class="relative max-w-4xl w-full">
+                                    <button id="close-lightbox" class="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                    <img id="lightbox-image" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-lg">
+                                    <p id="lightbox-caption" class="text-white text-center mt-4 text-lg"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- SDM -->
                 <div id="sdm" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Sumber Daya Manusia</h2>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-lg">
+                            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                Sumber Daya Manusia
+                            </h2>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <!-- Employee Summary Cards -->
+                                <div class="space-y-6">
+                                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Distribusi Karyawan</h3>
+                                        <ul class="space-y-3">
+                                            <li class="flex items-center justify-between">
+                                                <span class="flex items-center">
+                                                    <span class="w-3 h-3 rounded-full bg-indigo-500 mr-2"></span>
+                                                    Manajemen
+                                                </span>
+                                                <span class="font-medium">48</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <span class="flex items-center">
+                                                    <span class="w-3 h-3 rounded-full bg-blue-400 mr-2"></span>
+                                                    Teknisi
+                                                </span>
+                                                <span class="font-medium">92</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <span class="flex items-center">
+                                                    <span class="w-3 h-3 rounded-full bg-green-400 mr-2"></span>
+                                                    Operator
+                                                </span>
+                                                <span class="font-medium">117</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <span class="flex items-center">
+                                                    <span class="w-3 h-3 rounded-full bg-amber-400 mr-2"></span>
+                                                    Administrasi
+                                                </span>
+                                                <span class="font-medium">68</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <span class="flex items-center">
+                                                    <span class="w-3 h-3 rounded-full bg-gray-400 mr-2"></span>
+                                                    Lainnya
+                                                </span>
+                                                <span class="font-medium">32</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="text-sm text-gray-500">Total Karyawan</div>
+                                            <div class="text-2xl font-bold text-indigo-600">357</div>
+                                        </div>
+                                        <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="text-sm text-gray-500">Lokasi</div>
+                                            <div class="space-y-1">
+                                                <div class="flex justify-between">
+                                                    <span>Makassar</span>
+                                                    <span class="font-medium">280</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span>Bitung</span>
+                                                    <span class="font-medium">77</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Main Chart -->
+                                <div class="lg:col-span-2">
+                                    <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow h-full">
+                                        <div class="flex flex-col h-full">
+                                            <div class="flex justify-between items-center mb-4">
+                                                <h3 class="text-lg font-semibold text-gray-700">Distribusi Fungsi Kerja</h3>
+                                                <div class="flex space-x-2">
+                                                    <span class="px-2 py-1 text-xs bg-indigo-100 text-indigo-800 rounded-full">Tahun 2023</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex-grow">
+                                                <canvas id="sdmChart" class="w-full h-full min-h-[300px]"></canvas>
+                                            </div>
+                                            
+                                            <div class="mt-6 pt-4 border-t border-gray-100">
+                                                <h4 class="text-sm font-medium text-gray-700 mb-2">Keterangan:</h4>
+                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                                    <div class="flex items-center">
+                                                        <div class="w-3 h-3 rounded-full bg-indigo-500 mr-2"></div>
+                                                        <span class="text-sm">Produksi: <span class="font-medium">53.6%</span></span>
+                                                    </div>
+                                                    <div class="flex items-center">
+                                                        <div class="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
+                                                        <span class="text-sm">Produksi Tak Langsung: <span class="font-medium">20.87%</span></span>
+                                                    </div>
+                                                    <div class="flex items-center">
+                                                        <div class="w-3 h-3 rounded-full bg-green-400 mr-2"></div>
+                                                        <span class="text-sm">Administrasi: <span class="font-medium">25.53%</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partner Perusahaan Section -->
+                <div id="partners" class="content-section">
                     <div class="prose max-w-none text-gray-600">
-                        <!-- ... content ... -->
+                        <section id="partners" class="py-16 bg-gray-50">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div class="text-center mb-12">
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Corporate Partners</h2>
+                                    <div class="w-20 h-1 bg-indigo-600 mx-auto"></div>
+                                </div>
+
+                                <!-- Ship Building & Repairing -->
+                                <div class="mb-16">
+                                    <div class="flex items-center mb-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                                        </svg>
+                                        <h3 class="text-2xl font-semibold text-gray-800">SHIP BUILDING & SHIP REPAIRING</h3>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        <!-- Partner List with hover effect -->
+                                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    PT Pelayaran Nasional Indonesia (Persero)
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Altus
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    ASDP Cab. Bau-Bau
+                                                </li>
+                                                <!-- Add more items as needed -->
+                                            </ul>
+                                            <div class="mt-4 text-right">
+                                                <span class="text-sm text-gray-500">+23 more partners</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Second column -->
+                                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    ASDP Cab. Bajoe
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Ditjen Perhubungan Darat
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Ditjen Perhubungan Laut
+                                                </li>
+                                                <!-- Add more items as needed -->
+                                            </ul>
+                                        </div>
+                                        
+                                        <!-- Third column -->
+                                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Pertamina
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Pemprov Gorontalo
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Eastern Flour Mills
+                                                </li>
+                                                <!-- Add more items as needed -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CLASS Partners -->
+                                <div class="mb-16">
+                                    <div class="flex items-center mb-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                        </svg>
+                                        <h3 class="text-2xl font-semibold text-gray-800">CLASS</h3>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-abs.png" alt="ABS Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-bki.png" alt="BKI Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-bureau.png" alt="Bureau Veritas Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-gl.png" alt="Germanischer Lloyd Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-lloyds.png" alt="Lloyd's Register Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-class-nk.png" alt="Class NK Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BANK Partners -->
+                                <div class="mb-16">
+                                    <div class="flex items-center mb-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                                        </svg>
+                                        <h3 class="text-2xl font-semibold text-gray-800">BANK</h3>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-bri.png" alt="BRI Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-bni.png" alt="BNI Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-bukopin.png" alt="Bukopin Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-mandiri.png" alt="Mandiri Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-bsm.png" alt="BSM Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 hover:shadow-md transition-all">
+                                            <img src="WEB-INF/images/logo-cimb-niaga.png" alt="CIMB Niaga Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SUPPLIER Partners -->
+                                <div class="mb-16">
+                                    <div class="flex items-center mb-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                        </svg>
+                                        <h3 class="text-2xl font-semibold text-gray-800">SUPPLIER</h3>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    PT Krakatau Steel Jakarta
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    PT Benteng Anugrah Sejahtera Surabaya
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    CV Multitehnik Makassar
+                                                </li>
+                                                <!-- Add more items as needed -->
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all">
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    PT Samasundu Makassar
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    CV. Prima Sidrap
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    PT Samator Cabang Makassar
+                                                </li>
+                                                <!-- Add more items as needed -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- DESIGN ENGINEERING -->
+                                <div>
+                                    <div class="flex items-center mb-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                        </svg>
+                                        <h3 class="text-2xl font-semibold text-gray-800">DESIGN ENGINEERING</h3>
+                                    </div>
+                                    
+                                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all max-w-2xl">
+                                        <ul class="space-y-2 text-gray-700">
+                                            <li class="flex items-start">
+                                                <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                NasDEC Surabaya
+                                            </li>
+                                            <li class="flex items-start">
+                                                <svg class="h-5 w-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                Terafulk Design Surabaya
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
 
                 <!-- Fasilitas Perusahaan Section -->
                 <div id="fasilitas" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Fasilitas</h2>
                     <div class="prose max-w-none text-gray-600">
-                        <!-- ... content ... -->
+                        <section id="facilities" class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+                                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                    <!-- Section Header -->
+                                    <div class="text-center mb-12">
+                                        <h2 class="text-3xl font-bold text-gray-900 mb-3">Fasilitas Kami</h2>
+                                        <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                                        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                                            Fasilitas modern kami yang mendukung berbagai kebutuhan industri dan teknik
+                                        </p>
+                                    </div>
+
+                                    <!-- Yard Selection Tabs -->
+                                    <div class="flex justify-center mb-8">
+                                        <div class="inline-flex rounded-md shadow-sm">
+                                            <button class="yard-tab active px-6 py-3 text-sm font-medium rounded-l-lg bg-blue-600 text-white" data-yard="makassar">
+                                                Makassar Yard
+                                            </button>
+                                            <button class="yard-tab px-6 py-3 text-sm font-medium bg-white text-blue-600 hover:bg-blue-50" data-yard="bitung">
+                                                Bitung Yard
+                                            </button>
+                                            <button class="yard-tab px-6 py-3 text-sm font-medium rounded-r-lg bg-white text-blue-600 hover:bg-blue-50" data-yard="equipment">
+                                                Peralatan
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Yard Contents -->
+                                    <div class="yard-content active" id="makassar-content">
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                            <!-- Yard Image -->
+                                            <div class="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full">
+                                                <img src="WEB-INF/images/img-fasilitas.png" alt="Makassar Yard" class="w-full h-full object-cover">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-6">
+                                                    <div class="text-white">
+                                                        <h3 class="text-xl font-semibold">Makassar Yard</h3>
+                                                        <p class="text-blue-200">Fasilitas galangan kapal utama kami</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Facility List -->
+                                            <div class="bg-white rounded-xl shadow-md p-6">
+                                                <div class="space-y-6">
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Graving Dock
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">10.000 DWT, Ukuran: L 120 m x B 28 m x H 8 m</p>
+                                                    </div>
+
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Slipway
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">Kapasitas 1.500 TLC</p>
+                                                    </div>
+
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Site Track
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">8 Lines; 2 Lines 300 m/line, 4 Line 80 m/line and 2 lines 70 m/line</p>
+                                                    </div>
+
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Outfitting Quay / Jetty
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">Quay Length 800 m and Tower Crane 60 Ton and Water Front 895 m²</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="yard-content hidden" id="bitung-content">
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                            <!-- Yard Image -->
+                                            <div class="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full">
+                                                <img src="WEB-INF/images/img-fasilitas.png" alt="Bitung Yard" class="w-full h-full object-cover">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-6">
+                                                    <div class="text-white">
+                                                        <h3 class="text-xl font-semibold">Bitung Yard</h3>
+                                                        <p class="text-blue-200">Fasilitas galangan kapal cabang kami</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Facility List -->
+                                            <div class="bg-white rounded-xl shadow-md p-6">
+                                                <div class="space-y-6">
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Slipway / Helling
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">1 Slipway 300 TLC Length 120 m, 1 Slipway 1500 TLC Length 190 m, 1 Slipway 300 TLC Length 92 m dan 1 Slipway 3000 TLC Length 200 m</p>
+                                                    </div>
+
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Building Berth
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">1 Units 1000 DWT</p>
+                                                    </div>
+
+                                                    <div class="facility-item group">
+                                                        <h3 class="text-lg font-semibold text-gray-800 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Electrical Power
+                                                        </h3>
+                                                        <p class="text-gray-700 ml-7">PLN 1 x 600 KVA and Generator 1 x 450 KVA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="yard-content hidden" id="equipment-content">
+                                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                            <!-- Equipment Image -->
+                                            <div class="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full">
+                                                <img src="WEB-INF/images/img-fasilitas.png" alt="Peralatan Kami" class="w-full h-full object-cover">
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-6">
+                                                    <div class="text-white">
+                                                        <h3 class="text-xl font-semibold">Peralatan Makassar & Bitung</h3>
+                                                        <p class="text-blue-200">Peralatan modern untuk berbagai kebutuhan industri</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Equipment List -->
+                                            <div class="bg-white rounded-xl shadow-md p-6">
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                    <!-- Lifting Equipment -->
+                                                    <div>
+                                                        <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Peralatan Angkat
+                                                        </h3>
+                                                        <ul class="space-y-2">
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Tower Crane 60 Ton (2 Unit)</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Crawler Crane 400 Ton (1 Unit)</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Mobile Crane 35 Ton (4 Unit)</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <!-- Metal Working -->
+                                                    <div>
+                                                        <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                                            </svg>
+                                                            Pengerjaan Logam
+                                                        </h3>
+                                                        <ul class="space-y-2">
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Profile Bending Machine 500 Ton (1 Unit)</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Plate Bender Machine 200-500 Ton (1 Unit)</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Plate Roller Machine (1 Unit)</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <!-- Workshop Equipment -->
+                                                    <div>
+                                                        <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                                            </svg>
+                                                            Peralatan Workshop
+                                                        </h3>
+                                                        <ul class="space-y-2">
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Workshop 72 x 24 m and 24 x 124 M</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Platershop 40 x 120 m</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Lathe Machine up to dia. 330 mm x 12 m</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <!-- Support Equipment -->
+                                                    <div>
+                                                        <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                                                            </svg>
+                                                            Peralatan Pendukung
+                                                        </h3>
+                                                        <ul class="space-y-2">
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">CAD/CAM "Maxsurf" Engineer Software & Hardware</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Diesel Generator 3 x 450 KVA</span>
+                                                            </li>
+                                                            <li class="flex items-start">
+                                                                <svg class="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                <span class="text-gray-700">Diesel Compressor 900 CI/mm x 8 bar (4 unit)</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                     </div>
                 </div>
 
                 <!-- Peralatan Perusahaan Section -->
                 <div id="peralatan" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Peralatan</h2>
                     <div class="prose max-w-none text-gray-600">
-                        <!-- ... content ... -->
+                        <section id="equipment" class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <!-- Section Header -->
+                                <div class="text-center mb-12">
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Peralatan & Mesin</h2>
+                                    <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+                                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                                        Fasilitas dan peralatan industri mutakhir kami untuk proyek pembuatan kapal dan teknik
+                                    </p>
+                                </div>
+
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                                    <!-- Equipment Image -->
+                                    <div class="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                                        <img src="WEB-INF/images/img-peralatan.png" alt="Peralatan dan Mesin Kami" class="w-full h-auto object-cover">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent flex items-end p-6">
+                                            <div class="text-white">
+                                                <h3 class="text-xl font-semibold">Fasilitas Peralatan Industri</h3>
+                                                <p class="text-blue-200">Area workshop 72m x 24m</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Equipment List -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <!-- Crane Equipment -->
+                                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                                            <div class="flex items-center mb-4">
+                                                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-xl font-semibold text-gray-800">Peralatan Angkat</h3>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Tower Crane:</strong> 60 Ton (3 Unit)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Crawler Crane:</strong> 400 Ton (1 Unit)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Mobile Crane:</strong> 35 Ton (6 Unit)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Gantry Crane:</strong> 5-15 Ton (2 Unit)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Forklift:</strong> 5 Ton x Tinggi 5m</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Metal Working -->
+                                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                                            <div class="flex items-center mb-4">
+                                                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-xl font-semibold text-gray-800">Pengerjaan Logam</h3>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Profile Bending:</strong> Kapasitas 500 Ton</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Hydraulic Press:</strong> Kapasitas 500 Ton</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Pipe Bending:</strong> Diameter hingga 8 Inch</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Plate Bender:</strong> Kapasitas 200-500 Ton</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Plate Roller:</strong> Kelas industri</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Workshop Equipment -->
+                                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                                            <div class="flex items-center mb-4">
+                                                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-xl font-semibold text-gray-800">Peralatan Workshop</h3>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Stern Tube Boring:</strong> 600mm x 12m</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Mesin Bubut:</strong> 330mm x 12m</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Sandblasting:</strong> Peralatan lengkap</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Area Workshop:</strong> 72m x 24m</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Advanced Technology -->
+                                        <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                                            <div class="flex items-center mb-4">
+                                                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-xl font-semibold text-gray-800">Teknologi Canggih</h3>
+                                            </div>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>CAD/CAM:</strong> Software Defcar Engineer</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>CNC Cutting:</strong> Presisi optik</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Pengelasan:</strong> Multi-operator</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Pengelasan Otomatis:</strong> Sistem presisi</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span class="text-gray-700"><strong>Pasokan Daya:</strong> 3 x Generator 450 KVA</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
 
-                <!-- Klien Kami Perusahaan Section -->
-                <div id="klien_Kami" class="content-section">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Klien Kami</h2>
-                    <div class="prose max-w-none text-gray-600">
-                        <!-- ... content ... -->
+                <!-- Klien Kami - Modern Testimonials Section -->
+                <div id="klien_Kami" class="content-section py-16 bg-gray-50">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-4">Klien Kami</h2>
+                            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                                Perusahaan-perusahaan ternama yang telah mempercayai layanan kami
+                            </p>
+                        </div>
+
+                        <!-- Client Logos Grid -->
+                        <div class="mb-16">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">Mitra Kerja Sama</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-center">
+                                <!-- Client Logo 1 -->
+                                <div class="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <img src="https://via.placeholder.com/150x60?text=Client+1" alt="Client Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                </div>
+                                <!-- Client Logo 2 -->
+                                <div class="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <img src="https://via.placeholder.com/150x60?text=Client+2" alt="Client Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                </div>
+                                <!-- Client Logo 3 -->
+                                <div class="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <img src="https://via.placeholder.com/150x60?text=Client+3" alt="Client Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                </div>
+                                <!-- Client Logo 4 -->
+                                <div class="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <img src="https://via.placeholder.com/150x60?text=Client+4" alt="Client Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                </div>
+                                <!-- Client Logo 5 -->
+                                <div class="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <img src="https://via.placeholder.com/150x60?text=Client+5" alt="Client Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                </div>
+                                <!-- Client Logo 6 -->
+                                <div class="flex justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <img src="https://via.placeholder.com/150x60?text=Client+6" alt="Client Logo" class="h-12 object-contain grayscale hover:grayscale-0 transition-all">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonials Section -->
+                        <div class="mt-12">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-8 text-center">Apa Kata Mereka</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <!-- Testimonial 1 -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
+                                            <span class="text-indigo-600 font-bold text-xl">A</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Andi Wijaya</h4>
+                                            <p class="text-sm text-gray-500">Direktur, PT ABC Perkasa</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-gray-700 mb-4">
+                                        <svg class="w-5 h-5 text-amber-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                        </svg>
+                                        <p class="italic">"Kerja sama yang sangat profesional. Timnya responsif dan solutif dalam setiap kebutuhan kami. Hasil kerja melebihi ekspektasi."</p>
+                                    </div>
+                                    <div class="text-sm text-gray-500">Januari 2023</div>
+                                </div>
+
+                                <!-- Testimonial 2 -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                            <span class="text-blue-600 font-bold text-xl">S</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Sarah Darmawan</h4>
+                                            <p class="text-sm text-gray-500">Manajer Operasional, XYZ Corp</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-gray-700 mb-4">
+                                        <svg class="w-5 h-5 text-amber-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                        </svg>
+                                        <p class="italic">"Pelayanan yang sangat memuaskan dari awal hingga akhir proyek. Komitmen terhadap kualitas benar-benar terasa."</p>
+                                    </div>
+                                    <div class="text-sm text-gray-500">Maret 2023</div>
+                                </div>
+
+                                <!-- Testimonial 3 -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                                            <span class="text-green-600 font-bold text-xl">R</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Rudi Hartono</h4>
+                                            <p class="text-sm text-gray-500">CEO, 123 Teknologi</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-gray-700 mb-4">
+                                        <svg class="w-5 h-5 text-amber-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                        </svg>
+                                        <p class="italic">"Inovasi dan solusi yang diberikan sangat relevan dengan kebutuhan bisnis kami. Partner yang sangat recommended!"</p>
+                                    </div>
+                                    <div class="text-sm text-gray-500">Juni 2023</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Case Studies CTA -->
+                        <div class="mt-16 text-center">
+                            <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-8 md:p-10">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Ingin melihat studi kasus lengkap?</h3>
+                                <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                                    Lihat bagaimana kami membantu klien-klien kami mencapai tujuan bisnis mereka melalui solusi yang terukur.
+                                </p>
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
+                                    Lihat Studi Kasus
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -706,98 +2053,98 @@
                             </div>
                             
                             <!-- Grid System untuk Kantor Cabang -->
-<div class="mt-12">
-    <h3 class="text-2xl font-semibold mb-6 text-gray-800">Kantor Cabang</h3>
-    <p class="text-gray-600 mb-8 text-sm md:text-base">PT Industri Kapal Indonesia memiliki jaringan kantor cabang strategis di seluruh Indonesia untuk melayani kebutuhan pelanggan dengan lebih dekat dan responsif.</p>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Branch 1 - Bitung -->
-        <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <div class="grid grid-cols-6 gap-3">
-                <div class="col-span-6">
-                    <h4 class="text-lg font-semibold text-blue-700 mb-2">Bitung, Sulawesi Utara</h4>
-                    <p class="text-gray-600 text-xs mb-3">Spesialisasi: Perbaikan Kapal Besar & Dry Dock</p>
-                </div>
-                <div class="col-span-1">
-                    <i class="fas fa-map-marker-alt mt-1 text-blue-600"></i>
-                </div>
-                <div class="col-span-5">
-                    <p class="text-gray-700 text-sm">Jl. Dermaga Pelabuhan Bitung No. 45</p>
-                    <p class="text-gray-500 text-xs mt-1">Kawasan Pelabuhan Bitung, dekat dengan ALKI II</p>
-                </div>
-                <div class="col-span-1">
-                    <i class="fas fa-phone-alt text-blue-600"></i>
-                </div>
-                <div class="col-span-5">
-                    <p class="text-gray-700 text-sm">+62 438 321 5678</p>
-                    <p class="text-gray-500 text-xs mt-1">Hotline: +62 438 321 5680 (24 jam)</p>
-                </div>
-                <div class="col-span-1">
-                    <i class="fas fa-clock text-blue-600"></i>
-                </div>
-                <div class="col-span-5">
-                    <p class="text-gray-700 text-sm">Buka 24 jam untuk layanan darurat</p>
-                </div>
-                <div class="col-span-6 mt-2">
-                    <div class="bg-blue-50 p-2 rounded">
-                        <p class="text-blue-800 text-xs font-medium">Fasilitas: Dry Dock 250m, Workshop Perbaikan, Gudang Sparepart</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Branch 2 - Jakarta -->
-        <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <div class="grid grid-cols-6 gap-3">
-                <div class="col-span-6">
-                    <h4 class="text-lg font-semibold text-blue-700 mb-2">Jakarta Pusat</h4>
-                    <p class="text-gray-600 text-xs mb-3">Spesialisasi: Marketing & Customer Service</p>
-                </div>
-                <div class="col-span-1">
-                    <i class="fas fa-map-marker-alt mt-1 text-blue-600"></i>
-                </div>
-                <div class="col-span-5">
-                    <p class="text-gray-700 text-sm">Jl. Jenderal Sudirman Kav. 52-53, SCBD</p>
-                    <p class="text-gray-500 text-xs mt-1">Lantai 18, Gedung Equity Tower</p>
-                </div>
-                <div class="col-span-1">
-                    <i class="fas fa-phone-alt text-blue-600"></i>
-                </div>
-                <div class="col-span-5">
-                    <p class="text-gray-700 text-sm">+62 21 522 1234</p>
-                    <p class="text-gray-500 text-xs mt-1">Fax: +62 21 522 1235</p>
-                </div>
-                <div class="col-span-1">
-                    <i class="fas fa-clock text-blue-600"></i>
-                </div>
-                <div class="col-span-5">
-                    <p class="text-gray-700 text-sm">Senin-Jumat: 08:00-17:00 WIB</p>
-                </div>
-                <div class="col-span-6 mt-2">
-                    <div class="bg-blue-50 p-2 rounded">
-                        <p class="text-blue-800 text-xs font-medium">Layanan: Konsultasi Proyek, Kontrak Kerja, Pembayaran</p>
-                    </div>
-                </div>
-                <div class="col-span-6 mt-3">
-                    <a href="#" class="text-blue-600 text-xs font-medium flex items-center">
-                        <i class="fas fa-calendar-alt mr-2"></i> 
-                        Jadwalkan Pertemuan via Zoom
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+                            <div class="mt-12">
+                                <h3 class="text-2xl font-semibold mb-6 text-gray-800">Kantor Cabang</h3>
+                                <p class="text-gray-600 mb-8 text-sm md:text-base">PT Industri Kapal Indonesia memiliki jaringan kantor cabang strategis di seluruh Indonesia untuk melayani kebutuhan pelanggan dengan lebih dekat dan responsif.</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Branch 1 - Bitung -->
+                                    <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="grid grid-cols-6 gap-3">
+                                            <div class="col-span-6">
+                                                <h4 class="text-lg font-semibold text-blue-700 mb-2">Bitung, Sulawesi Utara</h4>
+                                                <p class="text-gray-600 text-xs mb-3">Spesialisasi: Perbaikan Kapal Besar & Dry Dock</p>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <i class="fas fa-map-marker-alt mt-1 text-blue-600"></i>
+                                            </div>
+                                            <div class="col-span-5">
+                                                <p class="text-gray-700 text-sm">Jl. Dermaga Pelabuhan Bitung No. 45</p>
+                                                <p class="text-gray-500 text-xs mt-1">Kawasan Pelabuhan Bitung, dekat dengan ALKI II</p>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <i class="fas fa-phone-alt text-blue-600"></i>
+                                            </div>
+                                            <div class="col-span-5">
+                                                <p class="text-gray-700 text-sm">+62 438 321 5678</p>
+                                                <p class="text-gray-500 text-xs mt-1">Hotline: +62 438 321 5680 (24 jam)</p>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <i class="fas fa-clock text-blue-600"></i>
+                                            </div>
+                                            <div class="col-span-5">
+                                                <p class="text-gray-700 text-sm">Buka 24 jam untuk layanan darurat</p>
+                                            </div>
+                                            <div class="col-span-6 mt-2">
+                                                <div class="bg-blue-50 p-2 rounded">
+                                                    <p class="text-blue-800 text-xs font-medium">Fasilitas: Dry Dock 250m, Workshop Perbaikan, Gudang Sparepart</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Branch 2 - Jakarta -->
+                                    <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="grid grid-cols-6 gap-3">
+                                            <div class="col-span-6">
+                                                <h4 class="text-lg font-semibold text-blue-700 mb-2">Jakarta Pusat</h4>
+                                                <p class="text-gray-600 text-xs mb-3">Spesialisasi: Marketing & Customer Service</p>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <i class="fas fa-map-marker-alt mt-1 text-blue-600"></i>
+                                            </div>
+                                            <div class="col-span-5">
+                                                <p class="text-gray-700 text-sm">Jl. Jenderal Sudirman Kav. 52-53, SCBD</p>
+                                                <p class="text-gray-500 text-xs mt-1">Lantai 18, Gedung Equity Tower</p>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <i class="fas fa-phone-alt text-blue-600"></i>
+                                            </div>
+                                            <div class="col-span-5">
+                                                <p class="text-gray-700 text-sm">+62 21 522 1234</p>
+                                                <p class="text-gray-500 text-xs mt-1">Fax: +62 21 522 1235</p>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <i class="fas fa-clock text-blue-600"></i>
+                                            </div>
+                                            <div class="col-span-5">
+                                                <p class="text-gray-700 text-sm">Senin-Jumat: 08:00-17:00 WIB</p>
+                                            </div>
+                                            <div class="col-span-6 mt-2">
+                                                <div class="bg-blue-50 p-2 rounded">
+                                                    <p class="text-blue-800 text-xs font-medium">Layanan: Konsultasi Proyek, Kontrak Kerja, Pembayaran</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-6 mt-3">
+                                                <a href="#" class="text-blue-600 text-xs font-medium flex items-center">
+                                                    <i class="fas fa-calendar-alt mr-2"></i> 
+                                                    Jadwalkan Pertemuan via Zoom
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-    <div class="mt-8 bg-gray-50 p-4 rounded-lg">
-        <h4 class="font-semibold text-gray-700 mb-2">Catatan Penting:</h4>
-        <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
-            <li>Kantor Bitung melayani perbaikan kapal > 10.000 DWT</li>
-            <li>Jakarta Office hanya melayani administrasi dan marketing</li>
-            <li>Untuk kunjungan langsung ke galangan kapal, harap membuat janji 1x24 jam sebelumnya</li>
-            <li>Layanan darurat tersedia 24 jam di semua lokasi</li>
-        </ul>
-    </div>
-</div>
+                                <div class="mt-8 bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-700 mb-2">Catatan Penting:</h4>
+                                    <ul class="list-disc list-inside text-gray-600 text-sm space-y-1">
+                                        <li>Kantor Bitung melayani perbaikan kapal > 10.000 DWT</li>
+                                        <li>Jakarta Office hanya melayani administrasi dan marketing</li>
+                                        <li>Untuk kunjungan langsung ke galangan kapal, harap membuat janji 1x24 jam sebelumnya</li>
+                                        <li>Layanan darurat tersedia 24 jam di semua lokasi</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -806,7 +2153,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-blue-800 to-blue-700 text-white py-12 mt-1 w-full">
+    <footer class="text-black py-12 mt-1 w-full">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <!-- Company Info -->
@@ -815,87 +2162,87 @@
               <div class="bg-white p-2 rounded-3xl">
                 <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-12 h-12 rounded-lg object-contain">
               </div>
-              <span class="text-xl font-bold text-white">IKISHI SHIPYARD</span>
+              <span class="text-xl font-bold text-blue-700">IKISHI SHIPYARD</span>
             </div>
-            <p class="text-blue-100">Shipbuilding, Docking & Related Industry</p>
+            <p class="text-blue-700">Shipbuilding, Docking & Related Industry</p>
             <div class="flex space-x-4">
-              <a href="#" class="text-blue-100 hover:text-white transition">
-                <i class="fab fa-facebook-f"></i>
+              <a href="#" class="text-blue-800 hover:bg-blue-800 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-facebook-f fa-2x group-hover:text-white"></i>
               </a>
-              <a href="#" class="text-blue-100 hover:text-white transition">
-                <i class="fab fa-twitter"></i>
+              <a href="#" class="text-blue-400 hover:bg-blue-400 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-twitter fa-2x group-hover:text-white"></i>
               </a>
-              <a href="#" class="text-blue-100 hover:text-white transition">
-                <i class="fab fa-linkedin-in"></i>
+              <a href="#" class="text-blue-500 hover:bg-blue-500 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-linkedin-in fa-2x group-hover:text-white" ></i>
               </a>
-              <a href="#" class="text-blue-100 hover:text-white transition">
-                <i class="fab fa-instagram"></i>
+              <a href="#" class="text-red-700 hover:bg-red-700 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-instagram fa-2x group-hover:text-white"></i>
               </a>
             </div>
           </div>
 
           <!-- Quick Links -->
           <div>
-            <h3 class="text-lg font-semibold mb-4 text-white border-b border-blue-400 pb-2">Menu</h3>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Menu</h3>
             <ul class="space-y-2">
               <!-- Menu Beranda -->
-              <li><a href="index.html" class="text-blue-100 hover:text-white transition flex items-center justify-between">Beranda</a></li>
-              <li><a href="halaman_perusahaan.html" class="text-blue-100 hover:text-white transition flex items-center justify-between">Perusahaan</a></li>        
+              <li><a href="#" class="text-black hover: transition flex items-center justify-between">Beranda</a></li>
+              <li><a href="halaman_perusahaan.html" class="text-black hover: transition flex items-center justify-between">Perusahaan</a></li>
 
               <!-- Dropdown Produk -->
               <li class="relative group">
-                <button class="w-full text-left text-blue-100 hover:text-white transition flex items-center justify-between">
+                <button class="w-full text-left text-black hover: transition flex items-center justify-between">
                   <span>Produk</span>
                   <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
                 </button>
                 <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
-                  <li><a href="bangunan_baru.html" class="text-blue-100 hover:text-white block py-1">Bangunan Baru</a></li>
-                  <li><a href="perbaikian.html" class="text-blue-100 hover:text-white block py-1">Perbaikan</a></li>
+                  <li><a href="bangunan_baru.html" class="text-black hover: block py-1">Bangunan Baru</a></li>
+                  <li><a href="perbaikian.html" class="text-black hover: block py-1">Perbaikan</a></li>
                   <!-- ... tambahkan menu lainnya ... -->
                 </ul>
               </li>
 
               <!-- Menu lainnya -->
-              <li><a href="#" class="text-blue-100 hover:text-white transition">Pelanggan</a></li>
-              <li><a href="#" class="text-blue-100 hover:text-white transition">Informasi</a></li>
-              <li><a href="#" class="text-blue-100 hover:text-white transition">E-PPID</a></li>
+              <li><a href="#" class="text-black hover: transition">Pelanggan</a></li>
+              <li><a href="#" class="text-black hover: transition">Informasi</a></li>
+              <li><a href="#" class="text-black hover: transition">E-PPID</a></li>
             </ul>
           </div>
 
           <!-- Contact Info -->
           <div>
-            <h3 class="text-lg font-semibold mb-4 text-white border-b border-blue-400 pb-2">Hubungi Kami</h3>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Hubungi Kami</h3>
             <ul class="space-y-3">
               <li class="flex items-start">
-                <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-200"></i>
-                <span class="text-blue-100">JL Galangan Kapal No. 31, Makassar,
+                <i class="fas fa-map-marker-alt mt-1 mr-3 text-black"></i>
+                <span class="text-black">JL Galangan Kapal No. 31, Makassar,
 Sulawesi Selatan,
 Indonesia, 90211.</span>
               </li>
               <li class="flex items-center">
-                <i class="fas fa-phone-alt mr-3 text-blue-200"></i>
-                <span class="text-blue-100"> +62 411 448 653</span>
+                <i class="fas fa-phone-alt mr-3 text-black"></i>
+                <span class="text-black"> +62 411 448 653</span>
               </li>
               <li class="flex items-center">
-                <i class="fas fa-question mr-3 text-blue-200"></i>
-                <span class="text-blue-100"> +62 411 448 658</span>
+                <i class="fas fa-question mr-3 text-black"></i>
+                <span class="text-black"> +62 411 448 658</span>
               </li>
               <li class="flex items-center">
-                <i class="fas fa-envelope mr-3 text-blue-200"></i>
-                <span class="text-blue-100">ptiki@ikishipyard.co.id</span>
+                <i class="fas fa-envelope mr-3 text-black"></i>
+                <span class="text-black">ptiki@ikishipyard.co.id</span>
               </li>
             </ul>
           </div>
 
           <!-- Newsletter -->
           <div>
-            <h3 class="text-lg font-semibold mb-4 text-white border-b border-blue-400 pb-2">Berlangganan</h3>
-            <p class="text-blue-100 mb-3">Dapatkan update terbaru dari kami</p>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Berlangganan</h3>
+            <p class="text-black mb-3">Dapatkan update terbaru dari kami</p>
             <form class="flex flex-col space-y-3">
               <input type="email" placeholder="Alamat Email Anda" 
-                    class="px-4 py-2 rounded-lg bg-blue-700 bg-opacity-50 border border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300 text-white placeholder-blue-300">
+                    class="px-4 py-2 rounded-lg bg-white bg-opacity-50 border border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300  placeholder-blue-300">
               <button type="submit" 
-                      class="bg-white hover:bg-blue-400 text-blue-600 font-medium py-2 px-4 rounded-lg transition">
+                      class="bg-blue-700 hover:bg-blue-400 text-white font-medium py-2 px-4 rounded-lg transition">
                 Berlangganan
               </button>
             </form>
@@ -904,19 +2251,22 @@ Indonesia, 90211.</span>
 
         <!-- Copyright & Legal -->
         <div class="border-t border-blue-400 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <div class="text-blue-100 text-sm mb-4 md:mb-0">
+          <div class="text-black text-sm mb-4 md:mb-0">
             © 2024 PT Industri Kapal Indonesia (Persero). All Rights Reserved.
           </div>
           <div class="flex space-x-6">
-            <a href="#" class="text-blue-100 hover:text-white text-sm transition">Kebijakan Privasi</a>
-            <a href="#" class="text-blue-100 hover:text-white text-sm transition">Syarat & Ketentuan</a>
-            <a href="#" class="text-blue-100 hover:text-white text-sm transition">Peta Situs</a>
+            <a href="#" class="text-black text-sm transition">Kebijakan Privasi</a>
+            <a href="#" class="text-black text-sm transition">Syarat & Ketentuan</a>
+            <a href="#" class="text-black text-sm transition">Peta Situs</a>
           </div>
         </div>
       </div>
     </footer>
+
+
     <script src="js/script.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Deklarasikan variabel map di level global
     let map;
@@ -930,7 +2280,7 @@ Indonesia, 90211.</span>
 
         // Tambahkan tile layer (OpenStreetMap gratis)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
+            maxZoom: 30,
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
@@ -1005,6 +2355,85 @@ Indonesia, 90211.</span>
         }
     });
 
+    
+
+    const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function showNextSlide() {
+            // Hide current slide
+            slides[currentSlide].classList.remove('opacity-100');
+            slides[currentSlide].classList.add('opacity-0');
+            
+            // Move to next slide
+            currentSlide = (currentSlide + 1) % slideCount;
+            
+            // Show new slide
+            slides[currentSlide].classList.remove('opacity-0');
+            slides[currentSlide].classList.add('opacity-100');
+        }
+        
+        // Start slideshow
+        if (slideCount > 1) {
+            setInterval(showNextSlide, 5000); // Change every 5 seconds
+        }
+
+        const ctx = document.getElementById('sdmChart').getContext('2d');    
+        // Modern gradient for chart
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(79, 70, 229, 0.2)');
+        gradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
+        
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Produksi', 'Produksi Tak Langsung', 'Administrasi'],
+                datasets: [{
+                    data: [53.6, 20.87, 25.53],
+                    backgroundColor: [
+                        '#6366F1',
+                        '#60A5FA',
+                        '#34D399'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20,
+                            font: {
+                                family: 'Inter, sans-serif'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1F2937',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 12
+                        },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false
+                    }
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        });
+
     // Check URL hash on page load
     window.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash.substring(1);
@@ -1028,29 +2457,134 @@ Indonesia, 90211.</span>
                 initMap();
             }
         }
+        const navContainer = document.getElementById('nav-container');
+            const nav = document.getElementById('company-nav');
+            const navItems = document.querySelectorAll('.company-nav-link');
+            const chevronLeft = document.querySelector('.nav-chevron-left');
+            const chevronRight = document.querySelector('.nav-chevron-right');
+            const itemWidth = 150; // Approximate width of each nav item
+            const visibleItems = 7;
+            let currentPosition = 0;
+            
+            // Calculate total width needed for all items
+            const totalWidth = itemWidth * navItems.length;
+            
+            // Update chevron visibility based on scroll position
+            function updateChevrons() {
+                const scrollLeft = navContainer.scrollLeft;
+                const maxScroll = navContainer.scrollWidth - navContainer.clientWidth;
+                
+                chevronLeft.style.opacity = scrollLeft > 0 ? '1' : '0';
+                chevronRight.style.opacity = scrollLeft < maxScroll - 5 ? '1' : '0'; // -5 to account for rounding
+            }
+            
+            // Scroll to position
+            function scrollTo(position) {
+                navContainer.scrollTo({
+                    left: position,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Navigation functions
+            function scrollLeft() {
+                const newPosition = Math.max(0, navContainer.scrollLeft - (itemWidth * 3));
+                scrollTo(newPosition);
+            }
+            
+            function scrollRight() {
+                const maxScroll = navContainer.scrollWidth - navContainer.clientWidth;
+                const newPosition = Math.min(maxScroll, navContainer.scrollLeft + (itemWidth * 3));
+                scrollTo(newPosition);
+            }
+            
+            // Event listeners
+            chevronLeft.addEventListener('click', scrollLeft);
+            chevronRight.addEventListener('click', scrollRight);
+            
+            // Update on scroll
+            navContainer.addEventListener('scroll', updateChevrons);
+            
+            // Initial state
+            updateChevrons();
+            
+            // Handle window resize
+            window.addEventListener('resize', updateChevrons);
 
-        const slides = document.querySelectorAll('.hero-slide');
-        let currentSlide = 0;
-        const slideCount = slides.length;
-        
-        function showNextSlide() {
-            // Hide current slide
-            slides[currentSlide].classList.remove('opacity-100');
-            slides[currentSlide].classList.add('opacity-0');
+            const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const closeLightbox = document.getElementById('close-lightbox');
+
+            lightboxTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const imgSrc = this.getAttribute('data-src');
+                    const caption = this.parentElement.querySelector('p').textContent;
+                    
+                    lightboxImage.src = imgSrc;
+                    lightboxCaption.textContent = caption;
+                    lightboxModal.classList.remove('opacity-0', 'pointer-events-none');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            closeLightbox.addEventListener('click', function() {
+                lightboxModal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            });
+
+            lightboxModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    lightboxModal.classList.add('opacity-0', 'pointer-events-none');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    lightboxModal.classList.add('opacity-0', 'pointer-events-none');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Yard tab functionality
+    const yardTabs = document.querySelectorAll('.yard-tab');
+    const yardContents = document.querySelectorAll('.yard-content');
+    
+    yardTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs and contents
+            yardTabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white'));
+            yardTabs.forEach(t => t.classList.add('bg-white', 'text-blue-600'));
+            yardContents.forEach(content => content.classList.add('hidden'));
             
-            // Move to next slide
-            currentSlide = (currentSlide + 1) % slideCount;
-            
-            // Show new slide
-            slides[currentSlide].classList.remove('opacity-0');
-            slides[currentSlide].classList.add('opacity-100');
-        }
-        
-        // Start slideshow
-        if (slideCount > 1) {
-            setInterval(showNextSlide, 5000); // Change every 5 seconds
-        }
+            // Add active class to clicked tab and corresponding content
+            this.classList.remove('bg-white', 'text-blue-600');
+            this.classList.add('active', 'bg-blue-600', 'text-white');
+            const yardId = this.getAttribute('data-yard') + '-content';
+            document.getElementById(yardId).classList.remove('hidden');
+        });
     });
+
+    // Facility item hover effect
+    const facilityItems = document.querySelectorAll('.facility-item');
+    facilityItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.querySelector('svg').classList.add('scale-125');
+            this.querySelector('svg').classList.remove('text-blue-600');
+            this.querySelector('svg').classList.add('text-blue-700');
+        });
+        item.addEventListener('mouseleave', function() {
+            this.querySelector('svg').classList.remove('scale-125');
+            this.querySelector('svg').classList.add('text-blue-600');
+            this.querySelector('svg').classList.remove('text-blue-700');
+        });
+    });
+
+        });
     </script>
+
 </body>
 </html>
