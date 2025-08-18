@@ -1,54 +1,236 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Peta Leaflet Zoom Lokasi</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern YouTube Video Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .info-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-container {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3B82F6, #EC4899);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .tag {
+            transition: all 0.2s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
-<body>
-
-<div id="map"></div>
-
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-// Inisialisasi peta
-var map = L.map('map').setView([-5.107422565079109, 119.43211555468012], 5); // Jakarta awal zoom-out
-
-// Gunakan tile OpenStreetMap (gratis, tanpa token)
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap contributors'
-}).addTo(map);
-
-// Data lokasi
-var lokasi = [
-    { nama: "Makassar", koordinat: [-5.107422565079109, 119.43211555468012], info: "Sulawesi Selatan" },
-    { nama: "Bitung", koordinat: [1.4432789138300852, 125.20035269283976], info: "Sulawesi Utara" },
-    { nama: "Jakarta Pusat", koordinat: [-6.173305, 106.842448], info: "Ibu Kota Indonesia" }
-];
-
-// Tambahkan marker
-lokasi.forEach(function(l) {
-    var marker = L.marker(l.koordinat).addTo(map);
-    marker.bindPopup(`<h3>${l.nama}</h3><p>${l.info}</p>`);
-
-    // Event klik untuk zoom ke lokasi
-    marker.on('click', function() {
-        map.flyTo(l.koordinat, 14, {
-            animate: true,
-            duration: 2 // durasi animasi zoom
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <!-- Header -->
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent mb-4">Modern Video Experience</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">Watch this amazing content with our enhanced player featuring interactive elements and additional information.</p>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Video Section -->
+            <div class="flex-1">
+                <div class="video-container mb-6 bg-gray-800">
+                    <iframe src="https://www.youtube.com/embed/BUK-AaO63N4?autoplay=0&rel=0&modestbranding=1" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+                
+                <!-- Video Controls -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full flex items-center space-x-2 transition-all">
+                            <i class="fas fa-play"></i>
+                            <span>Play</span>
+                        </button>
+                        <button class="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition-all">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition-all">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <button class="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition-all">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-container rounded-full mb-6">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                <!-- Video Info -->
+                <div class="info-card p-6 rounded-xl border border-gray-700 mb-6">
+                    <h2 class="text-2xl font-bold mb-2">Video Title Goes Here</h2>
+                    <div class="flex items-center text-gray-400 mb-4">
+                        <span class="mr-4">245K views</span>
+                        <span>•</span>
+                        <span class="mx-4">2 weeks ago</span>
+                        <span>•</span>
+                        <span class="ml-4 flex items-center">
+                            <i class="fas fa-thumbs-up mr-1"></i> 12K
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tag px-3 py-1 bg-gray-700 rounded-full text-sm hover:bg-gray-600 cursor-pointer">#Technology</span>
+                        <span class="tag px-3 py-1 bg-gray-700 rounded-full text-sm hover:bg-gray-600 cursor-pointer">#Innovation</span>
+                        <span class="tag px-3 py-1 bg-gray-700 rounded-full text-sm hover:bg-gray-600 cursor-pointer">#Future</span>
+                    </div>
+                    
+                    <button class="flex items-center text-blue-400 hover:text-blue-300 transition-all">
+                        <i class="fas fa-share-alt mr-2"></i>
+                        <span>Share this video</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="w-full lg:w-80 space-y-4">
+                <div class="info-card p-6 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4">About This Channel</h3>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mr-3"></div>
+                        <div>
+                            <h4 class="font-semibold">Channel Name</h4>
+                            <p class="text-sm text-gray-400">1.2M subscribers</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">This channel provides amazing content about technology, innovation, and future trends. Don't forget to subscribe!</p>
+                    <button class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-full transition-all">
+                        Subscribe
+                    </button>
+                </div>
+                
+                <div class="info-card p-6 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4">Related Videos</h3>
+                    <div class="space-y-4">
+                        <div class="flex cursor-pointer group">
+                            <div class="w-24 h-16 bg-gray-700 rounded mr-3 overflow-hidden flex-shrink-0">
+                                <img src="https://via.placeholder.com/96x64" alt="Thumbnail" class="w-full h-full object-cover group-hover:opacity-80 transition-all">
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm group-hover:text-blue-400 transition-all">Related Video Title 1</h4>
+                                <p class="text-xs text-gray-400">Channel Name</p>
+                                <p class="text-xs text-gray-400">45K views • 3 days ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex cursor-pointer group">
+                            <div class="w-24 h-16 bg-gray-700 rounded mr-3 overflow-hidden flex-shrink-0">
+                                <img src="https://via.placeholder.com/96x64" alt="Thumbnail" class="w-full h-full object-cover group-hover:opacity-80 transition-all">
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm group-hover:text-blue-400 transition-all">Related Video Title 2</h4>
+                                <p class="text-xs text-gray-400">Channel Name</p>
+                                <p class="text-xs text-gray-400">112K views • 1 week ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex cursor-pointer group">
+                            <div class="w-24 h-16 bg-gray-700 rounded mr-3 overflow-hidden flex-shrink-0">
+                                <img src="https://via.placeholder.com/96x64" alt="Thumbnail" class="w-full h-full object-cover group-hover:opacity-80 transition-all">
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm group-hover:text-blue-400 transition-all">Related Video Title 3</h4>
+                                <p class="text-xs text-gray-400">Channel Name</p>
+                                <p class="text-xs text-gray-400">78K views • 2 weeks ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card p-6 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4">Download Options</h3>
+                    <div class="space-y-3">
+                        <button class="w-full flex items-center justify-between bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg transition-all">
+                            <span>MP4 720p</span>
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="w-full flex items-center justify-between bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg transition-all">
+                            <span>MP4 1080p</span>
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="w-full flex items-center justify-between bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg transition-all">
+                            <span>Audio Only</span>
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simulate progress bar animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.querySelector('.progress-bar');
+            let progress = 0;
+            
+            const animateProgress = () => {
+                progress += 0.5;
+                if (progress > 100) progress = 0;
+                progressBar.style.width = `${progress}%`;
+                setTimeout(animateProgress, 50);
+            };
+            
+            animateProgress();
+            
+            // Add click effect to tags
+            document.querySelectorAll('.tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    this.classList.add('bg-blue-600');
+                    setTimeout(() => {
+                        this.classList.remove('bg-blue-600');
+                        this.classList.add('bg-gray-700');
+                    }, 300);
+                });
+            });
         });
-        marker.openPopup();
-    });
-});
-</script>
-
+    </script>
 </body>
 </html>

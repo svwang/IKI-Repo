@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk - PT. Industri Kapal Indonesia</title>
+    <link rel="icon" href="img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .hero-slide {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Navbar -->
+      <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+          <!-- Logo & Text with separator -->
+          <div class="flex items-center flex-shrink-0 min-w-0 group">
+            <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
+              <div class="flex-shrink-0 flex items-center space-x-2 sm:space-x-3">
+                <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" 
+                    class="h-6 w-auto sm:h-8 md:h-8 lg:h-10 object-contain transition-all duration-300 group-hover:scale-105" />
+                <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300"></div>
+                <img src="img/logo.png" alt="Ikishi Shipyard Logo" 
+                    class="h-6 w-auto sm:h-8 md:h-10 lg:h-12 object-contain transition-all duration-300 group-hover:scale-105" />
+              </div>
+              <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300 hidden xs:block"></div>
+              <div class="min-w-0 pl-1 sm:pl-2 md:pl-3">
+                <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-[8px] xs:text-xs sm:text-sm whitespace-nowrap"> 
+                  PT INDUSTRI KAPAL INDONESIA (Persero) 
+                </span>
+                <p class="text-[8px] xs:text-[10px] sm:text-xs text-gray-600 mt-0.5 whitespace-nowrap">Shipbuilding. Docking & Related Industry</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Menu -->
+          <div class="flex items-center space-x-4 md:space-x-6 lg:space-x-8">
+            <!-- Desktop Menu -->
+            <ul class="hidden lg:flex space-x-4 xl:space-x-6 font-medium text-gray-700 text-base" role="menubar">
+              <li><a href="index.html" class="hover:text-blue-600 transition whitespace-nowrap">Beranda</a></li>
+              <li><a href="halaman_perusahaan.html" class="hover:text-blue-600 transition whitespace-nowrap">Perusahaan</a></li>
+              <li><a href="produk.html" class="hover:text-blue-600 transition whitespace-nowrap">Produk</a></li>
+
+              <!-- Perusahaan-->
+              <!-- <li class="relative group" data-dd>
+                <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                        aria-expanded="false" onclick="toggleDropdown(this)">
+                  <span>Perusahaan</span>
+                  <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                </button>
+
+                <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div class="grid grid-cols-3 gap-x-6 gap-y-4">
+                    <a href="profile.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Profil</a>
+                    <a href="sejarah.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sejarah</a>
+                    <a href="visi&misi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Visi Misi</a>
+                    <a href="manajemen.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Manajemen</a>
+                    <a href="struktur_organisasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Struktur Organisasi</a>
+                    <a href="kegiatan_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Kegiatan Perusahaan</a>
+                    <a href="sdm.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sumber Daya Manusia</a>
+                    <a href="fasilitas.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Fasilitas</a>
+                    <a href="peralatan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Peralatan</a>
+                    <a href="parnert_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Partner Perusahaan</a>
+                    <a href="klien_kami.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Klien Kami</a>
+                    <a href="lokasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lokasi</a>
+                    <a href="#" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lain-lainnya</a>
+                  </div>
+                </div>
+              </li> -->
+
+              <!-- produk -->
+              <!-- <li class="relative group" data-dd>
+                <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                        aria-expanded="false" onclick="toggleDropdown(this)">
+                  <span>Produk</span>
+                  <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                </button>
+                <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Bangunan Baru</a>
+                  <a href="perbaikian.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Perbaikan</a>
+                  <a href="scri.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Stell Construction & Related Industry</a>
+                  <a href="fiberglass.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Fiberglass</a>
+                </div>
+              </li> -->
+
+              <!-- Pelanggan -->
+              <li class="relative group" data-dd>
+                <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                        aria-expanded="false" onclick="toggleDropdown(this)">
+                  <span>Pelanggan</span>
+                  <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                </button>
+                <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <a href="registrasi_pelanggan.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Regitrasi Pelanggan</a>
+                  <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Ketersediaan Dock</a>
+                  <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download Form</a>
+                  <a href="hubungi_kami.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Hubungi Kami</a>
+                </div>
+              </li>
+
+              <!-- Informasi -->
+              <li class="relative group" data-dd>
+                <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                        aria-expanded="false" onclick="toggleDropdown(this)">
+                  <span>Informasi</span>
+                  <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+                </button>
+                <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <a href="berita.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Berita</a>
+                  <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Karir</a>
+                  <a href="testimonials.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Customer Testimonials</a>
+                  <a href="galery.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Galery</a>
+                  <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Lelang</a>
+                  <a href="https://bumn.go.id/" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600" target="_blank">Kementrian BUMN</a>
+                  <a href="halaman_download.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download</a>
+                  <a href="whistleblower.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Whistleblower</a>
+                </div>
+              </li>
+
+              <li><a href="https://ppidikishipyard.id/" target="_blank" class="hover:text-blue-600 transition whitespace-nowrap">E-PPID</a></li>
+            </ul>
+
+            <!-- Language Selector -->
+            <div class="hidden lg:block flex-shrink-0">
+              <div class="relative group">
+                <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-2.5 py-1.5 rounded-lg transition hover:rounded-lg" >
+                  <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3" />
+                  <span class="text-sm font-medium chevron-down-gray">ID</span>
+                  <i class="fas fa-chevron-down text-xs chevron-down-gray"></i>
+                </button>
+                <div class="absolute right-0 mt-1 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
+                    <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                    <span class="text-sm chevron-down-gray">ID</span>
+                  </a>
+                  <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                    <span class="text-sm chevron-down-gray">EN</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hamburger Button -->
+            <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" 
+                    class="lg:hidden focus:outline-none text-gray-700 hover:text-blue-600 ml-2" id="menu-btn">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden lg:hidden bg-white shadow-md border-t border-gray-200 overflow-y-auto max-h-[calc(100vh-64px)]" id="mobile-menu">
+          <div class="px-4 pt-2 pb-6 space-y-1">
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Beranda</a>
+            <a href="halaman_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Perusahaan</a>
+            <a href="produk.html" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Produk</a>                        
+
+            <div class="relative">
+              <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                      onclick="toggleMobileDropdown(this)">
+                <span>Pelanggan</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+                <a href="registrasi_pelanggan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Regitrasi Pelanggan</a>
+                <a href="ketersediaan_dock.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Ketersediaan Dock</a>
+                <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download Form</a>
+                <a href="hubungi_kami.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Hubungi Kami</a>
+              </div>
+            </div>
+
+            <div class="relative">
+              <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                      onclick="toggleMobileDropdown(this)">
+                <span>Informasi</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+                <a href="berita.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Berita</a>
+                <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Karir</a>
+                <a href="testimonials.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Customer Testimonials</a>
+                <a href="galery.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Galery</a>
+                <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lelang</a>
+                <a href="https://bumn.go.id/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kementrian BUMN</a>
+                <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download</a>
+                <a href="whistleblower.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Whistleblower</a>
+              </div>
+            </div>
+
+            <a href="https://ppidikishipyard.id/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">E-PPID</a>
+
+            <!-- Language Selector Mobile -->
+            <div class="pt-4 border-t border-gray-200 mt-2">
+              <div class="flex items-center space-x-3 px-3">
+                <span class="font-medium text-gray-700">Language:</span>
+                <div class="flex space-x-2">
+                  <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+                    <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                    <span>ID</span>
+                  </a>
+                  <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                    <span>EN</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen overflow-hidden">
+        <!-- Slides Container -->
+        <div class="relative h-full w-full">
+            <!-- Slide 1 -->
+            <div class="hero-slide active">
+                <img src="img/berita/pexels-muzin-kahraman-789215623-33432437.jpg" 
+                     alt="Kapal Besar di Galangan" 
+                     class="w-full h-full object-cover">
+                <div class="hero-overlay absolute inset-0 flex items-center">
+                    <div class="container mx-auto px-6 text-white">
+                        <h1 class="text-4xl md:text-6xl font-bold ml-4 mb-4">Pembangunan Kapal Kelas Dunia</h1>
+                        <p class="text-xl md:text-2xl mb-8 mt-16 ml-4 max-w-2xl">Solusi terintegrasi untuk kebutuhan maritim dengan kualitas terbaik dan standar internasional.</p>                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="hero-slide">
+                <img src="img/berita/pexels-muzin-kahraman-789215623-33432436.jpg" 
+                     alt="Perbaikan Kapal" 
+                     class="w-full h-full object-cover">
+                <div class="hero-overlay absolute inset-0 flex items-center">
+                    <div class="container mx-auto px-6 text-white">
+                        <h1 class="text-4xl md:text-6xl font-bold ml-4 mb-4">Layanan Perbaikan Kapal Profesional</h1>
+                        <p class="text-xl md:text-2xl mb-8 mt-16 ml-4 max-w-2xl">Fasilitas dok modern dengan tim teknisi berpengalaman untuk perawatan kapal Anda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide">
+                <img src="img/berita/pexels-camilaignacia-33432914.jpg" 
+                     alt="Konstruksi Baja" 
+                     class="w-full h-full object-cover">
+                <div class="hero-overlay absolute inset-0 flex items-center">
+                    <div class="container mx-auto px-6 text-white">
+                        <h1 class="text-4xl md:text-6xl font-bold ml-4 mb-4">Spesialis Konstruksi Baja</h1>
+                        <p class="text-xl md:text-2xl mb-8 mt-16 ml-4 max-w-2xl">Solusi fabrikasi baja presisi tinggi untuk berbagai kebutuhan industri.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-10">
+            <button class="slide-dot w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition focus:outline-none active" data-slide="0"></button>
+            <button class="slide-dot w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition focus:outline-none" data-slide="1"></button>
+            <button class="slide-dot w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition focus:outline-none" data-slide="2"></button>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-white p-3 rounded-full z-10 transition focus:outline-none" id="prev-slide">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-white p-3 rounded-full z-10 transition focus:outline-none" id="next-slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl sm:text-4xl font-bold text-blue-900 mb-4">Produk & Layanan Kami</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                PT. Industri Kapal Indonesia menyediakan berbagai solusi terintegrasi untuk kebutuhan maritim dan konstruksi baja dengan kualitas terbaik.
+            </p>
+        </div>
+
+        <!-- Product Navigation -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom">
+            <button class="product-btn px-6 py-2 bg-blue-600 text-white rounded-lg border-2 border-blue-600 font-medium transition-all hover:shadow-lg hover:bg-blue-600 hover:text-white hover:rounded-2xl active" 
+                    data-target="bangunan">
+                Bangunan Baru
+            </button>
+            <button class="product-btn px-6 py-2 bg-white text-blue-600 rounded-lg border-2 border-blue-600 font-medium transition-all hover:bg-blue-600 hover:text-white hover:rounded-2xl hover:shadow-lg" 
+                    data-target="perbaikan">
+                Perbaikan
+            </button>
+            <button class="product-btn px-6 py-2 bg-white text-blue-600 rounded-lg border-2 border-blue-600 font-medium transition-all hover:bg-blue-600 hover:text-white hover:rounded-2xl hover:shadow-lg" 
+                    data-target="scri">
+                SCRI
+            </button>
+            <button class="product-btn px-6 py-2 bg-white text-blue-600 rounded-lg border-2 border-blue-600 font-medium transition-all hover:bg-blue-600 hover:text-white hover:rounded-2xl hover:shadow-lg" 
+                    data-target="fiberglass">
+                Fiberglass
+            </button>
+        </div>
+
+        <!-- Product Contents -->
+
+        <!-- Bangungan content -->
+        <div id="bangunan" class="product-content fade-in">
+            <!-- Deskripsi Utama -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg mb-12" data-aos="zoom-in">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-4">Bangunan Baru Kapal</h2>
+                    <p class="text-gray-600 mb-6">
+                        Kami menyediakan layanan pembangunan kapal baru dengan teknologi terkini dan standar kualitas tertinggi. 
+                        Setiap proyek dikerjakan oleh tim profesional dengan pengalaman puluhan tahun di industri maritim.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Keunggulan Kami:</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                            <li>Desain kapal custom sesuai kebutuhan klien</li>
+                            <li>Material berkualitas tinggi dengan sertifikasi internasional</li>
+                            <li>Tim insinyur dan teknisi berpengalaman</li>
+                            <li>Pengerjaan tepat waktu dengan standar ketat</li>
+                            <li>Garansi dan layanan purna jual komprehensif</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daftar Kapal -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Speed Boat -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/22speed-boat.jpg" alt="Speed Boat" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Speed Boat</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> Pemkab Pinrang</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 7,00 M</li>
+                                <li><strong>Lebar:</strong> 2,10 M</li>
+                                <li><strong>Tinggi:</strong> 0,95 M</li>
+                                <li><strong>Sarat Air:</strong> 0,35 M</li>
+                                <li><strong>Kecepatan:</strong> 15-20 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 1.000 HP</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=22" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Ferry Ro-Ro 500 GRT -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/21Ferry-Ro-Ro-500-GRT.jpg" alt="Ferry Ro-Ro 500 GRT" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Ferry Ro-Ro 500 GRT</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> Ditjen Perhubungan Darat</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 45,50 M</li>
+                                <li><strong>Lebar:</strong> 12,00 M</li>
+                                <li><strong>Tinggi:</strong> 3,00 M</li>
+                                <li><strong>Sarat Air:</strong> 2,00 M</li>
+                                <li><strong>Kecepatan:</strong> 11,50 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2 x 650 HP</li>
+                                <li><strong>Kelas:</strong> BKI</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=21" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Container Carrier 4,180 DWT -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/20Caraka-Jaya-III-Project-BOOK.jpg" alt="Container Carrier" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Container Carrier 4,180 DWT</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> PT. Djakarta Lloyd</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 98,00 M</li>
+                                <li><strong>Lebar:</strong> 16,50 M</li>
+                                <li><strong>Tinggi:</strong> 7,80 M</li>
+                                <li><strong>Sarat Air:</strong> 5,50 M</li>
+                                <li><strong>Kecepatan:</strong> 11,90 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2.037 HP</li>
+                                <li><strong>Kelas:</strong> BKI</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=20" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Tuna Long Liner 300 GRT -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/18KM-Mina-Jaya-Niaga-BOOK.jpg" alt="Tuna Long Liner" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Tuna Long Liner 300 GRT</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> PT. PANN MF</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 50,70 M</li>
+                                <li><strong>Lebar:</strong> 8,40 M</li>
+                                <li><strong>Tinggi:</strong> 3,60 M</li>
+                                <li><strong>Sarat Air:</strong> 3,20 M</li>
+                                <li><strong>Kecepatan:</strong> 12,00 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 1.000 HP</li>
+                                <li><strong>Kelas:</strong> BKI dan BV</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=18" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Cargo Passenger 200 DWT -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/17KM-Papua-Empat-BOOK.jpg" alt="Cargo Passenger" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Cargo Passenger 200 DWT</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> Ditjen Perhubungan Laut</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 36,60 M</li>
+                                <li><strong>Lebar:</strong> 8,00 M</li>
+                                <li><strong>Tinggi:</strong> 5,20 M</li>
+                                <li><strong>Sarat Air:</strong> 2,40 M</li>
+                                <li><strong>Kecepatan:</strong> 12,00 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2 x 550 HP</li>
+                                <li><strong>Kelas:</strong> BKI</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=17" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Ferry Ro-Ro 600 GRT -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/16KMP-BONTOHARU-BOOK.jpg" alt="Ferry Ro-Ro" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Ferry Ro-Ro 600 GRT</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> Ditjen Perhubungan Darat</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 54,00 M</li>
+                                <li><strong>Lebar:</strong> 14,00 M</li>
+                                <li><strong>Tinggi:</strong> 3,50 M</li>
+                                <li><strong>Sarat Air:</strong> 2,50 M</li>
+                                <li><strong>Kecepatan:</strong> 12,00 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2 x 900 HP</li>
+                                <li><strong>Kelas:</strong> BKI</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=16" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Ferry Ro-Ro 600 GRT -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/16KMP-BONTOHARU-BOOK.jpg" alt="Ferry Ro-Ro" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Ferry Ro-Ro 600 GRT</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> Ditjen Perhubungan Darat</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 54,00 M</li>
+                                <li><strong>Lebar:</strong> 14,00 M</li>
+                                <li><strong>Tinggi:</strong> 3,50 M</li>
+                                <li><strong>Sarat Air:</strong> 2,50 M</li>
+                                <li><strong>Kecepatan:</strong> 12,00 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2 x 900 HP</li>
+                                <li><strong>Kelas:</strong> BKI</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=16" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Pusher Tug Boat Pertamina TB. MASELA -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/15masela.jpg" alt="Pusher Tug Boat Pertamina TB. MASELA" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Pusher Tug Boat Pertamina TB. MASELA</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> Pertamina</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 28,50 M</li>
+                                <li><strong>Lebar:</strong> 8,60 M</li>
+                                <li><strong>Tinggi:</strong> 3,50 M</li>
+                                <li><strong>Sarat Air:</strong> 2,70 M</li>
+                                <li><strong>Kecepatan:</strong> 10,00 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2 x 650 HP</li>
+                                <li><strong>Kelas:</strong> BKI</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=15" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Patrol Boat KRI. ANDAU -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-up">
+                    <img src="img/produk/14KRI-ANDAU-BOOK.jpg" alt="Patrol Boat KRI. ANDAU" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Patrol Boat KRI. ANDAU</h3>
+                        <p class="text-gray-600 mb-3"><strong>Pemilik:</strong> TNI AL</p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Spesifikasi Utama:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><strong>Panjang:</strong> 30,60 M</li>
+                                <li><strong>Lebar:</strong> 5,80 M</li>
+                                <li><strong>Tinggi:</strong> 3,00 M</li>
+                                <li><strong>Sarat Air:</strong> 1,73 M</li>
+                                <li><strong>Kecepatan:</strong> 20,80 Knots</li>
+                                <li><strong>Mesin Utama:</strong> 2 x 1088 HP</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <a href="app/index/bangunan_baru_detil?reqId=14" class="inline-block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700">
+                            Lihat Detail
+                        </a> -->
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-8 flex flex-col sm:flex-row justify-between items-center">
+                <div class="mb-4 sm:mb-0">
+                    <span class="text-gray-600">Menampilkan 1 sampai 6 dari 8</span>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium disabled:opacity-50" disabled>
+                        1
+                    </button>
+                    <button class="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded-lg font-medium hover:bg-blue-50">
+                        2
+                    </button>
+                    <button class="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded-lg font-medium hover:bg-blue-50">
+                        ›
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perbaikan Content -->
+        <div id="perbaikan" class="product-content hidden" data-aos="flip-right">
+            <!-- Deskripsi Utama -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg mb-12">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-4">Layanan Perbaikan Kapal</h2>
+                    <p class="text-gray-600 mb-6" data-aos="flip-right">
+                        Layanan perbaikan dan pemeliharaan kapal komprehensif untuk menjaga performa optimal armada Anda. 
+                        Fasilitas dok kami dilengkapi dengan peralatan modern untuk berbagai jenis perbaikan.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Layanan Kami:</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                            <li>Perbaikan hull dan struktur kapal</li>
+                            <li>Pemeliharaan mesin dan sistem propulsi</li>
+                            <li>Perbaikan sistem elektrikal dan elektronik</li>
+                            <li>Dry docking dan underwater inspection</li>
+                            <li>Pengecatan ulang dan anti-fouling</li>
+                            <li>Modifikasi dan upgrade kapal</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="#" class="inline-block px-6 py-2 bg-blue-600 text-white rounded-full font-medium transition hover:bg-blue-700 hover:shadow-md">
+                        Jadwalkan Perbaikan
+                    </a>
+                </div>
+            </div>
+
+            <!-- Daftar Kapal yang Sudah Diperbaiki -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Ferry Ro-Ro -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 group" data-aos="flip-down">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="img/produk/perbaikan/4ferry-roro.jpg" alt="Ferry Ro-Ro" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Ferry Ro-Ro</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Detail Perbaikan:</h4>
+                            <p class="text-sm text-gray-600">Layanan perbaikan lengkap untuk ferry Ro-Ro termasuk perbaikan hull dan sistem mekanikal.</p>
+                        </div>
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700 group"
+                            data-ship-details
+                            data-image="img/produk/perbaikan/4ferry-roro.jpg"
+                            data-title="Ferry Ro-Ro"
+                            data-length="11,00 M"
+                            data-breadth="3,50 M"
+                            data-depth="1,00 M"
+                            data-draught="0,50 M"
+                            data-speed="20 Knots"
+                            data-engine="70 HP"
+                            data-class="ABS Singapore">
+                                <span>Lihat Detail</span>
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tug Boat -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="img/produk/perbaikan/3tug-boat.jpg" alt="Tug Boat" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Tug Boat</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Detail Perbaikan:</h4>
+                            <p class="text-sm text-gray-600">Perbaikan sistem propulsi dan penggantian komponen utama pada tug boat.</p>
+                        </div>
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700 group"
+                            data-ship-details
+                            data-image="img/produk/perbaikan/3tug-boat.jpg"
+                            data-title="Tug Boat"
+                            data-length="11,00 M"
+                            data-breadth="3,50 M"
+                            data-depth="1,00 M"
+                            data-draught="0,50 M"
+                            data-speed="20 Knots"
+                            data-engine="70 HP"
+                            data-class="ABS Singapore">
+                                <span>Lihat Detail</span>
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- KRI 542 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="img/produk/perbaikan/2kri-542.jpg" alt="KRI 542" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">KRI 542</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Detail Perbaikan:</h4>
+                            <p class="text-sm text-gray-600">Perawatan rutin dan perbaikan sistem persenjataan kapal perang.</p>
+                        </div>
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700 group"
+                            data-ship-details
+                            data-image="img/produk/perbaikan/2kri-542.jpg"
+                            data-title="KRI 542"
+                            data-length="11,00 M"
+                            data-breadth="3,50 M"
+                            data-depth="1,00 M"
+                            data-draught="0,50 M"
+                            data-speed="20 Knots"
+                            data-engine="70 HP"
+                            data-class="ABS Singapore">
+                                <span>Lihat Detail</span>
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Accommodation Barge -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1 group">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="uploads/shiprepair/be0b5893986055e221d7c64f795d5356.pht" alt="Accommodation Barge" 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Accommodation Barge "RAISSA"</h3>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">Detail Perbaikan:</h4>
+                            <p class="text-sm text-gray-600">Perbaikan fasilitas akomodasi dan sistem pendukung kehidupan.</p>
+                        </div>
+                        <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg font-medium transition hover:bg-blue-700 group"
+                            data-ship-details
+                            data-image="img/produk/perbaikan/4ferry-roro.jpg"
+                            data-title="Ferry Ro-Ro"
+                            data-owner="Ditjen Perhubungan Darat"
+                            data-length="45,50 M"
+                            data-breadth="12,00 M"
+                            data-depth="3,00 M"
+                            data-draught="2,00 M"
+                            data-speed="11,50 Knots"
+                            data-engine="2 x 650 HP"
+                            data-class="BKI">
+                                <span>Lihat Detail</span>
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jumlah Item -->
+            <div class="mt-6 text-center text-gray-600">
+                <p>Menampilkan: 4 proyek perbaikan kapal</p>
+            </div>
+        </div>
+
+        <!-- SCRI Content -->
+        <div id="scri" class="product-content hidden">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                <img src="image/pexels-fotografie-thomas-nolte-33443761.jpg" 
+                     alt="Steel Construction" class="w-full h-64 sm:h-80 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-4">Steel Construction & Related Industry</h2>
+                    <p class="text-gray-600 mb-6">
+                        -
+                    </p>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Keunggulan:</h3>
+                        <!-- <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                            <li>Fabrikasi presisi tinggi</li>
+                            <li>Pengelasan bersertifikat</li>
+                            <li>Material tahan korosi</li>
+                            <li>Desain struktural yang kuat</li>
+                            <li>Proyek turnkey</li>
+                        </ul> -->
+                    </div>
+                    
+                    <a href="#" class="inline-block px-6 py-2 bg-blue-600 text-white rounded-full font-medium transition hover:bg-blue-700 hover:shadow-md">
+                        Request Quotation
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fiberglass Content -->
+        <div id="fiberglass" class="product-content hidden">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg">
+                <img src="img/produk/22speed-boat.jpg" 
+                     alt="Fiberglass Products" class="w-full h-100 sm:h-80 object-cover">
+                <div class="p-6 sm:p-8">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-4">Produk Fiberglass</h2>
+                    <p class="text-gray-600 mb-6">
+                        -
+                    </p>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Principal Particulars</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                            <li>Komponen kapal dan perahu</li>
+                            <li>Tangki dan pipa industri</li>
+                            <li>Produk arsitektur</li>
+                            <li>Komponen otomotif</li>
+                            <li>Produk custom sesuai kebutuhan</li>
+                        </ul>
+                    </div>
+                    
+                    <button 
+                        class="inline-block px-6 py-2 bg-blue-600 text-white rounded-full font-medium transition 
+                                hover:bg-blue-700 hover:shadow-md 
+                                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-blue-600"
+                        disabled>
+                        Pesan Sekarang
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-black py-12 mt-1 w-full">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div class="flex flex-col space-y-4">
+            <div class="flex items-center space-x-3">
+              <div class="bg-white p-2 rounded-3xl">
+                <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-12 h-12 rounded-lg object-contain">
+              </div>
+              <span class="text-xl font-bold text-blue-700">IKISHI SHIPYARD</span>
+            </div>
+            <p class="text-blue-700">Shipbuilding, Docking & Related Industry</p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-blue-800 hover:bg-blue-800 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-facebook-f fa-2x group-hover:text-white"></i>
+              </a>
+              <a href="#" class="text-blue-400 hover:bg-blue-400 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-twitter fa-2x group-hover:text-white"></i>
+              </a>
+              <a href="#" class="text-blue-500 hover:bg-blue-500 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-linkedin-in fa-2x group-hover:text-white" ></i>
+              </a>
+              <a href="#" class="text-red-700 hover:bg-red-700 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-instagram fa-2x group-hover:text-white"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Menu</h3>
+            <ul class="space-y-2">
+              <!-- Menu Beranda -->
+              <li><a href="index.html" class="text-black hover: transition flex items-center justify-between">Beranda</a></li>
+              <!-- Menu Perusahaan -->
+              <li><a href="halaman_perusahaan.html" class="text-black hover: transition flex items-center justify-between">Perusahaan</a></li>
+              <!-- Menu Produk -->
+              <li><a href="produk.html" class="text-black hover: transition flex items-center justify-between">Produk</a></li>
+
+              <!-- Dropdown Pelanggan -->
+              <li class="relative group">
+                <button class="w-full text-left text-black hover: transition flex items-center justify-between">
+                  <span>Pelanggan</span>
+                  <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
+                </button>
+                <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
+                  <li><a href="bangunan_baru.html" class="text-black hover: block py-1">Registrasi Pelanggan</a></li>
+                  <li><a href="ketersediaan_dock.html" class="text-black hover: block py-1">ketersediaan Dock</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Download Form</a></li>
+                  <li><a href="hubungi_kami.html" class="text-black hover: block py-1">hubungi Kami</a></li>
+                </ul>
+              </li>
+
+              <!-- Dropdown Pelanggan -->
+              <li class="relative group">
+                <button class="w-full text-left text-black hover: transition flex items-center justify-between">
+                  <span>Informasi</span>
+                  <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
+                </button>
+                <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
+                  <li><a href="berita.html" class="text-black hover: block py-1">Berita</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Karir</a></li>
+                  <li><a href="testimonials.html" class="text-black hover: block py-1">Customer Testimonials</a></li>
+                  <li><a href="galery.html" class="text-black hover: block py-1">Galery</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Lelang</a></li>
+                  <li><a href="https://bumn.go.id/" class="text-black hover: block py-1">Kementrian BUMN</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Download</a></li>
+                  <li><a href="whistleblower.html" class="text-black hover: block py-1">Whistleblower</a></li>                  
+                </ul>
+              </li>
+              <li><a href="https://ppidikishipyard.id/" class="text-black hover: transition">E-PPID</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Hubungi Kami</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-map-marker-alt mt-1 mr-3 text-black"></i>
+                <span class="text-black">JL Galangan Kapal No. 31, Makassar,
+Sulawesi Selatan,
+Indonesia, 90211.</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone-alt mr-3 text-black"></i>
+                <span class="text-black"> +62 411 448 653</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-question mr-3 text-black"></i>
+                <span class="text-black"> +62 411 448 658</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-3 text-black"></i>
+                <span class="text-black">ptiki@ikishipyard.co.id</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Berlangganan</h3>
+            <p class="text-black mb-3">Dapatkan update terbaru dari kami</p>
+            <form class="flex flex-col space-y-3">
+              <input type="email" placeholder="Alamat Email Anda" 
+                    class="px-4 py-2 rounded-lg bg-white bg-opacity-50 border border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300  placeholder-blue-300">
+              <button type="submit" 
+                      class="bg-blue-700 hover:bg-blue-400 text-white font-medium py-2 px-4 rounded-lg transition">
+                Berlangganan
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Copyright & Legal -->
+        <div class="border-t border-blue-400 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <div class="text-black text-sm mb-4 md:mb-0">
+            © 2024 PT Industri Kapal Indonesia (Persero). All Rights Reserved.
+          </div>
+          <div class="flex space-x-6">
+            <a href="#" class="text-black text-sm transition">Kebijakan Privasi</a>
+            <a href="#" class="text-black text-sm transition">Syarat & Ketentuan</a>
+            <a href="#" class="text-black text-sm transition">Peta Situs</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Modal Structure -->
+    <div id="shipDetailModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            
+            <!-- Modal content -->
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <!-- Close button -->
+                        <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500" onclick="closeModal()">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Ship Image with view button -->
+                        <div class="w-full sm:w-1/2 relative">
+                            <img id="modalShipImage" src="" alt="Ship Image" class="w-full h-64 sm:h-96 object-cover rounded-lg shadow-md">
+                            
+                            <!-- Eye icon to view full image -->
+                            <a id="modalFullImageLink" href="" target="_blank" 
+                            class="absolute top-2 right-2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </a>
+                        </div>
+                        
+                        <!-- Ship Details -->
+                        <div class="mt-4 sm:mt-0 sm:ml-6 w-full sm:w-1/2">
+                            <h3 id="modalShipTitle" class="text-2xl font-bold text-blue-900 mb-2"></h3>
+                            <p id="modalShipOwner" class="text-gray-600 mb-4"></p>
+                            
+                            <!-- Specifications Table -->
+                            <div class="overflow-hidden border border-gray-200 rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Panjang</td>
+                                            <td id="modalShipLength" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Lebar</td>
+                                            <td id="modalShipBreadth" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Tinggi</td>
+                                            <td id="modalShipDepth" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Sarat Air</td>
+                                            <td id="modalShipDraught" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Kecepatan</td>
+                                            <td id="modalShipSpeed" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Mesin Utama</td>
+                                            <td id="modalShipEngine" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">Kelas</td>
+                                            <td id="modalShipClass" class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Additional Info -->
+                            <div id="modalShipAdditional" class="mt-4 text-sm text-gray-600"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closeModal()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.slide-dot');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            let currentSlide = 0;
+            let slideInterval;
+            let isTyping = false; // Flag untuk mengecek apakah animasi sedang berjalan
+
+            // Data untuk typewriter effect
+            const slideData = [
+                {
+                    title: "Pembangunan Kapal Kelas Dunia",
+                    desc: "Solusi terintegrasi untuk kebutuhan maritim dengan kualitas terbaik dan standar internasional."
+                },
+                {
+                    title: "Layanan Perbaikan Kapal Profesional",
+                    desc: "Fasilitas dok modern dengan tim teknisi berpengalaman untuk perawatan kapal Anda."
+                },
+                {
+                    title: "Spesialis Konstruksi Baja",
+                    desc: "Solusi fabrikasi baja presisi tinggi untuk berbagai kebutuhan industri."
+                }
+            ];
+
+            // Fungsi typewriter dengan callback
+            function typeWriter(element, text, speed = 50, callback) {
+                isTyping = true;
+                let i = 0;
+                element.textContent = '';
+                
+                function typing() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typing, speed);
+                    } else {
+                        isTyping = false;
+                        if (callback) callback();
+                    }
+                }
+                
+                typing();
+            }
+
+            // Fungsi untuk menjalankan animasi pada slide aktif
+            function runTypewriterAnimation() {
+                const activeSlide = document.querySelector('.hero-slide.active');
+                const titleElement = activeSlide.querySelector('h1');
+                const descElement = activeSlide.querySelector('p');
+                
+                // Hentikan animasi yang sedang berjalan jika ada
+                if (isTyping) {
+                    titleElement.textContent = slideData[currentSlide].title;
+                    descElement.textContent = slideData[currentSlide].desc;
+                    isTyping = false;
+                    return;
+                }
+                
+                // Jalankan animasi untuk judul
+                typeWriter(titleElement, slideData[currentSlide].title, 50, function() {
+                    // Setelah judul selesai, jalankan animasi untuk deskripsi
+                    typeWriter(descElement, slideData[currentSlide].desc, 30);
+                });
+            }
+
+            // Initialize slider
+            function initSlider() {
+                // Jalankan animasi untuk slide pertama
+                runTypewriterAnimation();
+                
+                // Start auto slide
+                startSlideInterval();
+                
+                // Set click events for dots
+                dots.forEach(dot => {
+                    dot.addEventListener('click', function() {
+                        if (isTyping) return; // Jangan izinkan perubahan slide saat animasi berjalan
+                        goToSlide(parseInt(this.getAttribute('data-slide')));
+                    });
+                });
+                
+                // Set click events for arrows
+                prevBtn.addEventListener('click', function() {
+                    if (isTyping) return;
+                    prevSlide();
+                });
+                
+                nextBtn.addEventListener('click', function() {
+                    if (isTyping) return;
+                    nextSlide();
+                });
+            }
+
+            // Start auto slide interval
+            function startSlideInterval() {
+                slideInterval = setInterval(() => {
+                    if (!isTyping) nextSlide();
+                }, 5000);
+            }
+
+            // Reset auto slide interval
+            function resetSlideInterval() {
+                clearInterval(slideInterval);
+                startSlideInterval();
+            }
+
+            // Go to specific slide
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                
+                currentSlide = (n + slides.length) % slides.length;
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+                
+                // Jalankan animasi typewriter untuk slide baru
+                runTypewriterAnimation();
+                
+                resetSlideInterval();
+            }
+
+            // Previous slide
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+
+            // Next slide
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+
+            // Initialize the slider
+            initSlider();
+
+
+            const productBtns = document.querySelectorAll('.product-btn');
+            const productLinks = document.querySelectorAll('.product-link');
+            const productContents = document.querySelectorAll('.product-content');
+            
+            // Function to switch product content
+            function switchProduct(target) {
+                // Remove active class from all buttons
+                productBtns.forEach(btn => {
+                    btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                    btn.classList.add('bg-white', 'text-blue-600');
+                });
+                
+                // Add active class to selected button
+                const activeBtn = document.querySelector(`.product-btn[data-target="${target}"]`);
+                activeBtn.classList.add('active', 'bg-blue-600', 'text-white');
+                activeBtn.classList.remove('bg-white', 'text-blue-600');
+                
+                // Hide all contents
+                productContents.forEach(content => content.classList.add('hidden'));
+                
+                // Show selected content
+                const activeContent = document.getElementById(target);
+                activeContent.classList.remove('hidden');
+                activeContent.classList.add('fade-in');
+            }
+            
+            // Add click event to product buttons
+            productBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    switchProduct(target);
+                });
+            });
+            
+            // Add click event to dropdown links
+            productLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-target');
+                    switchProduct(target);
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    
+                    // Scroll to products section
+                    document.querySelector('.product-nav').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+
+            // Modal perbaikan detail kapal
+            function openShipModal(shipData) {
+                // Set modal content
+                document.getElementById('modalShipImage').src = shipData.image;
+                document.getElementById('modalShipTitle').textContent = shipData.title;                
+                document.getElementById('modalShipLength').textContent = shipData.length;
+                document.getElementById('modalShipBreadth').textContent = shipData.breadth;
+                document.getElementById('modalShipDepth').textContent = shipData.depth;
+                document.getElementById('modalShipDraught').textContent = shipData.draught;
+                document.getElementById('modalShipSpeed').textContent = shipData.speed;
+                document.getElementById('modalShipEngine').textContent = shipData.engine;
+                document.getElementById('modalShipClass').textContent = shipData.class;
+                document.getElementById('modalShipAdditional').textContent = shipData.additional || '';
+                
+                // Show modal
+                document.getElementById('shipDetailModal').classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+            
+            // Function to close modal
+            function closeModal() {
+                document.getElementById('shipDetailModal').classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+            
+            // Example of how to use (attach this to your "Lihat Detail" buttons)
+            document.querySelectorAll('[data-ship-details]').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const shipData = {
+                        image: this.dataset.image,
+                        title: this.dataset.title,
+                        owner: this.dataset.owner,
+                        length: this.dataset.length,
+                        breadth: this.dataset.breadth,
+                        depth: this.dataset.depth,
+                        draught: this.dataset.draught,
+                        speed: this.dataset.speed,
+                        engine: this.dataset.engine,
+                        class: this.dataset.class,
+                        additional: this.dataset.additional
+                    };
+                    openShipModal(shipData);
+                    // Atur gambar dan link
+                    const modalImage = document.getElementById('modalShipImage');
+                    const fullImageLink = document.getElementById('modalFullImageLink');
+
+                    modalImage.src = shipData.image;
+                    fullImageLink.href = shipData.image || '#';
+                    fullImageLink.onclick = function(e) {
+                        if (!shipData.image) e.preventDefault();
+                    }
+                });
+            });
+
+            window.closeModal = function() {
+                const modal = document.getElementById('shipDetailModal');
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+
+            window.openShipModal = function(shipData) {
+                document.getElementById('shipDetailModal').classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+
+            // Event delegation untuk handle klik di luar modal
+            document.addEventListener('click', function(event) {
+                const modal = document.getElementById('shipDetailModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            const heroTitles = [
+                "Pembangunan Kapal Kelas Dunia",
+                "Layanan Perbaikan Kapal Profesional",
+                "Spesialis Konstruksi Baja"
+            ];
+            
+            const heroDescriptions = [
+                "Solusi terintegrasi untuk kebutuhan maritim dengan kualitas terbaik dan standar internasional.",
+                "Fasilitas dok modern dengan tim teknisi berpengalaman untuk perawatan kapal Anda.",
+                "Solusi fabrikasi baja presisi tinggi untuk berbagai kebutuhan industri."
+            ];
+            
+            const titleElement = document.querySelector('.hero-slide.active h1');
+            const descElement = document.querySelector('.hero-slide.active p');
+            
+            function typeWriter(element, text, speed = 50) {
+                let i = 0;
+                element.textContent = '';
+                
+                function typing() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typing, speed);
+                    }
+                }
+                
+                typing();
+            }
+    });
+    </script>
+</body>
+</html>

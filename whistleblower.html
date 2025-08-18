@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whistleblower System - IKI Shipyard</title>
+    <link rel="icon" href="img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="css/style.css"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #1e3a8a, #dc2626);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .report-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-left-color: #dc2626;
+        }
+        .contact-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 1rem;
+            height: 1rem;
+            background: linear-gradient(135deg, #1e3a8a, #dc2626);
+            border-radius: 50%;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
+      <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        <!-- Logo & Text with separator -->
+        <div class="flex items-center flex-shrink-0 min-w-0 group">
+          <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
+            <div class="flex-shrink-0 flex items-center space-x-2 sm:space-x-3">
+              <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" 
+                  class="h-6 w-auto sm:h-8 md:h-8 lg:h-10 object-contain transition-all duration-300 group-hover:scale-105" />
+              <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300"></div>
+              <img src="img/logo.png" alt="Ikishi Shipyard Logo" 
+                  class="h-6 w-auto sm:h-8 md:h-10 lg:h-12 object-contain transition-all duration-300 group-hover:scale-105" />
+            </div>
+            <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300 hidden xs:block"></div>
+            <div class="min-w-0 pl-1 sm:pl-2 md:pl-3">
+              <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-[8px] xs:text-xs sm:text-sm whitespace-nowrap"> 
+                PT INDUSTRI KAPAL INDONESIA (Persero) 
+              </span>
+              <p class="text-[8px] xs:text-[10px] sm:text-xs text-gray-600 mt-0.5 whitespace-nowrap">Shipbuilding. Docking & Related Industry</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div class="flex items-center space-x-4 md:space-x-6 lg:space-x-8">
+          <!-- Desktop Menu -->
+          <ul class="hidden lg:flex space-x-4 xl:space-x-6 font-medium text-gray-700 text-base" role="menubar">
+            <li><a href="index.html" class="hover:text-blue-600 transition whitespace-nowrap">Beranda</a></li>
+            <li><a href="halaman_perusahaan.html" class="hover:text-blue-600 transition whitespace-nowrap">Perusahaan</a></li>
+            <li><a href="produk.html" class="hover:text-blue-600 transition whitespace-nowrap">Produk</a></li>
+
+            <!-- Perusahaan-->
+            <!-- <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Perusahaan</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+
+              <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="grid grid-cols-3 gap-x-6 gap-y-4">
+                  <a href="profile.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Profil</a>
+                  <a href="sejarah.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sejarah</a>
+                  <a href="visi&misi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Visi Misi</a>
+                  <a href="manajemen.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Manajemen</a>
+                  <a href="struktur_organisasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Struktur Organisasi</a>
+                  <a href="kegiatan_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Kegiatan Perusahaan</a>
+                  <a href="sdm.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sumber Daya Manusia</a>
+                  <a href="fasilitas.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Fasilitas</a>
+                  <a href="peralatan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Peralatan</a>
+                  <a href="parnert_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Partner Perusahaan</a>
+                  <a href="klien_kami.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Klien Kami</a>
+                  <a href="lokasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lokasi</a>
+                  <a href="#" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lain-lainnya</a>
+                </div>
+              </div>
+            </li> -->
+
+            <!-- produk -->
+            <!-- <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Produk</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Bangunan Baru</a>
+                <a href="perbaikian.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Perbaikan</a>
+                <a href="scri.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Stell Construction & Related Industry</a>
+                <a href="fiberglass.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Fiberglass</a>
+              </div>
+            </li> -->
+
+            <!-- Pelanggan -->
+            <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Pelanggan</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="registrasi_pelanggan.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Regitrasi Pelanggan</a>
+                <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Ketersediaan Dock</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download Form</a>
+                <a href="hubungi_kami.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Hubungi Kami</a>
+              </div>
+            </li>
+
+            <!-- Informasi -->
+            <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Informasi</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="berita.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Berita</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Karir</a>
+                <a href="testimonials.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Customer Testimonials</a>
+                <a href="galery.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Galery</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Lelang</a>
+                <a href="https://bumn.go.id/" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600" target="_blank">Kementrian BUMN</a>
+                <a href="halaman_download.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download</a>
+                <a href="whistleblower.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Whistleblower</a>
+              </div>
+            </li>
+
+            <li><a href="https://ppidikishipyard.id/" target="_blank" class="hover:text-blue-600 transition whitespace-nowrap">E-PPID</a></li>
+          </ul>
+
+          <!-- Language Selector -->
+          <div class="hidden lg:block flex-shrink-0">
+            <div class="relative group">
+              <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-2.5 py-1.5 rounded-lg transition hover:rounded-lg" >
+                <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3" />
+                <span class="text-sm font-medium chevron-down-gray">ID</span>
+                <i class="fas fa-chevron-down text-xs chevron-down-gray"></i>
+              </button>
+              <div class="absolute right-0 mt-1 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
+                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                  <span class="text-sm chevron-down-gray">ID</span>
+                </a>
+                <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                  <span class="text-sm chevron-down-gray">EN</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hamburger Button -->
+          <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" 
+                  class="lg:hidden focus:outline-none text-gray-700 hover:text-blue-600 ml-2" id="menu-btn">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="hidden lg:hidden bg-white shadow-md border-t border-gray-200 overflow-y-auto max-h-[calc(100vh-64px)]" id="mobile-menu">
+        <div class="px-4 pt-2 pb-6 space-y-1">
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Beranda</a>
+
+          <!-- Mobile Dropdowns -->
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Perusahaan</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="profile.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Profil</a>
+              <a href="sejarah.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Sejarah</a>
+              <a href="visi&misi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Visi Misi</a>
+              <a href="manajemen.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Manajemen</a>
+              <a href="struktur_organisasi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Struktur Organisasi</a>
+              <a href="kegiatan_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kegiatan Perusahaan</a>
+              <a href="sdm.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Sumber Daya Manusia</a>
+              <a href="fasilitas.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Fasilitas</a>
+              <a href="peralatan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Peralatan</a>
+              <a href="parnert_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Partner Perusahaan</a>
+              <a href="klien_kami.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Klien Kami</a>
+              <a href="lokasi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lokasi</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lain-lainnya</a>
+            </div>
+          </div>
+
+          <!-- Other mobile dropdowns -->
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Produk</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="bangunan_baru.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Bangunan Baru</a>
+              <a href="perbaikian.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Perbaikan</a>
+              <a href="scri.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Stell Construction & Related Industry</a>
+              <a href="fiberglass.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Fiberglass</a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Pelanggan</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Regitrasi Pelanggan</a>
+              <a href="ketersediaan_dock.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Ketersediaan Dock</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download Form</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Hubungi Kami</a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Informasi</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Berita</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Karir</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Customer Testimonials</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Galery</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lelang</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kementrian BUMN</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Whistleblower</a>
+            </div>
+          </div>
+
+          <a href="#e-ppid" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">E-PPID</a>
+
+          <!-- Language Selector Mobile -->
+          <div class="pt-4 border-t border-gray-200 mt-2">
+            <div class="flex items-center space-x-3 px-3">
+              <span class="font-medium text-gray-700">Language:</span>
+              <div class="flex space-x-2">
+                <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                  <span>ID</span>
+                </a>
+                <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                  <span>EN</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16 md:py-24">
+        <div class="container mx-auto px-6 text-center animate__animated animate__fadeIn">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-red-600">SISTEM PELAPORAN PELANGGARAN</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
+                Membangun budaya integritas dan transparansi di IKI Shipyard
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12 md:py-16">
+        <div class="container mx-auto px-6">
+            <!-- Introduction -->
+            <div class="bg-white rounded-xl shadow-md p-8 mb-12 animate__animated animate__fadeInUp">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    PT Industri Kapal Indonesia (Persero) secara konsisten terus berupaya untuk menerapkan prinsip-prinsip Tata Kelola Perusahaan Yang Baik (Good Corporate Governance/"GCG") dan Nilai-Nilai Perusahaan dalam setiap kegiatan yang dilakukan untuk mewujudkan PT Industri Kapal Indonesia (Persero) yang bersih. Untuk mendukung peningkatan integritas dan penguatan sistem pengendalian internal guna mencegah terjadinya penyuapan di lingkungan PT Industri Kapal Indonesia (Persero), maka Perseroan menerapkan Whistle Blowing System (WBS) sebagai salah satu media pelaporan dalam mencegah dan mendeteksi potensi terjadinya pelanggaran etika dan hukum di Perseroan.
+                </p>
+            </div>
+
+            <!-- Reporting Channels -->
+            <div class="mb-16 animate__animated animate__fadeInUp animate__delay-1s">
+                <h2 class="text-3xl font-bold text-blue-900 mb-8 flex items-center">
+                    <i class="fas fa-bullhorn mr-3 text-red-600"></i>
+                    <span>Saluran Pelaporan</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Phone -->
+                    <div class="report-card bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-blue-900 text-3xl mb-4">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Telepon</h3>
+                        <p class="text-gray-600 mb-4">Hubungi kami langsung melalui telepon</p>
+                        <a href="tel:+62411448653" class="text-blue-700 font-medium hover:text-blue-900 transition">
+                            +62 411 448653 Ext 302
+                        </a>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="report-card bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-blue-900 text-3xl mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Email</h3>
+                        <p class="text-gray-600 mb-4">Kirim laporan melalui email resmi</p>
+                        <a href="mailto:fkap.ikishipyard@gmail.com" class="text-blue-700 font-medium hover:text-blue-900 transition">
+                            fkap.ikishipyard@gmail.com
+                        </a>
+                    </div>
+                    
+                    <!-- Form -->
+                    <div class="report-card bg-white rounded-lg p-6 shadow-sm">
+                        <div class="text-blue-900 text-3xl mb-4">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Form Online</h3>
+                        <p class="text-gray-600 mb-4">Isi formulir pengaduan online</p>
+                        <a href="https://forms.gle/YXDb4K332cZe1H5V9" target="_blank" class="inline-block bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+                            Akses Formulir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reporting Procedure -->
+            <div class="mb-16 animate__animated animate__fadeInUp animate__delay-2s">
+                <h2 class="text-3xl font-bold text-blue-900 mb-8 flex items-center">
+                    <i class="fas fa-clipboard-list mr-3 text-red-600"></i>
+                    <span>Prosedur Pelaporan</span>
+                </h2>
+                
+                <div class="space-y-6">
+                    <!-- Accordion Item 1 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                            <h3 class="text-xl font-semibold text-blue-900">1. Saluran Pelaporan</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                        </button>
+                        <div class="accordion-content px-6">
+                            <div class="pb-6">
+                                <p class="mb-4">Perusahaan menyediakan sarana/media penyampaian Pelaporan Atas Dugaan Penyimpangan melalui:</p>
+                                <ul class="space-y-3 pl-6">
+                                    <li class="contact-item"><span class="font-medium">Telepon:</span> +62 411 448653 Ext 302</li>
+                                    <li class="contact-item"><span class="font-medium">Website:</span> https://www.ikishipyard.co.id</li>
+                                    <li class="contact-item"><span class="font-medium">Email:</span> fkap.ikishipyard@gmail.com</li>
+                                    <li class="contact-item"><span class="font-medium">Form Pengaduan:</span> https://forms.gle/YXDb4K332cZe1H5V9</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 2 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                            <h3 class="text-xl font-semibold text-blue-900">2. Ketentuan Pelaporan</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                        </button>
+                        <div class="accordion-content px-6">
+                            <div class="pb-6 space-y-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Pelapor sebagai Penyelenggara Negara:</h4>
+                                    <p>Pelapor menyampaikan Laporan Dugaan Penyimpangan melalui Fungsi Kepatuhan Anti Penyuapan (FKAP), baik secara manual atau melalui media elektronik dengan mengisi formulir laporan Gratifikasi.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Pelapor bukan sebagai Penyelenggara Negara:</h4>
+                                    <p>Pelapor menyampaikan Laporan Dugaan Penyimpangan kepada Fungsi Kepatuhan Anti Penyuapan (FKAP), baik secara manual atau melalui media elektronik dengan mengisi formulir Laporan Dugaan Penyimpangan paling lambat dalam waktu 7 (tujuh) hari kerja terhitung sejak diterimanya Gratifikasi oleh Pelapor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 3 -->
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <button class="accordion-btn w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                            <h3 class="text-xl font-semibold text-blue-900">3. Isi Laporan</h3>
+                            <i class="fas fa-chevron-down transition-transform duration-200"></i>
+                        </button>
+                        <div class="accordion-content px-6">
+                            <div class="pb-6">
+                                <p class="mb-4">Laporan Dugaan Penyimpangan yang disampaikan kepada FKAP paling kurang memuat:</p>
+                                <ol class="list-decimal pl-6 space-y-2">
+                                    <li>Nama dan alamat lengkap Pelapor dan pelaku penyuapan/pemberi Gratifikasi</li>
+                                    <li>Jabatan Pelapor</li>
+                                    <li>Tempat dan waktu penerimaan</li>
+                                    <li>Uraian jenis Penyuapan/Gratifikasi yang diterima dengan melampirkan bukti dalam bentuk sampel atau foto</li>
+                                    <li>Nilai atau taksiran nilai yang diterima</li>
+                                    <li>Kronologis penerimaan</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protection Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-red-50 rounded-xl p-8 animate__animated animate__fadeInUp animate__delay-3s">
+                <h2 class="text-3xl font-bold text-blue-900 mb-6 flex items-center">
+                    <i class="fas fa-shield-alt mr-3 text-red-600"></i>
+                    <span>Perlindungan & Penghargaan</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-blue-900 mb-4">Perlindungan Pelapor</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Setiap Pelapor yang melaporkan tindakan penyuapan/Gratifikasi wajib dilindungi hak dan kewajibannya</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Tata cara perlindungan dilaksanakan sesuai ketentuan peraturan perundang-undangan</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-blue-900 mb-4">Penghargaan & Sanksi</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-award text-yellow-500 mt-1 mr-3"></i>
+                                <span>Perseroan dapat memberikan penghargaan kepada pihak yang memberikan keteladanan dalam pengendalian Penyuapan/Gratifikasi</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-500 mt-1 mr-3"></i>
+                                <span>Insan IKI Shipyard yang terbukti melakukan pelanggaran dikenakan sanksi sesuai Peraturan Perusahaan</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-900 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-6">Laporkan Pelanggaran Sekarang</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Bantu kami menjaga integritas perusahaan dengan melaporkan setiap pelanggaran yang Anda temui</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="tel:+62411448653" class="bg-white text-blue-900 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition flex items-center">
+                    <i class="fas fa-phone mr-2"></i> Telepon Kami
+                </a>
+                <a href="mailto:fkap.ikishipyard@gmail.com" class="bg-red-600 text-white font-bold px-8 py-3 rounded-lg hover:bg-red-700 transition flex items-center">
+                    <i class="fas fa-envelope mr-2"></i> Kirim Email
+                </a>
+                <a href="https://forms.gle/YXDb4K332cZe1H5V9" target="_blank" class="bg-blue-700 text-white font-bold px-8 py-3 rounded-lg hover:bg-blue-800 transition flex items-center">
+                    <i class="fas fa-file-alt mr-2"></i> Isi Formulir
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                button.classList.toggle('active');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

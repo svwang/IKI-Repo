@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - IKI Shipyard</title>
+    <link rel="icon" href="img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .gallery-item {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .filter-btn.active {
+            background-color: #1e3a8a;
+            color: white;
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .video-thumbnail::after {
+            content: '\f04b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        .video-thumbnail:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .zoom-in {
+            animation: zoomIn 0.3s ease-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* New header animation styles */
+        .hero-wave {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        
+        .hero-wave .shape-fill {
+            fill: #153a5f5a;
+        }
+        
+        @keyframes waveMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #a5b4fc);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientShift 3s linear infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        .floating-ship {
+            position: absolute;
+            right: 10%;
+            bottom: 20px;
+            width: 120px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="%23ffffff" d="M176 320c-61.9 0-112-50.1-112-112S114.1 96 176 96s112 50.1 112 112-50.1 112-112 112zm16-176c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm240 176c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112zm16-176c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zM592 288H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h16c8.8 0 16 7.2 16 16v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16c0-8.8 7.2-16 16-16h16c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16z"/></svg>');
+            background-repeat: no-repeat;
+            animation: floating 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+        }
+        
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+            100% {
+                bottom: 100%;
+                transform: translateX(-200px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
+      <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        <!-- Logo & Text with separator -->
+        <div class="flex items-center flex-shrink-0 min-w-0 group">
+          <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
+            <div class="flex-shrink-0 flex items-center space-x-2 sm:space-x-3">
+              <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" 
+                  class="h-6 w-auto sm:h-8 md:h-8 lg:h-10 object-contain transition-all duration-300 group-hover:scale-105" />
+              <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300"></div>
+              <img src="img/logo.png" alt="Ikishi Shipyard Logo" 
+                  class="h-6 w-auto sm:h-8 md:h-10 lg:h-12 object-contain transition-all duration-300 group-hover:scale-105" />
+            </div>
+            <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300 hidden xs:block"></div>
+            <div class="min-w-0 pl-1 sm:pl-2 md:pl-3">
+              <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-[8px] xs:text-xs sm:text-sm whitespace-nowrap"> 
+                PT INDUSTRI KAPAL INDONESIA (Persero) 
+              </span>
+              <p class="text-[8px] xs:text-[10px] sm:text-xs text-gray-600 mt-0.5 whitespace-nowrap">Shipbuilding. Docking & Related Industry</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div class="flex items-center space-x-4 md:space-x-6 lg:space-x-8">
+          <!-- Desktop Menu -->
+          <ul class="hidden lg:flex space-x-4 xl:space-x-6 font-medium text-gray-700 text-base" role="menubar">
+            <li><a href="index.html" class="hover:text-blue-600 transition whitespace-nowrap">Beranda</a></li>
+            <li><a href="halaman_perusahaan.html" class="hover:text-blue-600 transition whitespace-nowrap">Perusahaan</a></li>
+            <li><a href="produk.html" class="hover:text-blue-600 transition whitespace-nowrap">Produk</a></li>
+
+            <!-- Perusahaan-->
+            <!-- <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Perusahaan</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+
+              <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="grid grid-cols-3 gap-x-6 gap-y-4">
+                  <a href="profile.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Profil</a>
+                  <a href="sejarah.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sejarah</a>
+                  <a href="visi&misi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Visi Misi</a>
+                  <a href="manajemen.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Manajemen</a>
+                  <a href="struktur_organisasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Struktur Organisasi</a>
+                  <a href="kegiatan_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Kegiatan Perusahaan</a>
+                  <a href="sdm.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sumber Daya Manusia</a>
+                  <a href="fasilitas.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Fasilitas</a>
+                  <a href="peralatan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Peralatan</a>
+                  <a href="parnert_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Partner Perusahaan</a>
+                  <a href="klien_kami.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Klien Kami</a>
+                  <a href="lokasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lokasi</a>
+                  <a href="#" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lain-lainnya</a>
+                </div>
+              </div>
+            </li> -->
+
+            <!-- produk -->
+            <!-- <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Produk</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Bangunan Baru</a>
+                <a href="perbaikian.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Perbaikan</a>
+                <a href="scri.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Stell Construction & Related Industry</a>
+                <a href="fiberglass.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Fiberglass</a>
+              </div>
+            </li> -->
+
+            <!-- Pelanggan -->
+            <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Pelanggan</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="registrasi_pelanggan.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Regitrasi Pelanggan</a>
+                <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Ketersediaan Dock</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download Form</a>
+                <a href="hubungi_kami.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Hubungi Kami</a>
+              </div>
+            </li>
+
+            <!-- Informasi -->
+            <li class="relative group" data-dd>
+              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                      aria-expanded="false" onclick="toggleDropdown(this)">
+                <span>Informasi</span>
+                <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+              </button>
+              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="berita.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Berita</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Karir</a>
+                <a href="testimonials.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Customer Testimonials</a>
+                <a href="galery.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Galery</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Lelang</a>
+                <a href="https://bumn.go.id/" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600" target="_blank">Kementrian BUMN</a>
+                <a href="halaman_download.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download</a>
+                <a href="whistleblower.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Whistleblower</a>
+              </div>
+            </li>
+
+            <li><a href="https://ppidikishipyard.id/" target="_blank" class="hover:text-blue-600 transition whitespace-nowrap">E-PPID</a></li>
+          </ul>
+
+          <!-- Language Selector -->
+          <div class="hidden lg:block flex-shrink-0">
+            <div class="relative group">
+              <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-2.5 py-1.5 rounded-lg transition hover:rounded-lg" >
+                <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3" />
+                <span class="text-sm font-medium chevron-down-gray">ID</span>
+                <i class="fas fa-chevron-down text-xs chevron-down-gray"></i>
+              </button>
+              <div class="absolute right-0 mt-1 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
+                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                  <span class="text-sm chevron-down-gray">ID</span>
+                </a>
+                <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                  <span class="text-sm chevron-down-gray">EN</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hamburger Button -->
+          <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" 
+                  class="lg:hidden focus:outline-none text-gray-700 hover:text-blue-600 ml-2" id="menu-btn">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="hidden lg:hidden bg-white shadow-md border-t border-gray-200 overflow-y-auto max-h-[calc(100vh-64px)]" id="mobile-menu">
+        <div class="px-4 pt-2 pb-6 space-y-1">
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Beranda</a>
+
+          <!-- Mobile Dropdowns -->
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Perusahaan</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="profile.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Profil</a>
+              <a href="sejarah.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Sejarah</a>
+              <a href="visi&misi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Visi Misi</a>
+              <a href="manajemen.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Manajemen</a>
+              <a href="struktur_organisasi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Struktur Organisasi</a>
+              <a href="kegiatan_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kegiatan Perusahaan</a>
+              <a href="sdm.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Sumber Daya Manusia</a>
+              <a href="fasilitas.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Fasilitas</a>
+              <a href="peralatan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Peralatan</a>
+              <a href="parnert_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Partner Perusahaan</a>
+              <a href="klien_kami.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Klien Kami</a>
+              <a href="lokasi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lokasi</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lain-lainnya</a>
+            </div>
+          </div>
+
+          <!-- Other mobile dropdowns -->
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Produk</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="bangunan_baru.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Bangunan Baru</a>
+              <a href="perbaikian.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Perbaikan</a>
+              <a href="scri.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Stell Construction & Related Industry</a>
+              <a href="fiberglass.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Fiberglass</a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Pelanggan</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Regitrasi Pelanggan</a>
+              <a href="ketersediaan_dock.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Ketersediaan Dock</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download Form</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Hubungi Kami</a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    onclick="toggleMobileDropdown(this)">
+              <span>Informasi</span>
+              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            </button>
+            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Berita</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Karir</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Customer Testimonials</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Galery</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lelang</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kementrian BUMN</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download</a>
+              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Whistleblower</a>
+            </div>
+          </div>
+
+          <a href="#e-ppid" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">E-PPID</a>
+
+          <!-- Language Selector Mobile -->
+          <div class="pt-4 border-t border-gray-200 mt-2">
+            <div class="flex items-center space-x-3 px-3">
+              <span class="font-medium text-gray-700">Language:</span>
+              <div class="flex space-x-2">
+                <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                  <span>ID</span>
+                </a>
+                <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
+                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                  <span>EN</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Animations -->
+    <section class="relative bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20 overflow-hidden">
+        <!-- Animated bubbles background -->
+        <div class="bubbles">
+            <!-- Bubbles will be generated by JS -->
+        </div>
+        
+        <!-- Floating ship animation -->
+        <div class="floating-ship"></div>
+        
+        <div class="container mx-auto px-6 text-center animate__animated animate__fadeIn relative z-10 pt-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="gradient-text">Galeri IKI Shipyard</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90 animate__animated animate__fadeInUp">
+                Dokumentasi visual kegiatan dan pencapaian perusahaan
+            </p>
+        </div>
+        
+        <!-- Animated wave divider -->
+        <div class="hero-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Rest of your existing code remains the same -->
+    <!-- Gallery Navigation -->
+    <div class="container mx-auto px-6 py-8 -mt-8 z-10 relative">
+        <div class="bg-white rounded-lg shadow-md p-4 flex flex-wrap justify-center gap-2 animate__animated animate__fadeInUp">
+            <button class="filter-btn active px-4 py-2 rounded-full transition-all" data-filter="all">Semua</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="photo">Foto</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="video">Video</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="construction">Konstruksi</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="event">Acara</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="award">Penghargaan</button>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <section class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Photo Item 1 -->
+            <div class="gallery-item photo construction animate__animated animate__fadeIn" data-category="photo construction">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?shipyard" alt="Ship Construction" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Proses Konstruksi Kapal</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Pembangunan Kapal Baru</h3>
+                        <p class="text-gray-600 text-sm">15 Juni 2023 - Galangan Utama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Item 1 -->
+            <div class="gallery-item video event animate__animated animate__fadeIn" data-category="video event" style="animation-delay: 0.1s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] video-thumbnail gallery-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <img src="https://source.unsplash.com/random/600x400/?ceremony" alt="Company Event" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Peluncuran Kapal Perdana</h3>
+                        <p class="text-gray-600 text-sm">28 Mei 2023 - Dermaga Utama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 2 -->
+            <div class="gallery-item photo award animate__animated animate__fadeIn" data-category="photo award" style="animation-delay: 0.2s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?award" alt="Award Ceremony" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Penghargaan Industri Maritim</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Penghargaan Nasional 2023</h3>
+                        <p class="text-gray-600 text-sm">10 Mei 2023 - Jakarta</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Item 2 -->
+            <div class="gallery-item video construction animate__animated animate__fadeIn" data-category="video construction" style="animation-delay: 0.3s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] video-thumbnail gallery-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <img src="https://source.unsplash.com/random/600x400/?construction" alt="Ship Construction" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Proses Pembangunan Kapal</h3>
+                        <p class="text-gray-600 text-sm">22 April 2023 - Workshop</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 3 -->
+            <div class="gallery-item photo event animate__animated animate__fadeIn" data-category="photo event" style="animation-delay: 0.4s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?meeting" alt="Company Meeting" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Rapat Tahunan Perusahaan</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Rapat Direksi 2023</h3>
+                        <p class="text-gray-600 text-sm">5 April 2023 - Ruang Rapat</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 4 -->
+            <div class="gallery-item photo construction animate__animated animate__fadeIn" data-category="photo construction" style="animation-delay: 0.5s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?dock" alt="Ship Dock" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Area Docking Kapal</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Fasilitas Docking Modern</h3>
+                        <p class="text-gray-600 text-sm">30 Maret 2023 - Pelabuhan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Item 3 -->
+            <div class="gallery-item video award animate__animated animate__fadeIn" data-category="video award" style="animation-delay: 0.6s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] video-thumbnail gallery-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <img src="https://source.unsplash.com/random/600x400/?trophy" alt="Award Ceremony" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Penghargaan Inovasi Teknologi</h3>
+                        <p class="text-gray-600 text-sm">15 Maret 2023 - Jakarta</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 5 -->
+            <div class="gallery-item photo event animate__animated animate__fadeIn" data-category="photo event" style="animation-delay: 0.7s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?training" alt="Employee Training" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Pelatihan Karyawan</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Program Pelatihan SDM</h3>
+                        <p class="text-gray-600 text-sm">1 Maret 2023 - Ruang Pelatihan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12 animate__animated animate__fadeIn">
+            <button id="loadMore" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-full transition-all transform hover:scale-105">
+                Muat Lebih Banyak
+            </button>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="relative max-w-4xl w-full max-h-[90vh]">
+            <button id="closeImageModal" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-400 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="bg-white rounded-lg overflow-hidden">
+                <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[80vh] object-contain">
+                <div class="p-4 bg-white">
+                    <h3 id="modalImageTitle" class="text-xl font-bold text-blue-900"></h3>
+                    <p id="modalImageDate" class="text-gray-600 text-sm"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="relative max-w-4xl w-full">
+            <button id="closeVideoModal" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-400 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden">
+                <iframe id="modalVideo" width="100%" height="100%" frameborder="0" allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                </iframe>
+            </div>
+            <div class="p-4 bg-white rounded-b-lg">
+                <h3 id="modalVideoTitle" class="text-xl font-bold text-blue-900"></h3>
+                <p id="modalVideoDate" class="text-gray-600 text-sm"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-black py-12 mt-1 w-full">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div class="flex flex-col space-y-4">
+            <div class="flex items-center space-x-3">
+              <div class="bg-white p-2 rounded-3xl">
+                <img src="img/logo.png" alt="Ikishi Shipyard Logo" class="w-12 h-12 rounded-lg object-contain">
+              </div>
+              <span class="text-xl font-bold text-blue-700">IKISHI SHIPYARD</span>
+            </div>
+            <p class="text-blue-700">Shipbuilding, Docking & Related Industry</p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-blue-800 hover:bg-blue-800 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-facebook-f fa-2x group-hover:text-white"></i>
+              </a>
+              <a href="#" class="text-blue-400 hover:bg-blue-400 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-twitter fa-2x group-hover:text-white"></i>
+              </a>
+              <a href="#" class="text-blue-500 hover:bg-blue-500 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-linkedin-in fa-2x group-hover:text-white" ></i>
+              </a>
+              <a href="#" class="text-red-700 hover:bg-red-700 px-4 py-4 rounded-2xl group transition">
+                <i class="fab fa-instagram fa-2x group-hover:text-white"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Menu</h3>
+            <ul class="space-y-2">
+              <!-- Menu Beranda -->
+              <li><a href="index.html" class="text-black hover: transition flex items-center justify-between">Beranda</a></li>
+              <!-- Menu Perusahaan -->
+              <li><a href="halaman_perusahaan.html" class="text-black hover: transition flex items-center justify-between">Perusahaan</a></li>
+              <!-- Menu Produk -->
+              <li><a href="produk.html" class="text-black hover: transition flex items-center justify-between">Produk</a></li>
+
+              <!-- Dropdown Pelanggan -->
+              <li class="relative group">
+                <button class="w-full text-left text-black hover: transition flex items-center justify-between">
+                  <span>Pelanggan</span>
+                  <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
+                </button>
+                <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
+                  <li><a href="bangunan_baru.html" class="text-black hover: block py-1">Registrasi Pelanggan</a></li>
+                  <li><a href="ketersediaan_dock.html" class="text-black hover: block py-1">ketersediaan Dock</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Download Form</a></li>
+                  <li><a href="hubungi_kami.html" class="text-black hover: block py-1">hubungi Kami</a></li>
+                </ul>
+              </li>
+
+              <!-- Dropdown Pelanggan -->
+              <li class="relative group">
+                <button class="w-full text-left text-black hover: transition flex items-center justify-between">
+                  <span>Informasi</span>
+                  <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
+                </button>
+                <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
+                  <li><a href="berita.html" class="text-black hover: block py-1">Berita</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Karir</a></li>
+                  <li><a href="testimonials.html" class="text-black hover: block py-1">Customer Testimonials</a></li>
+                  <li><a href="galery.html" class="text-black hover: block py-1">Galery</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Lelang</a></li>
+                  <li><a href="https://bumn.go.id/" class="text-black hover: block py-1">Kementrian BUMN</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Download</a></li>
+                  <li><a href="whistleblower.html" class="text-black hover: block py-1">Whistleblower</a></li>                  
+                </ul>
+              </li>
+              <li><a href="https://ppidikishipyard.id/" class="text-black hover: transition">E-PPID</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Hubungi Kami</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fas fa-map-marker-alt mt-1 mr-3 text-black"></i>
+                <span class="text-black">JL Galangan Kapal No. 31, Makassar,
+Sulawesi Selatan,
+Indonesia, 90211.</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone-alt mr-3 text-black"></i>
+                <span class="text-black"> +62 411 448 653</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-question mr-3 text-black"></i>
+                <span class="text-black"> +62 411 448 658</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-3 text-black"></i>
+                <span class="text-black">ptiki@ikishipyard.co.id</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Berlangganan</h3>
+            <p class="text-black mb-3">Dapatkan update terbaru dari kami</p>
+            <form class="flex flex-col space-y-3">
+              <input type="email" placeholder="Alamat Email Anda" 
+                    class="px-4 py-2 rounded-lg bg-white bg-opacity-50 border border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300  placeholder-blue-300">
+              <button type="submit" 
+                      class="bg-blue-700 hover:bg-blue-400 text-white font-medium py-2 px-4 rounded-lg transition">
+                Berlangganan
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Copyright & Legal -->
+        <div class="border-t border-blue-400 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <div class="text-black text-sm mb-4 md:mb-0">
+            © 2024 PT Industri Kapal Indonesia (Persero). All Rights Reserved.
+          </div>
+          <div class="flex space-x-6">
+            <a href="#" class="text-black text-sm transition">Kebijakan Privasi</a>
+            <a href="#" class="text-black text-sm transition">Syarat & Ketentuan</a>
+            <a href="#" class="text-black text-sm transition">Peta Situs</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Create bubbles for header animation
+        function createBubbles() {
+            const bubblesContainer = document.querySelector('.bubbles');
+            const bubbleCount = 15;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Random size between 10px and 40px
+                const size = Math.random() * 30 + 10;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 5s and 15s
+                const duration = Math.random() * 10 + 5;
+                bubble.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createBubbles();
+            
+            // Filter functionality
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    const items = document.querySelectorAll('.gallery-item');
+                    
+                    items.forEach(item => {
+                        if (filter === 'all' || item.dataset.category.includes(filter)) {
+                            item.style.display = 'block';
+                            item.classList.add('animate__fadeIn');
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.remove('animate__fadeIn');
+                        }
+                    });
+                });
+            });
+
+            // Image modal functionality
+            document.querySelectorAll('.gallery-image').forEach(image => {
+                image.addEventListener('click', function() {
+                    const card = this.closest('.gallery-item');
+                    const imgSrc = this.querySelector('img').src;
+                    const title = card.querySelector('h3').textContent;
+                    const date = card.querySelector('p').textContent;
+                    
+                    document.getElementById('modalImage').src = imgSrc;
+                    document.getElementById('modalImageTitle').textContent = title;
+                    document.getElementById('modalImageDate').textContent = date;
+                    
+                    const modal = document.getElementById('imageModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex', 'fade-in');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Video modal functionality
+            document.querySelectorAll('.gallery-video').forEach(video => {
+                video.addEventListener('click', function() {
+                    const card = this.closest('.gallery-item');
+                    const videoUrl = this.dataset.video;
+                    const title = card.querySelector('h3').textContent;
+                    const date = card.querySelector('p').textContent;
+                    
+                    document.getElementById('modalVideo').src = videoUrl;
+                    document.getElementById('modalVideoTitle').textContent = title;
+                    document.getElementById('modalVideoDate').textContent = date;
+                    
+                    const modal = document.getElementById('videoModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex', 'fade-in');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close modals
+            document.getElementById('closeImageModal').addEventListener('click', function() {
+                const modal = document.getElementById('imageModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            });
+
+            document.getElementById('closeVideoModal').addEventListener('click', function() {
+                const modal = document.getElementById('videoModal');
+                const iframe = document.getElementById('modalVideo');
+                iframe.src = '';
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close modals when clicking outside
+            document.getElementById('imageModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                    this.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            document.getElementById('videoModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    const iframe = document.getElementById('modalVideo');
+                    iframe.src = '';
+                    this.classList.add('hidden');
+                    this.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Load more functionality
+            document.getElementById('loadMore').addEventListener('click', function() {
+                // In a real implementation, this would load more items from an API
+                // For demo, we'll just show an alert
+                alert('Fitur "Muat Lebih Banyak" akan menampilkan item galeri tambahan dalam implementasi nyata.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -13,6 +13,114 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+
+        .video-container {
+            position: relative;
+            padding-bottom: 48%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .custom-popup {
+            max-width: 280px;
+        }
+
+        .video-thumbnail-container {
+            position: relative;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .video-thumbnail:hover {
+            transform: scale(1.03);
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            display: block;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .video-thumbnail:hover .play-button {
+            background: rgba(255, 0, 0, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Modal content */
+        #videoModal > div {
+            width: 80%;
+            max-width: 800px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        #closeModal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff0000;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
         #map {
             min-height: 500px;
             z-index: 0;
@@ -36,7 +144,7 @@
         }
         .company-nav-link.active {
             color: #1d4ed8;
-            font-weight: 500;
+            font-weight: 700;
         }
         .company-nav-link.active::after {
             content: '';
@@ -159,241 +267,229 @@
                 );
             }
         }
+
+        @media (min-width: 768px) {
+            .timeline-item {
+                flex-direction: row;
+                align-items: stretch;
+            }
+            .timeline-text,
+            .timeline-image {
+                flex: 1 1 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: 320px;
+            }
+            .timeline-text {
+                padding: 0 3rem;
+            }
+            .timeline-image {
+                padding: 0 3rem;
+            }
+        }
         
     </style>
 </head>
-<body class="font-sans antialiased text-gray-800">
+<body>
     <!-- Navbar -->
     <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
-      <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         <!-- Logo & Text with separator -->
-        <a href="#" class="flex items-center flex-shrink-0 min-w-0 group">
-          <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
+        <div class="flex items-center flex-shrink-0 min-w-0 group">
+        <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
             <div class="flex-shrink-0 flex items-center space-x-2 sm:space-x-3">
-              <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" 
-                  class="h-6 w-auto sm:h-8 md:h-8 lg:h-10 object-contain transition-all duration-300 group-hover:scale-105" />
-              <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300"></div>
-              <img src="img/logo.png" alt="Ikishi Shipyard Logo" 
-                  class="h-6 w-auto sm:h-8 md:h-10 lg:h-12 object-contain transition-all duration-300 group-hover:scale-105" />
+            <img src="img/bumn-untuk-negeri.png" alt="BUMN Logo" 
+                class="h-6 w-auto sm:h-8 md:h-8 lg:h-10 object-contain transition-all duration-300 group-hover:scale-105" />
+            <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300"></div>
+            <img src="img/logo.png" alt="Ikishi Shipyard Logo" 
+                class="h-6 w-auto sm:h-8 md:h-10 lg:h-12 object-contain transition-all duration-300 group-hover:scale-105" />
             </div>
             <div class="h-6 sm:h-8 md:h-10 lg:h-12 border-r border-gray-300 hidden xs:block"></div>
             <div class="min-w-0 pl-1 sm:pl-2 md:pl-3">
-              <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-[8px] xs:text-xs sm:text-sm whitespace-nowrap"> 
+            <span class="font-semibold text-blue-900 tracking-wide select-none leading-tight text-[8px] xs:text-xs sm:text-sm whitespace-nowrap"> 
                 PT INDUSTRI KAPAL INDONESIA (Persero) 
-              </span>
-              <p class="text-[8px] xs:text-[10px] sm:text-xs text-gray-600 mt-0.5 whitespace-nowrap">Shipbuilding. Docking & Related Industry</p>
+            </span>
+            <p class="text-[8px] xs:text-[10px] sm:text-xs text-gray-600 mt-0.5 whitespace-nowrap">Shipbuilding. Docking & Related Industry</p>
             </div>
-          </div>
-        </a>
+        </div>
+        </div>
+
         <!-- Main Menu -->
         <div class="flex items-center space-x-4 md:space-x-6 lg:space-x-8">
-          <!-- Desktop Menu -->
-          <ul class="hidden lg:flex space-x-4 xl:space-x-6 font-medium text-gray-700 text-base" role="menubar">
+        <!-- Desktop Menu -->
+        <ul class="hidden lg:flex space-x-4 xl:space-x-6 font-medium text-gray-700 text-base" role="menubar">
             <li><a href="index.html" class="hover:text-blue-600 transition whitespace-nowrap">Beranda</a></li>
             <li><a href="halaman_perusahaan.html" class="hover:text-blue-600 transition whitespace-nowrap">Perusahaan</a></li>
+            <li><a href="produk.html" class="hover:text-blue-600 transition whitespace-nowrap">Produk</a></li>
 
-            <!-- Dropdown Perusahaan - Clickable -->
+            <!-- Perusahaan-->
             <!-- <li class="relative group" data-dd>
-              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
-                      aria-expanded="false" onclick="toggleDropdown(this)">
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                    aria-expanded="false" onclick="toggleDropdown(this)">
                 <span>Perusahaan</span>
                 <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-              </button>
+            </button>
 
-              <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="dropdown-panel absolute left-0 top-full w-[680px] bg-white border border-gray-200 rounded-lg shadow-lg p-6 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div class="grid grid-cols-3 gap-x-6 gap-y-4">
-                  <a href="profile.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Profil</a>
-                  <a href="sejarah.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sejarah</a>
-                  <a href="visi&misi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Visi Misi</a>
-                  <a href="manajemen.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Manajemen</a>
-                  <a href="struktur_organisasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Struktur Organisasi</a>
-                  <a href="kegiatan_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Kegiatan Perusahaan</a>
-                  <a href="sdm.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sumber Daya Manusia</a>
-                  <a href="fasilitas.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Fasilitas</a>
-                  <a href="peralatan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Peralatan</a>
-                  <a href="parnert_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Partner Perusahaan</a>
-                  <a href="klien_kami.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Klien Kami</a>
-                  <a href="lokasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lokasi</a>
-                  <a href="#" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lain-lainnya</a>
+                <a href="profile.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Profil</a>
+                <a href="sejarah.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sejarah</a>
+                <a href="visi&misi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Visi Misi</a>
+                <a href="manajemen.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Manajemen</a>
+                <a href="struktur_organisasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Struktur Organisasi</a>
+                <a href="kegiatan_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Kegiatan Perusahaan</a>
+                <a href="sdm.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Sumber Daya Manusia</a>
+                <a href="fasilitas.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Fasilitas</a>
+                <a href="peralatan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Peralatan</a>
+                <a href="parnert_perusahaan.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Partner Perusahaan</a>
+                <a href="klien_kami.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Klien Kami</a>
+                <a href="lokasi.html" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lokasi</a>
+                <a href="#" class="block py-2 border-b border-gray-200 hover:text-blue-600 hover:border-b-blue-600">Lain-lainnya</a>
                 </div>
-              </div>
+            </div>
             </li> -->
 
-            <!-- Other dropdowns with click functionality -->
-            <li class="relative group" data-dd>
-              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
-                      aria-expanded="false" onclick="toggleDropdown(this)">
+            <!-- produk -->
+            <!-- <li class="relative group" data-dd>
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                    aria-expanded="false" onclick="toggleDropdown(this)">
                 <span>Produk</span>
                 <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-              </button>
-              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            </button>
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <a href="bangunan_baru.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Bangunan Baru</a>
                 <a href="perbaikian.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Perbaikan</a>
                 <a href="scri.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Stell Construction & Related Industry</a>
                 <a href="fiberglass.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Fiberglass</a>
-              </div>
-            </li>
+            </div>
+            </li> -->
 
+            <!-- Pelanggan -->
             <li class="relative group" data-dd>
-              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
-                      aria-expanded="false" onclick="toggleDropdown(this)">
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                    aria-expanded="false" onclick="toggleDropdown(this)">
                 <span>Pelanggan</span>
                 <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-              </button>
-              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Regitrasi Pelanggan</a>
+            </button>
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="registrasi_pelanggan.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Regitrasi Pelanggan</a>
                 <a href="ketersediaan_dock.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Ketersediaan Dock</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download Form</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Hubungi Kami</a>
-              </div>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download Form</a>
+                <a href="hubungi_kami.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Hubungi Kami</a>
+            </div>
             </li>
 
+            <!-- Informasi -->
             <li class="relative group" data-dd>
-              <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
-                      aria-expanded="false" onclick="toggleDropdown(this)">
+            <button class="dropdown-trigger flex items-center space-x-1 hover:text-blue-600 transition whitespace-nowrap" 
+                    aria-expanded="false" onclick="toggleDropdown(this)">
                 <span>Informasi</span>
                 <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-              </button>
-              <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Berita</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Karir</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Customer Testimonials</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Galery</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Lelang</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Kementrian BUMN</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Whistleblower</a>
-              </div>
+            </button>
+            <div class="dropdown-panel absolute left-0 top-full w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <a href="berita.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Berita</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Karir</a>
+                <a href="testimonials.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Customer Testimonials</a>
+                <a href="galery.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Galery</a>
+                <a href="404.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Lelang</a>
+                <a href="https://bumn.go.id/" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600" target="_blank">Kementrian BUMN</a>
+                <a href="halaman_download.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Download</a>
+                <a href="whistleblower.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-blue-600">Whistleblower</a>
+            </div>
             </li>
 
-            <li><a href="#e-ppid" class="hover:text-blue-600 transition whitespace-nowrap">E-PPID</a></li>
-          </ul>
+            <li><a href="https://ppidikishipyard.id/" target="_blank" class="hover:text-blue-600 transition whitespace-nowrap">E-PPID</a></li>
+        </ul>
 
-          <!-- Language Selector -->
-          <div class="hidden lg:block flex-shrink-0">
+        <!-- Language Selector -->
+        <div class="hidden lg:block flex-shrink-0">
             <div class="relative group">
-              <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-2.5 py-1.5 rounded-lg transition hover:rounded-lg" >
+            <button class="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-2.5 py-1.5 rounded-lg transition hover:rounded-lg" >
                 <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="w-5 h-3" />
                 <span class="text-sm font-medium chevron-down-gray">ID</span>
                 <i class="fas fa-chevron-down text-xs chevron-down-gray"></i>
-              </button>
-              <div class="absolute right-0 mt-1 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            </button>
+            <div class="absolute right-0 mt-1 w-28 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <a href="?lang=id" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
-                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
-                  <span class="text-sm chevron-down-gray">ID</span>
+                <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                <span class="text-sm chevron-down-gray">ID</span>
                 </a>
                 <a href="?lang=en" class="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 hover:rounded-lg">
-                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
-                  <span class="text-sm chevron-down-gray">EN</span>
+                <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                <span class="text-sm chevron-down-gray">EN</span>
                 </a>
-              </div>
             </div>
-          </div>
-
-          <!-- Hamburger Button -->
-          <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" 
-                  class="lg:hidden focus:outline-none text-gray-700 hover:text-blue-600 ml-2" id="menu-btn">
-            <i class="fas fa-bars text-xl"></i>
-          </button>
+            </div>
         </div>
-      </div>
 
-      <!-- Mobile Menu -->
-      <div class="hidden lg:hidden bg-white shadow-md border-t border-gray-200 overflow-y-auto max-h-[calc(100vh-64px)]" id="mobile-menu">
+        <!-- Hamburger Button -->
+        <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu" 
+                class="lg:hidden focus:outline-none text-gray-700 hover:text-blue-600 ml-2" id="menu-btn">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="hidden lg:hidden bg-white shadow-md border-t border-gray-200 overflow-y-auto max-h-[calc(100vh-64px)]" id="mobile-menu">
         <div class="px-4 pt-2 pb-6 space-y-1">
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-large text-gray-700 hover:text-blue-600 hover:bg-gray-50">Beranda</a>
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Beranda</a>
+        <a href="halaman_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Perusahaan</a>
+        <a href="produk.html" class="block px-3 py-2 rounded-md text-base font-large text-black hover:text-blue-600 hover:bg-gray-50">Produk</a>                        
 
-          <!-- Mobile Dropdowns -->
-          <div class="relative">
+        <div class="relative">
             <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                     onclick="toggleMobileDropdown(this)">
-              <span>Perusahaan</span>
-              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            <span>Pelanggan</span>
+            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
             </button>
             <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
-              <a href="profile.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Profil</a>
-              <a href="sejarah.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Sejarah</a>
-              <a href="visi&misi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Visi Misi</a>
-              <a href="manajemen.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Manajemen</a>
-              <a href="struktur_organisasi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Struktur Organisasi</a>
-              <a href="kegiatan_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kegiatan Perusahaan</a>
-              <a href="sdm.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Sumber Daya Manusia</a>
-              <a href="fasilitas.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Fasilitas</a>
-              <a href="peralatan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Peralatan</a>
-              <a href="parnert_perusahaan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Partner Perusahaan</a>
-              <a href="klien_kami.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Klien Kami</a>
-              <a href="lokasi.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lokasi</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lain-lainnya</a>
+            <a href="registrasi_pelanggan.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Regitrasi Pelanggan</a>
+            <a href="ketersediaan_dock.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Ketersediaan Dock</a>
+            <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download Form</a>
+            <a href="hubungi_kami.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Hubungi Kami</a>
             </div>
-          </div>
+        </div>
 
-          <!-- Other mobile dropdowns -->
-          <div class="relative">
+        <div class="relative">
             <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                     onclick="toggleMobileDropdown(this)">
-              <span>Produk</span>
-              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
+            <span>Informasi</span>
+            <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
             </button>
             <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
-              <a href="bangunan_baru.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Bangunan Baru</a>
-              <a href="perbaikian.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Perbaikan</a>
-              <a href="scri.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Stell Construction & Related Industry</a>
-              <a href="fiberglass.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Fiberglass</a>
+            <a href="berita.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Berita</a>
+            <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Karir</a>
+            <a href="testimonials.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Customer Testimonials</a>
+            <a href="galery.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Galery</a>
+            <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lelang</a>
+            <a href="https://bumn.go.id/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kementrian BUMN</a>
+            <a href="404.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download</a>
+            <a href="whistleblower.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Whistleblower</a>
             </div>
-          </div>
+        </div>
 
-          <div class="relative">
-            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                    onclick="toggleMobileDropdown(this)">
-              <span>Pelanggan</span>
-              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-            </button>
-            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Regitrasi Pelanggan</a>
-              <a href="ketersediaan_dock.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Ketersediaan Dock</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download Form</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Hubungi Kami</a>
-            </div>
-          </div>
+        <a href="https://ppidikishipyard.id/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">E-PPID</a>
 
-          <div class="relative">
-            <button class="dropdown-trigger-mobile w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                    onclick="toggleMobileDropdown(this)">
-              <span>Informasi</span>
-              <i class="fas fa-chevron-down text-xs transition-transform duration-200"></i>
-            </button>
-            <div class="dropdown-panel-mobile hidden pl-4 space-y-1 mt-1">
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Berita</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Karir</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Customer Testimonials</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Galery</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Lelang</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Kementrian BUMN</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Download</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50">Whistleblower</a>
-            </div>
-          </div>
-
-          <a href="#e-ppid" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">E-PPID</a>
-
-          <!-- Language Selector Mobile -->
-          <div class="pt-4 border-t border-gray-200 mt-2">
+        <!-- Language Selector Mobile -->
+        <div class="pt-4 border-t border-gray-200 mt-2">
             <div class="flex items-center space-x-3 px-3">
-              <span class="font-medium text-gray-700">Language:</span>
-              <div class="flex space-x-2">
+            <span class="font-medium text-gray-700">Language:</span>
+            <div class="flex space-x-2">
                 <a href="?lang=id" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
-                  <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
-                  <span>ID</span>
+                <img src="https://flagcdn.com/w20/id.png" alt="Indonesia Flag" class="w-5 h-3" />
+                <span>ID</span>
                 </a>
                 <a href="?lang=en" class="flex items-center space-x-1 px-3 py-1.5 bg-gray-100 rounded-lg text-sm">
-                  <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
-                  <span>EN</span>
+                <img src="https://flagcdn.com/w20/gb.png" alt="UK Flag" class="w-5 h-3" />
+                <span>EN</span>
                 </a>
-              </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
+        </div>
+    </div>
     </nav>
 
     <!-- Hero Section with Consistent Blue Overlay -->
@@ -502,24 +598,24 @@
             <!-- Content Sections -->
             <div >
                 <!-- Profile Section -->
-                <div id="profile" class="content-section active">
+                <div id="profile" class="content-section active" >
                     <div class="prose max-w-none text-gray-600">
-                        <section class="max-w-9xl mx-auto">
+                        <section class="max-w-9xl mx-auto">                            
                             <div class="flex flex-col md:flex-row md:items-start md:gap-16">
-                                <div class="md:flex-1 md:max-w-[480px] lg:max-w-[480px]">
-                                <img alt="Tall white building with unique architectural design surrounded by green trees under a clear blue sky" class="w-full h-auto object-cover" src="image/iki.jpg" />
+                                <div class="md:flex-1 md:max-w-[480px] lg:max-w-[480px]" data-aos="fade-right">
+                                    <img alt="Tall white building with unique architectural design surrounded by green trees under a clear blue sky" class="w-full h-auto object-cover" src="image/iki.jpg" />
                                 </div>
-                                <div class="md:flex-1 mt-10 md:mt-0">
-                                <h2 class="text-[28px] md:text-[32px] font-extrabold text-[#7B8EAE] tracking-widest uppercase leading-tight">profile</h2>
-                                <div class="flex items-center gap-3 mt-3 mb-6">
+                                <div class="md:flex-1 mt-10 md:mt-0" >
+                                <h2 class="text-[28px] md:text-[32px] font-extrabold text-[#7B8EAE] tracking-widest uppercase leading-tight" data-aos="fade-left">profile</h2>
+                                <div class="flex items-center gap-3 mt-3 mb-6" data-aos="fade-in">
                                     <span class="block w-14 h-[2px] bg-[#4A90E2]"> </span>
                                     <p class="text-sm text-gray-600 uppercase tracking-wide">PT IKI Shipyard</p>
                                 </div>
-                                <p class="text-base leading-relaxed mb-6">
+                                <p class="text-base leading-relaxed mb-6" data-aos="fade-up">
                                     PT IKI Shipyard is a leading aerospace company in Asia, specializing in the design, development, manufacturing, and maintenance of aircraft for both civilian and military applications. Established in 1976, PTDI has consistently
                                     expanded its capabilities and expertise in the aerospace industry. With over 470 aircraft delivered to more than 50 customers worldwide, we have a strong presence across Asia Pacific, the Middle East, Africa, and Latin America.
                                 </p>
-                                <p class="text-base leading-relaxed mb-6">
+                                <p class="text-base leading-relaxed mb-6" data-aos="fade-up">
                                     Our product portfolio includes renowned aircraft models such as the NC212i, CN235, and the N219. Additionally, we collaborate with global aerospace leaders such as Airbus Defense &amp; Space on the CN295, and Airbus Helicopters
                                     on a range of helicopter projects. PTDI also partners with Bell Helicopters in the production of critical components for the Bell 412 and Huey II models, including tail booms, door assemblies, pylons, and ducts. Our ongoing
                                     collaboration with Bell Helicopters extends to joint sales, marketing, customization, and maintenance services for the Bell 412EPI.
@@ -527,20 +623,20 @@
 
                                 <!-- Card dipindahkan ke sini -->
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center pt-10">
-                                    <div class="bg-blue-50 rounded-lg p-6 shadow hover:shadow-lg transition">
-                                    <i class="fas fa-industry fa-3x text-blue-600 mb-4"> </i>
-                                    <h2 class="text-xl font-semibold mb-2 text-blue-800">Fasilitas Modern</h2>
-                                    <p class="text-gray-600">Galangan kapal dengan peralatan canggih dan area kerja luas untuk mendukung produksi kapal berkualitas tinggi.</p>
+                                    <div class="bg-blue-50 rounded-lg p-6 shadow hover:shadow-lg transition" data-aos="flip-left">
+                                        <i class="fas fa-industry fa-3x text-blue-600 mb-4"> </i>
+                                        <h2 class="text-xl font-semibold mb-2 text-blue-800">Fasilitas Modern</h2>
+                                        <p class="text-gray-600">Galangan kapal dengan peralatan canggih dan area kerja luas untuk mendukung produksi kapal berkualitas tinggi.</p>
                                     </div>
-                                    <div class="bg-blue-50 rounded-lg p-6 shadow hover:shadow-lg transition">
-                                    <i class="fas fa-users fa-3x text-blue-600 mb-4"> </i>
-                                    <h2 class="text-xl font-semibold mb-2 text-blue-800">Tenaga Ahli Profesional</h2>
-                                    <p class="text-gray-600">Tim insinyur dan teknisi berpengalaman yang berdedikasi untuk menghasilkan kapal sesuai standar internasional.</p>
+                                    <div class="bg-blue-50 rounded-lg p-6 shadow hover:shadow-lg transition" data-aos="flip-left">
+                                        <i class="fas fa-users fa-3x text-blue-600 mb-4"> </i>
+                                        <h2 class="text-xl font-semibold mb-2 text-blue-800">Tenaga Ahli Profesional</h2>
+                                        <p class="text-gray-600">Tim insinyur dan teknisi berpengalaman yang berdedikasi untuk menghasilkan kapal sesuai standar internasional.</p>
                                     </div>
-                                    <div class="bg-blue-50 rounded-lg p-6 shadow hover:shadow-lg transition">
-                                    <i class="fas fa-globe-asia fa-3x text-blue-600 mb-4"> </i>
-                                    <h2 class="text-xl font-semibold mb-2 text-blue-800">Jangkauan Internasional</h2>
-                                    <p class="text-gray-600">Melayani pelanggan dari berbagai negara dengan pengiriman tepat waktu dan layanan purna jual yang handal.</p>
+                                    <div class="bg-blue-50 rounded-lg p-6 shadow hover:shadow-lg transition" data-aos="flip-left">
+                                        <i class="fas fa-globe-asia fa-3x text-blue-600 mb-4"> </i>
+                                        <h2 class="text-xl font-semibold mb-2 text-blue-800">Jangkauan Internasional</h2>
+                                        <p class="text-gray-600">Melayani pelanggan dari berbagai negara dengan pengiriman tepat waktu dan layanan purna jual yang handal.</p>
                                     </div>
                                 </div>
                                 <!-- End Card -->
@@ -554,95 +650,153 @@
                 <!-- Sejarah Section -->
                 <div id="sejarah" class="content-section">
                     <div class="prose max-w-none text-gray-600">
+
+                        <div class="video-container mb-9 ">
+                                <iframe src="https://www.youtube.com/embed/BUK-AaO63N4?autoplay=0&rel=0&modestbranding=1" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen></iframe>
+                            </div>
                         <!-- Content Section -->
                         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                            <div>
-                            <img alt="Pemandangan galangan kapal PT Ikishi Shipyard dengan kapal-kapal sedang dibangun dan peralatan berat di sekitar dermaga" class="rounded-lg shadow-lg w-full object-cover" loading="lazy" src="image/welcome.jpg" />
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                                <div data-aos="fade-right">
+                                    <img alt="Pemandangan galangan kapal PT Ikishi Shipyard dengan kapal-kapal sedang dibangun dan peralatan berat di sekitar dermaga" class="rounded-lg shadow-lg w-full object-cover" loading="lazy" src="image/welcome.jpg"/>
+                                </div>
+                                <div class="space-y-6 text-gray-700 text-justify" data-aos="fade-right">
+                                    <p>
+                                        PT Ikishi Shipyard didirikan pada tahun 2010 dengan tujuan menjadi salah satu galangan kapal terkemuka di Indonesia. Berlokasi strategis di pesisir, kami memanfaatkan akses laut yang mudah untuk mendukung operasional pembuatan
+                                        dan perbaikan kapal.
+                                    </p>
+                                    <p>
+                                        Sejak awal berdirinya, kami fokus pada kualitas dan inovasi. Dengan tenaga ahli yang berpengalaman dan fasilitas modern, PT Ikishi Shipyard mampu memenuhi kebutuhan pelanggan dari berbagai sektor, mulai dari kapal niaga hingga
+                                        kapal khusus.
+                                    </p>
+                                    <p>
+                                        Perjalanan kami tidak lepas dari tantangan, namun dengan semangat dan dedikasi tinggi, kami terus berkembang dan memperluas layanan kami. Saat ini, PT Ikishi Shipyard telah dipercaya oleh banyak perusahaan nasional dan
+                                        internasional.
+                                    </p>
+                                    <p>Kami berkomitmen untuk terus meningkatkan kualitas layanan dan menjaga kepercayaan pelanggan melalui inovasi teknologi dan standar keselamatan yang ketat.</p>
+                                </div>
                             </div>
-                            <div class="space-y-6 text-gray-700 text-justify">
-                            <p>
-                                PT Ikishi Shipyard didirikan pada tahun 2010 dengan tujuan menjadi salah satu galangan kapal terkemuka di Indonesia. Berlokasi strategis di pesisir, kami memanfaatkan akses laut yang mudah untuk mendukung operasional pembuatan
-                                dan perbaikan kapal.
-                            </p>
-                            <p>
-                                Sejak awal berdirinya, kami fokus pada kualitas dan inovasi. Dengan tenaga ahli yang berpengalaman dan fasilitas modern, PT Ikishi Shipyard mampu memenuhi kebutuhan pelanggan dari berbagai sektor, mulai dari kapal niaga hingga
-                                kapal khusus.
-                            </p>
-                            <p>
-                                Perjalanan kami tidak lepas dari tantangan, namun dengan semangat dan dedikasi tinggi, kami terus berkembang dan memperluas layanan kami. Saat ini, PT Ikishi Shipyard telah dipercaya oleh banyak perusahaan nasional dan
-                                internasional.
-                            </p>
-                            <p>Kami berkomitmen untuk terus meningkatkan kualitas layanan dan menjaga kepercayaan pelanggan melalui inovasi teknologi dan standar keselamatan yang ketat.</p>
-                            </div>
-                        </div>
                         </section>
                         <!-- Timeline Section -->
-                        <section class="bg-gray-50 py-16">
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Timeline Sejarah</h2>
-                            <div class="relative max-w-4xl mx-auto">
-                            <div class="border-l-4 border-blue-700 absolute h-full left-1/2 transform -translate-x-1/2"></div>
-                            <div class="space-y-12">
-                                <div class="flex flex-col md:flex-row md:items-center md:justify-start md:space-x-8">
-                                <div class="md:w-1/2 md:pr-8 md:text-right">
-                                    <div class="inline-block bg-blue-700 text-white font-semibold px-4 py-2 rounded-full mb-2">2010</div>
-                                    <p class="text-gray-700 text-justify">Pendirian PT Ikishi Shipyard dengan visi menjadi galangan kapal unggulan di Indonesia.</p>
+                        <section class="py-20">
+                            <div class="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+                                <h2 class="text-4xl font-extrabold text-center text-blue-900 mb-16 drop-shadow-lg" data-aos="fade-up">
+                                    Timeline Sejarah PT Ikishi Shipyard
+                                </h2>
+                                <div class="relative max-w-5xl mx-auto">
+                                <!-- Vertical line -->
+                                <!-- <div class="absolute sm:hidden left-1/2 top-0 -translate-x-1/2 w-1 bg-gradient-to-b from-blue-400 via-blue-600 to-blue-800 rounded-full h-full">
+                                </div> -->
+                                <div class="space-y-20">
+                                <!-- Timeline item 1 -->
+                                <div class="timeline-item">
+                                <div class="timeline-text text-right md:text-right order-2 md:order-1">
+                                    <div class="inline-flex items-center justify-end space-x-3">
+                                        <div class="text-2xl font-bold text-blue-700 drop-shadow-md">
+                                            1962
+                                        </div>
+                                        <div class="w-8 h-8 bg-blue-700 rounded-full shadow-lg flex items-center justify-center text-white text-lg animate-pulse">
+                                            <i class="fas fa-anchor">
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4 text-lg leading-relaxed text-gray-700 max-w-md mx-auto md:mx-0">
+                                    Pembangunan proyek galangan Kapal Tallo dan Galangan Kapal Paotere.
+                                    </p>
                                 </div>
-                                <div class="md:w-1/2 md:pl-8 md:relative md:left-8">
-                                    <img
-                                    alt="Foto galangan kapal PT Ikishi Shipyard pada tahun 2010 dengan beberapa kapal kecil dan fasilitas awal"
-                                    class="rounded-lg shadow-md w-full object-cover"
-                                    loading="lazy"
-                                    src="https://placehold.co/400x250/png?text=Galangan+Kapal+2010"
-                                    />
-                                </div>
-                                </div>
-                                <div class="flex flex-col md:flex-row md:items-center md:justify-end md:space-x-8 md:space-x-reverse">
-                                <div class="md:w-1/2 md:pl-8 md:text-left">
-                                    <div class="inline-block bg-blue-700 text-white font-semibold px-4 py-2 rounded-full mb-2">2015</div>
-                                    <p class="text-gray-700 text-justify">Perluasan fasilitas galangan kapal dan penambahan tenaga ahli untuk meningkatkan kapasitas produksi.</p>
-                                </div>
-                                <div class="md:w-1/2 md:pr-8 md:relative md:right-8">
-                                    <img
-                                    alt="Foto perluasan fasilitas galangan kapal PT Ikishi Shipyard dengan alat berat dan kapal sedang dibangun"
-                                    class="rounded-lg shadow-md w-full object-cover"
-                                    loading="lazy"
-                                    src="https://placehold.co/400x250/png?text=Perluasan+Fasilitas+2015"
-                                    />
-                                </div>
-                                </div>
-                                <div class="flex flex-col md:flex-row md:items-center md:justify-start md:space-x-8">
-                                <div class="md:w-1/2 md:pr-8 md:text-right">
-                                    <div class="inline-block bg-blue-700 text-white font-semibold px-4 py-2 rounded-full mb-2">2020</div>
-                                    <p class="text-gray-700 text-justify">Implementasi teknologi modern dan sertifikasi internasional untuk meningkatkan kualitas dan keselamatan.</p>
-                                </div>
-                                <div class="md:w-1/2 md:pl-8 md:relative md:left-8">
-                                    <img
-                                    alt="Foto galangan kapal PT Ikishi Shipyard dengan teknologi modern dan pekerja menggunakan alat pelindung"
-                                    class="rounded-lg shadow-md w-full object-cover"
-                                    loading="lazy"
-                                    src="https://placehold.co/400x250/png?text=Teknologi+Modern+2020"
-                                    />
+                                <div class="timeline-image order-1 md:order-2">
+                                    <div class="relative group rounded-xl shadow-2xl overflow-hidden hover:scale-105 transition-transform duration-500 w-full h-full max-w-md mx-auto" data-aos="zoom-in-left">
+                                        <img class="w-full h-full object-cover" loading="lazy" src="img/sejarah/sejarah11.jpeg" alt="gambar" data-aos="zoom-in-left">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                            <p class="text-white font-semibold text-sm">
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 </div>
-                                <div class="flex flex-col md:flex-row md:items-center md:justify-end md:space-x-8 md:space-x-reverse">
-                                <div class="md:w-1/2 md:pl-8 md:text-left">
-                                    <div class="inline-block bg-blue-700 text-white font-semibold px-4 py-2 rounded-full mb-2">2024</div>
-                                    <p class="text-gray-700 text-justify">PT Ikishi Shipyard menjadi salah satu galangan kapal terpercaya dengan jaringan nasional dan internasional.</p>
+                                <!-- Timeline item 2 -->
+                                <div class="timeline-item">
+                                <div class="timeline-image order-2 md:order-1">
+                                    <div class="relative group rounded-xl shadow-2xl overflow-hidden hover:scale-105 transition-transform duration-500 w-full h-full max-w-md mx-auto" data-aos="zoom-in-right">
+                                        <img class="w-full h-full object-cover" loading="lazy" src="img/sejarah/kpl622.jpg">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                            <p class="text-white font-semibold text-sm">
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="md:w-1/2 md:pr-8 md:relative md:right-8">
-                                    <img
-                                    alt="Foto galangan kapal PT Ikishi Shipyard terbaru dengan kapal besar dan fasilitas lengkap"
-                                    class="rounded-lg shadow-md w-full object-cover"
-                                    loading="lazy"
-                                    src="https://placehold.co/400x250/png?text=Galangan+Kapal+2024"
-                                    />
+                                <div class="timeline-text text-left order-1 md:order-2">
+                                    <div class="inline-flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-700 rounded-full shadow-lg flex items-center justify-center text-white text-lg animate-pulse">
+                                    <i class="fas fa-industry">
+                                    </i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-blue-700 drop-shadow-md">
+                                    1963
+                                    </div>
+                                    </div>
+                                    <p class="mt-4 text-lg leading-relaxed text-gray-700 max-w-md mx-auto md:mx-0">
+                                    Penggabungan dua proyek galangan kapal tersebut oleh pemerintah diberi nama Galangan Kapal Makassar yang dibiayai Departemen Perindustrian Dasar dan Pertambangan RI.
+                                    </p>
+                                </div>
+                                </div>
+                                <!-- Timeline item 3 -->
+                                <div class="timeline-item">
+                                <div class="timeline-text text-right md:text-right order-2 md:order-1">
+                                    <div class="inline-flex items-center justify-end space-x-3">
+                                        <div class="text-2xl font-bold text-blue-700 drop-shadow-md">
+                                            1977
+                                        </div>
+                                        <div class="w-8 h-8 bg-blue-700 rounded-full shadow-lg flex items-center justify-center text-white text-lg animate-pulse">
+                                            <i class="fas fa-ship">
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4 text-lg leading-relaxed text-gray-700 max-w-md mx-auto md:mx-0">
+                                    Proyek Galangan Kapal Makassar berubah nama menjadi PT Industri Kapal Indonesia pada 29 Oktober 1977 sesuai akta notaris Siske Limowa nomor 122.
+                                    </p>
+                                </div>
+                                <div class="timeline-image order-1 md:order-2">
+                                    <div class="relative group rounded-xl shadow-2xl overflow-hidden hover:scale-105 transition-transform duration-500 w-full h-full max-w-md mx-auto" data-aos="zoom-in-left">
+                                        <img class="w-full h-full object-cover" loading="lazy" src="img/sejarah/sejarah12.jpeg" alt="gambar">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                            <p class="text-white font-semibold text-sm">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <!-- Timeline item 4 -->
+                                <div class="timeline-item">
+                                <div class="timeline-image order-2 md:order-1">
+                                    <div class="relative group rounded-xl shadow-2xl overflow-hidden hover:scale-105 transition-transform duration-500 w-full h-full max-w-md mx-auto"data-aos="zoom-in-right">
+                                        <img class="w-full h-full object-cover" loading="lazy" src="img/sejarah/sejarah44 .jpg" alt="gambar">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-text text-left order-1 md:order-2">
+                                    <div class="inline-flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-700 rounded-full shadow-lg flex items-center justify-center text-white text-lg animate-pulse">
+                                    <i class="fas fa-certificate">
+                                    </i>
+                                    </div>
+                                    <div class="text-2xl font-bold text-blue-700 drop-shadow-md">
+                                    1985
+                                    </div>
+                                    </div>
+                                    <p class="mt-4 text-lg leading-relaxed text-gray-700 max-w-md mx-auto md:mx-0">
+                                    PT Industri Kapal Indonesia resmi dalam berita negara RI no.73.
+                                    </p>
+                                </div>
+                                </div>
                                 </div>
                                 </div>
                             </div>
-                            </div>
-                        </div>
                         </section>
                     </div>
                 </div>
@@ -2186,26 +2340,44 @@
             <h3 class="text-lg font-semibold mb-4  border-b border-blue-400 pb-2">Menu</h3>
             <ul class="space-y-2">
               <!-- Menu Beranda -->
-              <li><a href="#" class="text-black hover: transition flex items-center justify-between">Beranda</a></li>
+              <li><a href="index.html" class="text-black hover: transition flex items-center justify-between">Beranda</a></li>
+              <!-- Menu Perusahaan -->
               <li><a href="halaman_perusahaan.html" class="text-black hover: transition flex items-center justify-between">Perusahaan</a></li>
+              <!-- Menu Produk -->
+              <li><a href="produk.html" class="text-black hover: transition flex items-center justify-between">Produk</a></li>
 
-              <!-- Dropdown Produk -->
+              <!-- Dropdown Pelanggan -->
               <li class="relative group">
                 <button class="w-full text-left text-black hover: transition flex items-center justify-between">
-                  <span>Produk</span>
+                  <span>Pelanggan</span>
                   <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
                 </button>
                 <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
-                  <li><a href="bangunan_baru.html" class="text-black hover: block py-1">Bangunan Baru</a></li>
-                  <li><a href="perbaikian.html" class="text-black hover: block py-1">Perbaikan</a></li>
-                  <!-- ... tambahkan menu lainnya ... -->
+                  <li><a href="bangunan_baru.html" class="text-black hover: block py-1">Registrasi Pelanggan</a></li>
+                  <li><a href="ketersediaan_dock.html" class="text-black hover: block py-1">ketersediaan Dock</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Download Form</a></li>
+                  <li><a href="hubungi_kami.html" class="text-black hover: block py-1">hubungi Kami</a></li>
                 </ul>
               </li>
 
-              <!-- Menu lainnya -->
-              <li><a href="#" class="text-black hover: transition">Pelanggan</a></li>
-              <li><a href="#" class="text-black hover: transition">Informasi</a></li>
-              <li><a href="#" class="text-black hover: transition">E-PPID</a></li>
+              <!-- Dropdown Pelanggan -->
+              <li class="relative group">
+                <button class="w-full text-left text-black hover: transition flex items-center justify-between">
+                  <span>Informasi</span>
+                  <i class="fas fa-chevron-down text-xs ml-2 transition-transform duration-200 group-hover:rotate-180"></i>
+                </button>
+                <ul class="dropdown-panel mt-1 ml-4 pl-2 border-l-2 border-blue-400 hidden group-hover:block space-y-2">
+                  <li><a href="berita.html" class="text-black hover: block py-1">Berita</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Karir</a></li>
+                  <li><a href="testimonials.html" class="text-black hover: block py-1">Customer Testimonials</a></li>
+                  <li><a href="galery.html" class="text-black hover: block py-1">Galery</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Lelang</a></li>
+                  <li><a href="https://bumn.go.id/" class="text-black hover: block py-1">Kementrian BUMN</a></li>
+                  <li><a href="404.html" class="text-black hover: block py-1">Download</a></li>
+                  <li><a href="whistleblower.html" class="text-black hover: block py-1">Whistleblower</a></li>                  
+                </ul>
+              </li>
+              <li><a href="https://ppidikishipyard.id/" class="text-black hover: transition">E-PPID</a></li>
             </ul>
           </div>
 
@@ -2263,67 +2435,143 @@ Indonesia, 90211.</span>
       </div>
     </footer>
 
+    <!-- Modal Video -->
+        <!-- Pastikan modal ada sebelum script -->
+    <div id="videoModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-80" style="display:none">
+        <div class="relative w-full max-w-4xl bg-white rounded-lg overflow-hidden">
+            <button id="closeModal" class="absolute top-4 right-4 z-10 text-white bg-red-500 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600">×</button>
+            <div class="aspect-w-16 aspect-h-9">
+                <video id="modalVideo" class="w-full h-[500px]" controls>
+                    <source src="" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+            </div>
+        </div>
+    </div>
 
-    <script src="js/script.js"></script>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
     <script>
         // Deklarasikan variabel map di level global
-    let map;
-    let markers = [];
+        let map;
+        let markers = [];
 
-    // Fungsi untuk inisialisasi peta
-    function initMap() {
-        if (map) return; // Jika peta sudah ada, jangan inisialisasi lagi
-        
-        map = L.map('map').setView([-2.5, 118], 5); // posisi awal: Indonesia tengah
+        // Fungsi untuk inisialisasi peta
+        function initMap() {
+            if (map) return; // Jika peta sudah ada, jangan inisialisasi lagi
+            
+            map = L.map('map').setView([-2.5, 118], 5); // posisi awal: Indonesia tengah
 
-        // Tambahkan tile layer (OpenStreetMap gratis)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 30,
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
+            // Tambahkan tile layer (OpenStreetMap gratis)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 30,
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
 
-        // Data lokasi
-        const lokasi = [
-            {
-                nama: "Head Office & Makassar Shipyard",
-                koordinat: [-5.130078, 119.412990],
-                info: "Jl Galangan Kapal 31 Makassar, Sulawesi Selatan 90211"
-            },
-            {
-                nama: "Branch Office & Bitung Shipyard",
-                koordinat: [1.445617, 125.188340],
-                info: "Jl Samuel Languyu Pateten Bitung, Sulawesi Utara 95524"
-            },
-            {
-                nama: "Branch Office Jakarta",
-                koordinat: [-6.173305, 106.842448],
-                info: "Ruko Atrium Senen Blok C 12 A, Jl Senen Raya, Jakarta Pusat 10410"
+            // Data lokasi
+            const lokasi = [
+                {
+                    nama: "Head Office & Makassar Shipyard",
+                    koordinat: [-5.104273687957515, 119.43197732312109],
+                    info: "Jl Galangan Kapal 31 Makassar, Sulawesi Selatan 90211",
+                    videoUrl: "video/shipyard.mp4",
+                    thumbnail: "img/thumnail1.jpg"
+                },
+                {
+                    nama: "Branch Office & Bitung Shipyard",
+                    koordinat: [1.445617, 125.188340],
+                    info: "Jl Samuel Languyu Pateten Bitung, Sulawesi Utara 95524"
+                },
+                {
+                    nama: "Branch Office Jakarta",
+                    koordinat: [-6.173305, 106.842448],
+                    info: "Ruko Atrium Senen Blok C 12 A, Jl Senen Raya, Jakarta Pusat 10410"
+                }
+            ];
+
+            // Modal elements
+            // Modal elements
+const videoModal = document.getElementById('videoModal');
+const modalVideo = document.getElementById('modalVideo');
+const closeModal = document.getElementById('closeModal');
+
+// Fungsi untuk menutup modal
+closeModal.addEventListener('click', (e) => {
+    e.stopPropagation();
+    videoModal.style.display = 'none';
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+});
+
+// Fungsi untuk menangani klik di luar modal
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+        videoModal.style.display = 'none';
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+    }
+});
+
+lokasi.forEach(l => {
+    const marker = L.marker(l.koordinat).addTo(map)
+        .bindPopup(`
+            <div class="custom-popup">
+                <b>${l.nama}</b><br>
+                ${l.info}
+                ${l.videoUrl ? `
+                <div class="video-thumbnail-container mt-2" id="thumbnail-${l.nama.replace(/\s+/g, '-')}">
+                    <img src="${l.thumbnail}" alt="Video thumbnail" style="width:100%; cursor:pointer">
+                    <div class="play-button" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); 
+                        width:50px; height:50px; background:rgba(255,0,0,0.7); border-radius:50%; display:flex; 
+                        align-items:center; justify-content:center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+                ` : ''}
+            </div>
+        `)
+        .on('popupopen', function() {
+            if (l.videoUrl) {
+                // Gunakan ID unik untuk thumbnail
+                const thumbnailId = `thumbnail-${l.nama.replace(/\s+/g, '-')}`;
+                setTimeout(() => {
+                    const thumbnail = document.getElementById(thumbnailId);
+                    if (thumbnail) {
+                        thumbnail.onclick = (e) => {
+                            e.stopPropagation();
+                            console.log('Mencoba memuat video:', l.videoUrl);
+                            
+                            // Langsung tampilkan modal (tanpa cek file dulu)
+                            modalVideo.src = l.videoUrl;
+                            videoModal.style.display = 'flex';
+                            
+                            // Debugging
+                            console.log('Modal seharusnya muncul sekarang');
+                            console.log('Style modal:', videoModal.style.display);
+                        };
+                    }
+                }, 100);
             }
-        ];
-
-        // Tambahkan marker dan event klik
-        lokasi.forEach(l => {
-            const marker = L.marker(l.koordinat).addTo(map)
-                .bindPopup(`<b>${l.nama}</b><br>${l.info}`)
-                .on('click', function () {
-                    map.setView(l.koordinat, 16, { animate: true });
-                });
-            markers.push(marker);
         });
-    }
-
-    // Fungsi untuk menghancurkan peta
-    function destroyMap() {
-        if (map) {
-            map.remove();
-            map = null;
-            markers = [];
+    markers.push(marker);
+});
         }
-    }
 
-    document.getElementById('company-nav').addEventListener('click', function(e) {
+        // Fungsi untuk menghancurkan peta
+        function destroyMap() {
+            if (map) {
+                map.remove();
+                map = null;
+                markers = [];
+            }
+        }
+
+        document.getElementById('company-nav').addEventListener('click', function(e) {
         if (e.target.tagName === 'A') {
             e.preventDefault();
             
@@ -2355,37 +2603,36 @@ Indonesia, 90211.</span>
         }
     });
 
-    
 
-    const slides = document.querySelectorAll('.hero-slide');
-        let currentSlide = 0;
-        const slideCount = slides.length;
-        
-        function showNextSlide() {
-            // Hide current slide
-            slides[currentSlide].classList.remove('opacity-100');
-            slides[currentSlide].classList.add('opacity-0');
+        const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            const slideCount = slides.length;
             
-            // Move to next slide
-            currentSlide = (currentSlide + 1) % slideCount;
+            function showNextSlide() {
+                // Hide current slide
+                slides[currentSlide].classList.remove('opacity-100');
+                slides[currentSlide].classList.add('opacity-0');
+                
+                // Move to next slide
+                currentSlide = (currentSlide + 1) % slideCount;
+                
+                // Show new slide
+                slides[currentSlide].classList.remove('opacity-0');
+                slides[currentSlide].classList.add('opacity-100');
+            }
             
-            // Show new slide
-            slides[currentSlide].classList.remove('opacity-0');
-            slides[currentSlide].classList.add('opacity-100');
-        }
-        
-        // Start slideshow
-        if (slideCount > 1) {
-            setInterval(showNextSlide, 5000); // Change every 5 seconds
-        }
+            // Start slideshow
+            if (slideCount > 1) {
+                setInterval(showNextSlide, 5000); // Change every 5 seconds
+            }
 
-        const ctx = document.getElementById('sdmChart').getContext('2d');    
-        // Modern gradient for chart
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(79, 70, 229, 0.2)');
-        gradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
-        
-        new Chart(ctx, {
+            const ctx = document.getElementById('sdmChart').getContext('2d');    
+            // Modern gradient for chart
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(79, 70, 229, 0.2)');
+            gradient.addColorStop(1, 'rgba(79, 70, 229, 0)');
+            
+            new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: ['Produksi', 'Produksi Tak Langsung', 'Administrasi'],
@@ -2434,8 +2681,8 @@ Indonesia, 90211.</span>
             }
         });
 
-    // Check URL hash on page load
-    window.addEventListener('DOMContentLoaded', () => {
+        // Check URL hash on page load
+        window.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash.substring(1);
         if (hash && document.getElementById(hash)) {
             document.querySelectorAll('#company-nav a').forEach(link => {
@@ -2550,40 +2797,40 @@ Indonesia, 90211.</span>
             });
 
             // Yard tab functionality
-    const yardTabs = document.querySelectorAll('.yard-tab');
-    const yardContents = document.querySelectorAll('.yard-content');
-    
-    yardTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            // Remove active class from all tabs and contents
-            yardTabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white'));
-            yardTabs.forEach(t => t.classList.add('bg-white', 'text-blue-600'));
-            yardContents.forEach(content => content.classList.add('hidden'));
+            const yardTabs = document.querySelectorAll('.yard-tab');
+            const yardContents = document.querySelectorAll('.yard-content');
             
-            // Add active class to clicked tab and corresponding content
-            this.classList.remove('bg-white', 'text-blue-600');
-            this.classList.add('active', 'bg-blue-600', 'text-white');
-            const yardId = this.getAttribute('data-yard') + '-content';
-            document.getElementById(yardId).classList.remove('hidden');
-        });
-    });
+            yardTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    yardTabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white'));
+                    yardTabs.forEach(t => t.classList.add('bg-white', 'text-blue-600'));
+                    yardContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.remove('bg-white', 'text-blue-600');
+                    this.classList.add('active', 'bg-blue-600', 'text-white');
+                    const yardId = this.getAttribute('data-yard') + '-content';
+                    document.getElementById(yardId).classList.remove('hidden');
+                });
+            });
 
-    // Facility item hover effect
-    const facilityItems = document.querySelectorAll('.facility-item');
-    facilityItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.querySelector('svg').classList.add('scale-125');
-            this.querySelector('svg').classList.remove('text-blue-600');
-            this.querySelector('svg').classList.add('text-blue-700');
-        });
-        item.addEventListener('mouseleave', function() {
-            this.querySelector('svg').classList.remove('scale-125');
-            this.querySelector('svg').classList.add('text-blue-600');
-            this.querySelector('svg').classList.remove('text-blue-700');
-        });
+            // Facility item hover effect
+            const facilityItems = document.querySelectorAll('.facility-item');
+            facilityItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.querySelector('svg').classList.add('scale-125');
+                    this.querySelector('svg').classList.remove('text-blue-600');
+                    this.querySelector('svg').classList.add('text-blue-700');
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.querySelector('svg').classList.remove('scale-125');
+                    this.querySelector('svg').classList.add('text-blue-600');
+                    this.querySelector('svg').classList.remove('text-blue-700');
+                });
+            });
+            AOS.init();
     });
-
-        });
     </script>
 
 </body>
