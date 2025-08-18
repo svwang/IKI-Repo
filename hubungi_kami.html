@@ -283,217 +283,75 @@
 
       <!-- Konten -->
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center text-white">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Docking</h1>
-        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Sejarah dan perjalanan berdirinya perusahaan</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Hubungi Kami</h1>
+        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Menjawab berbagai pertanyaan yang mungkin Anda ingin ajukan</p>
       </div>
     </section>
 
-    <main class="py-4 px-12 sm:py-10">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 class="text-3xl font-extrabold text-gray-800">Ketersediaan Dock</h1>
-        <div class="mt-4 md:mt-0 flex items-center space-x-4">
-          <div class="flex items-center">
-            <span class="availability-indicator bg-green-500"></span>
-            <span class="text-sm text-gray-600">Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-red-500"></span>
-            <span class="text-sm text-gray-600">Tidak Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-yellow-500"></span>
-            <span class="text-sm text-gray-600">Terbatas</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Location Tabs -->
-      <div class="bg-white rounded-lg shadow-sm mb-8">
-        <div class="border-b border-gray-200">
-          <nav class="flex nav-tabs -mb-px">
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm active" id="makassar-tab" data-location="makassar">Makassar</button>
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm" id="bitung-tab" data-location="bitung">Bitung</button>
-          </nav>
-        </div>
-      </div>
-
-      <!-- Month Navigation -->
-      <div class="flex justify-between items-center mb-6">
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <h2 class="text-xl font-bold text-gray-800">Juli 2023</h2>
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- Calendar Grid -->
-      <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
-        <div class="grid grid-cols-7 gap-px bg-gray-200">
-          <!-- Weekday Headers -->
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Minggu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Senin</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Selasa</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Rabu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Kamis</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Jumat</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Sabtu</div>
-
-          <!-- Calendar Days -->
-          <!-- Previous Month (empty) -->
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-
-          <!-- Current Month -->
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">1</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">2</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">3</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">4</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">5</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">6</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">7</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-red-500"></span>
-              </div>
-            </div>
-          </div>
-          <!-- More days... -->
-          <!-- I'm showing a partial month for brevity -->
-        </div>
-      </div>
-
-      <!-- Selected Date Details -->
-      <div class="mb-8">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Detail Ketersediaan: <span class="text-blue-600">5 Juli 2023</span></h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Dock A -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-green-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock A</h4>
-              <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full"> Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 150 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 30 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 8 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 5000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock B -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-yellow-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock B</h4>
-              <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded-full"> Terbatas </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 120 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 25 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 7 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 4000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock C -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-red-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock C</h4>
-              <span class="inline-block bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded-full"> Tidak Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 100 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 20 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 6 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 3000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-gray-400 text-white py-2 px-4 rounded-lg text-sm font-medium cursor-not-allowed" disabled>Tidak Tersedia</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Booking Information -->
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Booking</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Contact Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20" id="contact">    
+      <div class="grid md:grid-cols-2 gap-16">
+        <form action="#" class="bg-white rounded-3xl shadow-lg p-12 space-y-8" method="POST" novalidate="">
           <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Prosedur Booking:</h4>
-            <ol class="list-decimal list-inside text-gray-600 text-sm space-y-2">
-              <li>Pilih lokasi dan tanggal yang tersedia</li>
-              <li>Pilih dock yang ingin dipesan</li>
-              <li>Isi formulir pemesanan dengan data lengkap</li>
-              <li>Upload dokumen yang diperlukan</li>
-              <li>Konfirmasi pemesanan akan dikirim via email</li>
-            </ol>
+            <label class="block text-gray-700 font-semibold mb-3 text-lg" for="name"> Nama </label>
+            <input class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg" id="name" name="name" placeholder="Nama lengkap Anda" required="" type="text" />
           </div>
           <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Persyaratan:</h4>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-2">
-              <li>Surat Permohonan dari Perusahaan</li>
-              <li>SIUPAL/SIUP (untuk perusahaan)</li>
-              <li>Dokumen kapal yang akan di-docking</li>
-              <li>Rencana kerja selama di dock</li>
-            </ul>
+            <label class="block text-gray-700 font-semibold mb-3 text-lg" for="email"> Email </label>
+            <input class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg" id="email" name="email" placeholder="email@domain.com" required="" type="email" />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-semibold mb-3 text-lg" for="message"> Pesan </label>
+            <textarea
+              class="w-full border border-gray-300 rounded-xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition text-lg resize-none"
+              id="message"
+              name="message"
+              placeholder="Tulis pesan Anda di sini"
+              required=""
+              rows="6"
+            ></textarea>
+          </div>
+          <button class="w-full bg-blue-700 text-white font-semibold py-4 rounded-3xl hover:bg-blue-800 transition text-lg" type="submit">Kirim Pesan</button>
+        </form>
+        <div class="space-y-12 text-gray-700 text-lg font-medium">
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Alamat</h3>
+            <p>JL Galangan Kapal No. 31, Makassar, Sulawesi Selatan, Indonesia, 90211.</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Telepon</h3>
+            <p>+62 411 448 653</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Fax</h3>
+            <p>+62 411 448 658</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Email</h3>
+            <p>ptiki@ikishipyard.co.id</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold text-blue-700 mb-3">Ikuti Kami</h3>
+            <div class="flex space-x-8 text-5xl">
+              <a aria-label="Facebook" class="hover:text-blue-900 text-blue-700 transition" href="#">
+                <i class="fab fa-facebook-square"> </i>
+              </a>
+              <a aria-label="Twitter" class="hover:text-blue-900 text-blue-400 transition" href="#">
+                <i class="fab fa-twitter-square"> </i>
+              </a>
+              <a aria-label="Instagram" class="hover:text-blue-900 text-red-700 transition" href="#">
+                <i class="fab fa-instagram-square"> </i>
+              </a>
+              <a aria-label="LinkedIn" class="hover:text-blue-900 text-blue-600 transition" href="#">
+                <i class="fab fa-linkedin"> </i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </main>
+    </section>
 
     <!-- Footer -->
     <footer class="text-black py-12 mt-1 w-full">
@@ -625,48 +483,6 @@ Indonesia, 90211.</span>
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-      // Tab functionality
-      document.querySelectorAll("[data-location]").forEach((tab) => {
-        tab.addEventListener("click", function () {
-          // Remove active class from all tabs
-          document.querySelectorAll(".nav-tabs button").forEach((t) => {
-            t.classList.remove("active");
-          });
 
-          // Add active class to clicked tab
-          this.classList.add("active");
-
-          // Here you would typically load data for the selected location
-          // For this example, we'll just log to console
-          console.log("Selected location:", this.dataset.location);
-        });
-      });
-
-      // Calendar day selection
-      document.querySelectorAll(".calendar-day").forEach((day) => {
-        day.addEventListener("click", function () {
-          // Remove any existing selection
-          document.querySelectorAll(".calendar-day").forEach((d) => {
-            d.classList.remove("bg-blue-50", "border-blue-200");
-          });
-
-          // Highlight selected day
-          this.classList.add("bg-blue-50", "border-blue-200");
-
-          // Here you would typically load availability data for the selected date
-          // For this example, we'll just log to console
-          const dayNumber = this.querySelector("span").textContent;
-          console.log("Selected date: July", dayNumber, "2023");
-        });
-      });
-
-      // Initialize AOS animations
-      AOS.init({
-        duration: 800,
-        easing: "ease-in-out",
-        once: true,
-      });
-    </script>
   </body>
 </html>

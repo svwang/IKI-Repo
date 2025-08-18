@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ketersediaan Dock IKISHIPYARD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Pelanggan</title>
     <link rel="icon" href="img/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -11,34 +11,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
-    <style>
-      .calendar-day {
-        transition: all 0.2s ease;
-      }
-      .calendar-day:hover {
-        transform: translateY(-2px);
-      }
-      .dock-card {
-        transition: all 0.3s ease;
-      }
-      .dock-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-      }
-      .availability-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 5px;
-      }
-      .nav-tabs .active {
-        border-bottom: 3px solid #3b82f6;
-        color: #3b82f6;
-      }
+    <style type="text/tailwindcss">
+        @layer components {
+            .shine-animation {
+                position: relative;
+                overflow: hidden;
+            }            
+            
+            .shine-animation::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: linear-gradient(
+                    to bottom right,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    rgba(255, 255, 255, 0) 60%
+                );
+                transform: rotate(30deg);
+                animation: shine 8s infinite linear;
+            }
+            
+            @keyframes shine {
+                0% { transform: translateX(-100%) rotate(30deg); }
+                20% { transform: translateX(100%) rotate(30deg); }
+                100% { transform: translateX(100%) rotate(30deg); }
+            }
+            
+            .checkmark {
+                @apply absolute top-0 left-0 h-6 w-6 bg-gray-200 rounded transition-all duration-300;
+            }
+            
+            .checkbox-container:hover input ~ .checkmark {
+                @apply bg-gray-300 scale-105;
+            }
+            
+            .checkbox-container input:checked ~ .checkmark {
+                @apply bg-blue-600 scale-110;
+            }
+            
+            .checkmark:after {
+                content: "";
+                @apply absolute hidden;
+            }
+            
+            .checkbox-container input:checked ~ .checkmark:after {
+                @apply block;
+            }
+            
+            .checkbox-container .checkmark:after {
+                @apply left-[9px] top-[5px] w-[7px] h-3 border-white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+            
+            .modal-overlay {
+                @apply fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[1000] opacity-0 invisible transition-all duration-300;
+            }
+            
+            .modal-overlay.active {
+                @apply opacity-100 visible;
+            }
+            
+            .modal-content {
+                @apply bg-white rounded-xl w-[90%] max-w-2xl max-h-[80vh] overflow-y-auto p-8 relative transition-all duration-300;
+                transform: translateY(50px);
+            }
+            
+            .modal-overlay.active .modal-content {
+                @apply translate-y-0;
+            }                    
+            
+            .progress-step.active:after {
+                @apply bg-white bg-opacity-100;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <!-- Navbar -->
     <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
       <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
@@ -279,221 +331,106 @@
     <!-- Hero Section -->
     <section class="relative pt-16 bg-center bg-cover" style="background-image: url('image/Pemandangan_laut.jpeg')">
       <!-- Overlay hitam full kanan kiri -->
-      <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-black/90"></div>
 
       <!-- Konten -->
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center text-white">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Docking</h1>
-        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Sejarah dan perjalanan berdirinya perusahaan</p>
-      </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Registrasi Pelanggan</h1>
+        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Halaman Registrasi untuk pelanggan baru</p>
+      </div>     
     </section>
 
-    <main class="py-4 px-12 sm:py-10">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 class="text-3xl font-extrabold text-gray-800">Ketersediaan Dock</h1>
-        <div class="mt-4 md:mt-0 flex items-center space-x-4">
-          <div class="flex items-center">
-            <span class="availability-indicator bg-green-500"></span>
-            <span class="text-sm text-gray-600">Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-red-500"></span>
-            <span class="text-sm text-gray-600">Tidak Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-yellow-500"></span>
-            <span class="text-sm text-gray-600">Terbatas</span>
-          </div>
+    <!-- Main contents -->
+    <section id="registration" class="py-4 sm:py-10">
+        <div class="container mx-auto px-2 sm:px-4">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-6 sm:mb-8">
+                <!-- Header Section -->
+                <div class="shine-animation px-4 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-blue-600 to-blue-900 text-white animate__animated animate__fadeInDown">
+                    <h1 class="text-xl sm:text-3xl font-semibold mb-0 relative animate__animated animate__fadeIn animate__delay-1s">Persyaratan Registrasi Pelanggan</h1>
+                    <div class="flex mt-3 sm:mt-5 relative flex-col sm:flex-row">
+                        <div class="progress-step flex-1 text-center py-1 sm:py-2.5 relative text-white text-opacity-70 transition-all duration-500 animate__animated animate__fadeInLeft animate__delay-1s active:text-white active:font-medium active:scale-105 text-sm sm:text-base">1. Persyaratan</div>
+                        <div class="progress-step flex-1 text-center py-1 sm:py-2.5 relative text-white text-opacity-70 transition-all duration-500 animate__animated animate__fadeIn animate__delay-1s text-sm sm:text-base">2. Formulir</div>
+                        <div class="progress-step flex-1 text-center py-1 sm:py-2.5 relative text-white text-opacity-70 transition-all duration-500 animate__animated animate__fadeInRight animate__delay-1s text-sm sm:text-base">3. Verifikasi</div>
+                    </div>
+                </div>
+
+                <!-- Terms Content with Scrollable Area -->
+                <div class="p-4 sm:p-8 max-h-[400px] sm:max-h-[500px] overflow-y-auto border-b border-gray-200">
+                    <div class="flex flex-col sm:flex-row items-center mb-6 sm:mb-8 pb-4 sm:pb-5 border-b border-gray-200">
+                        <div class="company-logo mb-4 sm:mb-0 sm:mr-8">
+                            <img src="path/to/company-logo.png" alt="PT Industri Kapal Indonesia Logo" class="h-16 sm:h-20 transition-transform duration-300 hover:scale-105 hover:-rotate-5 animate__animated animate__fadeInLeft mx-auto sm:mx-0">
+                        </div>
+                        <div class="flex-1 animate__animated animate__fadeInRight text-center sm:text-left">
+                            <h2 class="text-lg sm:text-xl font-semibold text-blue-600 m-0">PERATURAN DIREKSI</h2>
+                            <h3 class="text-base sm:text-lg my-1 text-gray-800">PT INDUSTRI KAPAL INDONESIA (PERSERO)</h3>
+                            <p class="m-0 text-gray-500 text-sm sm:text-base">Nomor : 015/DIR-IKI/KPTS/IV/2012</p>
+                        </div>
+                    </div>
+
+                    <div class="text-gray-700 leading-relaxed text-sm sm:text-base">
+                        <div class="mb-4 sm:mb-6 animate__animated animate__fadeInUp">
+                            <h4 class="text-blue-600 mb-2 sm:mb-2.5 text-base sm:text-lg">Tentang</h4>
+                            <p class="font-semibold text-gray-800 text-base sm:text-lg">PEDOMAN PEMELIHARAAN DAN PERBAIKAN KAPAL DI KAWASAN GALANGAN</p>
+                        </div>
+
+                        <div class="mb-4 sm:mb-6 animate__animated animate__fadeInUp">
+                            <h4 class="text-blue-600 mb-2 sm:mb-2.5 text-base sm:text-lg">Menimbang :</h4>
+                            <ol class="list-decimal pl-4 sm:pl-5 space-y-1.5 sm:space-y-2.5">
+                                <li>Bahwa untuk memberikan petunjuk bagi karyawan dan pelanggan PT Industri Kapal Indonesia (Persero) diperlukan pedoman yang sama untuk seluruh Divisi, Biro dan Bagian yang berkaitan langsung maupun tidak langsung dengan kegiatan peeliharaan dan perbaikan kapal.</li>
+                                <li>Bahwa petunjuk tersebut dimaksudkan untuk memberikan mewujudkan ketertiban, keamanan dan keselamatan dalam menjalankan kegiatan pemeliharaan dan perbaikan kapal di lingkungan perusahaan.</li>
+                                <li>Bahwa untuk itu dipandang perlu membuat petunjuk dan prosedur dalam kegiatan pemeliharaan dan perbaikan kapal dan peraturan ketertiban di lingkungan galangan PT Industri Kapal Indonesia (Persero) yang sesuai dengan prinsip-prinsip ekonomi perusahaan yang efektif, efisien, kompetitif, transparan, adil dan wajar serta akuntabel dan berdasarkan azas keadilan bagi semua pihak, azas persaingan serta transparansi.</li>
+                                <li>Bahwa untuk itu, perlu ditetapkan dalam Peraturan Direksi.</li>
+                            </ol>
+                        </div>
+
+                        <div class="mb-4 sm:mb-6 animate__animated animate__fadeInUp">
+                            <h4 class="text-blue-600 mb-2 sm:mb-2.5 text-base sm:text-lg">Mengingat :</h4>
+                            <ol class="list-decimal pl-4 sm:pl-5 space-y-1.5 sm:space-y-2.5">
+                                <li>Anggaran dasar PT Industri Kapal Indonesia (Persero) yang terakhir kali diubah sesuai Akta Notaris Andi Mindaryana Yunus, SH Nomor 19 Tahun 2008.</li>
+                                <li>Surat Keputusan Menteri Negara BUMN Nomor KEP-249/MBU/2011 tanggal 16 Desember 2011 tentang Pemberhentian dan Pengangkatan Anggota-Anggota Direksi Perusahaan Perseroan (Persero) PT Industri Kapal Indonesia.</li>
+                            </ol>
+                        </div>
+                        
+                        <!-- Continue with other sections similarly -->
+                        
+                        <div class="mt-6 sm:mt-10 text-center italic animate__animated animate__fadeInUp">
+                            <p class="text-sm sm:text-base">DITETAPKAN DI : MAKASSAR</p>
+                            <p class="text-sm sm:text-base">PADA TANGGAL : 30 APRIL 2012</p>
+                            <div class="w-32 sm:w-48 h-px bg-gray-800 mx-auto my-3 sm:my-5"></div>
+                            <p class="font-semibold mb-6 sm:mb-10 text-sm sm:text-base">DIREKSI PT INDUSTRI KAPAL INDONESIA (PERSERO)</p>
+                            <div class="h-10 sm:h-16"></div>
+                            <p class="font-semibold text-sm sm:text-base"><u>F. HARRY SAMPURNO</u></p>
+                            <p class="text-sm sm:text-base">Direktur Utama</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agreement Checkbox -->
+                <div class="px-4 sm:px-8 py-3 sm:py-5 bg-gray-50 border-t border-gray-200">
+                    <label class="checkbox-container block relative pl-8 sm:pl-9 cursor-pointer select-none text-gray-800 text-sm sm:text-base">
+                        <input type="checkbox" id="terms-agreement" class="absolute opacity-0 h-0 w-0">
+                        <span class="checkmark"></span>
+                        Saya telah membaca dan menyetujui seluruh peraturan di atas
+                    </label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="px-4 sm:px-8 py-3 sm:py-5 bg-white border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+                    <a href="http://www.ikishipyard.co.id/admin/uploads/registration/12PERATURAN%20DIREKSI%20PT%20IKI.pdf" class="btn-download inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-600 text-white no-underline rounded transition-all duration-300 hover:bg-gray-700 hover:-translate-y-0.5 hover:scale-105 hover:shadow-sm w-full sm:w-auto justify-center">
+                        <i class="fas fa-download mr-2"></i> Download Form
+                    </a>
+                    <div class="flex gap-2 sm:gap-4 w-full sm:w-auto">
+                        <button id="disagree-btn" class="px-4 sm:px-8 py-2 sm:py-3 bg-red-600 text-white border-none rounded cursor-pointer transition-all duration-300 hover:bg-red-700 hover:-translate-y-0.5 hover:scale-105 hover:shadow-sm flex-1 sm:flex-none" onclick="window.location.href='index.php'">
+                            Tidak Setuju
+                        </button>
+                        <button id="agree-btn" class="px-4 sm:px-8 py-2 sm:py-3 bg-green-600 text-white border-none rounded cursor-pointer transition-all duration-300 hover:bg-green-700 hover:-translate-y-0.5 hover:scale-105 hover:shadow-sm disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70 flex-1 sm:flex-none" disabled onclick="window.location.href='?reqMode=ketentuan'">
+                            Setuju & Lanjutkan
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Location Tabs -->
-      <div class="bg-white rounded-lg shadow-sm mb-8">
-        <div class="border-b border-gray-200">
-          <nav class="flex nav-tabs -mb-px">
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm active" id="makassar-tab" data-location="makassar">Makassar</button>
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm" id="bitung-tab" data-location="bitung">Bitung</button>
-          </nav>
-        </div>
-      </div>
-
-      <!-- Month Navigation -->
-      <div class="flex justify-between items-center mb-6">
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <h2 class="text-xl font-bold text-gray-800">Juli 2023</h2>
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- Calendar Grid -->
-      <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
-        <div class="grid grid-cols-7 gap-px bg-gray-200">
-          <!-- Weekday Headers -->
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Minggu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Senin</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Selasa</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Rabu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Kamis</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Jumat</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Sabtu</div>
-
-          <!-- Calendar Days -->
-          <!-- Previous Month (empty) -->
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-
-          <!-- Current Month -->
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">1</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">2</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">3</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">4</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">5</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">6</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">7</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-red-500"></span>
-              </div>
-            </div>
-          </div>
-          <!-- More days... -->
-          <!-- I'm showing a partial month for brevity -->
-        </div>
-      </div>
-
-      <!-- Selected Date Details -->
-      <div class="mb-8">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Detail Ketersediaan: <span class="text-blue-600">5 Juli 2023</span></h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Dock A -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-green-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock A</h4>
-              <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full"> Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 150 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 30 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 8 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 5000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock B -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-yellow-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock B</h4>
-              <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded-full"> Terbatas </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 120 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 25 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 7 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 4000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock C -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-red-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock C</h4>
-              <span class="inline-block bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded-full"> Tidak Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 100 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 20 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 6 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 3000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-gray-400 text-white py-2 px-4 rounded-lg text-sm font-medium cursor-not-allowed" disabled>Tidak Tersedia</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Booking Information -->
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Booking</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Prosedur Booking:</h4>
-            <ol class="list-decimal list-inside text-gray-600 text-sm space-y-2">
-              <li>Pilih lokasi dan tanggal yang tersedia</li>
-              <li>Pilih dock yang ingin dipesan</li>
-              <li>Isi formulir pemesanan dengan data lengkap</li>
-              <li>Upload dokumen yang diperlukan</li>
-              <li>Konfirmasi pemesanan akan dikirim via email</li>
-            </ol>
-          </div>
-          <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Persyaratan:</h4>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-2">
-              <li>Surat Permohonan dari Perusahaan</li>
-              <li>SIUPAL/SIUP (untuk perusahaan)</li>
-              <li>Dokumen kapal yang akan di-docking</li>
-              <li>Rencana kerja selama di dock</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </main>
+    </section>
 
     <!-- Footer -->
     <footer class="text-black py-12 mt-1 w-full">
@@ -623,50 +560,82 @@ Indonesia, 90211.</span>
         </div>
       </div>
     </footer>
+    <!-- Modal Welcome -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-5 pb-4 border-b border-gray-200">
+                <h2 class="text-2xl font-semibold text-blue-700 m-0">Selamat Datang di Halaman Registrasi</h2>
+                <button class="close-modal bg-transparent border-none text-xl cursor-pointer text-gray-500 transition-all duration-300 hover:text-red-500 hover:rotate-90" id="closeModal">&times;</button>
+            </div>
+            <div class="mb-5">
+                <p>Sebelum melanjutkan proses registrasi, harap perhatikan hal-hal berikut:</p>
+                <ol class="list-decimal pl-5 mt-3 space-y-2">
+                    <li>Halaman ini berisi peraturan dan ketentuan yang berlaku untuk pelanggan PT Industri Kapal Indonesia (Persero).</li>
+                    <li>Anda diharuskan membaca seluruh isi peraturan sebelum melanjutkan.</li>
+                    <li>Setelah membaca, centang kotak persetujuan di bagian bawah halaman untuk melanjutkan.</li>
+                    <li>Anda dapat mengunduh salinan peraturan ini untuk referensi.</li>
+                    <li>Proses registrasi terdiri dari 3 tahap: Persyaratan, Formulir, dan Verifikasi.</li>
+                </ol>
+                <p class="mt-3 font-semibold">Pastikan data yang Anda berikan akurat dan benar.</p>
+            </div>
+            <div class="flex justify-end">
+                <button class="btn-understood px-5 py-2.5 bg-blue-700 text-white border-none rounded-md cursor-pointer transition-all duration-300 hover:bg-blue-900 hover:-translate-y-0.5" id="understandBtn">Saya Mengerti</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
     <script>
-      // Tab functionality
-      document.querySelectorAll("[data-location]").forEach((tab) => {
-        tab.addEventListener("click", function () {
-          // Remove active class from all tabs
-          document.querySelectorAll(".nav-tabs button").forEach((t) => {
-            t.classList.remove("active");
-          });
-
-          // Add active class to clicked tab
-          this.classList.add("active");
-
-          // Here you would typically load data for the selected location
-          // For this example, we'll just log to console
-          console.log("Selected location:", this.dataset.location);
+        // Enable agree button only when checkbox is checked
+        document.getElementById('terms-agreement').addEventListener('change', function() {
+            document.getElementById('agree-btn').disabled = !this.checked;
         });
-      });
 
-      // Calendar day selection
-      document.querySelectorAll(".calendar-day").forEach((day) => {
-        day.addEventListener("click", function () {
-          // Remove any existing selection
-          document.querySelectorAll(".calendar-day").forEach((d) => {
-            d.classList.remove("bg-blue-50", "border-blue-200");
-          });
+        // Modal functionality
+        const welcomeModal = document.getElementById('welcomeModal');
+        const closeModal = document.getElementById('closeModal');
+        const understandBtn = document.getElementById('understandBtn');
 
-          // Highlight selected day
-          this.classList.add("bg-blue-50", "border-blue-200");
+    
+        setTimeout(() => {
+            welcomeModal.classList.add('active');
+        }, 500);
 
-          // Here you would typically load availability data for the selected date
-          // For this example, we'll just log to console
-          const dayNumber = this.querySelector("span").textContent;
-          console.log("Selected date: July", dayNumber, "2023");
+
+        // Close modal
+        function closeWelcomeModal() {
+            welcomeModal.classList.remove('active');
+            localStorage.setItem('modalShown', 'true');
+        }
+
+        closeModal.addEventListener('click', closeWelcomeModal);
+        understandBtn.addEventListener('click', closeWelcomeModal);
+
+        // Close modal when clicking outside
+        welcomeModal.addEventListener('click', function(e) {
+            if (e.target === welcomeModal) {
+                closeWelcomeModal();
+            }
         });
-      });
 
-      // Initialize AOS animations
-      AOS.init({
-        duration: 800,
-        easing: "ease-in-out",
-        once: true,
-      });
+        // Add animation to elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.terms-section, .signature-section');
+            
+            elements.forEach((element, index) => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition && !element.classList.contains('animate__fadeInUp')) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                    element.style.animationDelay = `${index * 0.1}s`;
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        animateOnScroll();
     </script>
-  </body>
+</body>
 </html>

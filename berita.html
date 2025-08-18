@@ -1,44 +1,41 @@
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ketersediaan Dock IKISHIPYARD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Ikishi Shipyard</title>
     <link rel="icon" href="img/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="css/style.css" />
     <style>
-      .calendar-day {
-        transition: all 0.2s ease;
-      }
-      .calendar-day:hover {
-        transform: translateY(-2px);
-      }
-      .dock-card {
-        transition: all 0.3s ease;
-      }
-      .dock-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-      }
-      .availability-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 5px;
-      }
-      .nav-tabs .active {
-        border-bottom: 3px solid #3b82f6;
-        color: #3b82f6;
-      }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1e3a8a, #dc2626);
+            transition: width 0.3s ease;
+        }
+        .gradient-border:hover::after {
+            width: 100%;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body class="bg-gray-50">
     <!-- Navbar -->
     <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
       <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
@@ -276,226 +273,127 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-16 bg-center bg-cover" style="background-image: url('image/Pemandangan_laut.jpeg')">
-      <!-- Overlay hitam full kanan kiri -->
-      <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
-
-      <!-- Konten -->
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center text-white">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Docking</h1>
-        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Sejarah dan perjalanan berdirinya perusahaan</p>
-      </div>
-    </section>
-
-    <main class="py-4 px-12 sm:py-10">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 class="text-3xl font-extrabold text-gray-800">Ketersediaan Dock</h1>
-        <div class="mt-4 md:mt-0 flex items-center space-x-4">
-          <div class="flex items-center">
-            <span class="availability-indicator bg-green-500"></span>
-            <span class="text-sm text-gray-600">Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-red-500"></span>
-            <span class="text-sm text-gray-600">Tidak Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-yellow-500"></span>
-            <span class="text-sm text-gray-600">Terbatas</span>
-          </div>
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-center animate__animated animate__fadeInDown">
+                <span class="text-blue-900">Berita</span> 
+                <span class="text-red-600">Terbaru</span>
+            </h1>
+            <p class="text-center text-gray-600 mt-4 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
+                Update terbaru dari PT Industri Kapal Indonesia (Persero)
+            </p>
         </div>
-      </div>
+    </header>
 
-      <!-- Location Tabs -->
-      <div class="bg-white rounded-lg shadow-sm mb-8">
-        <div class="border-b border-gray-200">
-          <nav class="flex nav-tabs -mb-px">
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm active" id="makassar-tab" data-location="makassar">Makassar</button>
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm" id="bitung-tab" data-location="bitung">Bitung</button>
-          </nav>
+    <!-- News Grid -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- News Card 1 -->
+            <div class="news-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 animate__animated animate__fadeInUp">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://source.unsplash.com/random/600x400/?ship" alt="News Image" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <span class="text-white text-sm font-medium">15 Juni 2023</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Update</span>
+                        <span class="text-gray-500 text-sm ml-2">5 menit baca</span>
+                    </div>
+                    <a href="#news1" class="gradient-border block">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 hover:text-blue-900 transition">Peluncuran Kapal Baru dengan Teknologi Ramah Lingkungan</h3>
+                    </a>
+                    <p class="text-gray-600 mb-4">IKI Shipyard meluncurkan kapal terbaru dengan teknologi hijau yang mengurangi emisi hingga 30%...</p>
+                    <a href="#news1" class="text-blue-600 font-medium inline-flex items-center hover:text-blue-900 transition">
+                        Baca Selengkapnya
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- News Card 2 -->
+            <div class="news-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 animate__animated animate__fadeInUp">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://source.unsplash.com/random/600x400/?dock" alt="News Image" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <span class="text-white text-sm font-medium">28 Mei 2023</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">Prestasi</span>
+                        <span class="text-gray-500 text-sm ml-2">8 menit baca</span>
+                    </div>
+                    <a href="#news2" class="gradient-border block">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 hover:text-blue-900 transition">IKI Shipyard Raih Penghargaan Industri Maritim Nasional 2023</h3>
+                    </a>
+                    <p class="text-gray-600 mb-4">Atas inovasi dalam pembangunan kapal dan kontribusi terhadap pengembangan industri maritim Indonesia...</p>
+                    <a href="#news2" class="text-blue-600 font-medium inline-flex items-center hover:text-blue-800 transition">
+                        Baca Selengkapnya
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- News Card 3 -->
+            <div class="news-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 animate__animated animate__fadeInUp">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://source.unsplash.com/random/600x400/?shipyard" alt="News Image" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                        <span class="text-white text-sm font-medium">10 Mei 2023</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Kerjasama</span>
+                        <span class="text-gray-500 text-sm ml-2">6 menit baca</span>
+                    </div>
+                    <a href="#news3" class="gradient-border block">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 hover:text-blue-900 transition">Kerjasama Strategis dengan Universitas Teknologi untuk Pengembangan SDM</h3>
+                    </a>
+                    <p class="text-gray-600 mb-4">Program magang dan penelitian bersama untuk menciptakan tenaga kerja maritim yang kompeten...</p>
+                    <a href="#news3" class="text-blue-600 font-medium inline-flex items-center hover:text-blue-800 transition">
+                        Baca Selengkapnya
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Month Navigation -->
-      <div class="flex justify-between items-center mb-6">
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <h2 class="text-xl font-bold text-gray-800">Juli 2023</h2>
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- Calendar Grid -->
-      <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
-        <div class="grid grid-cols-7 gap-px bg-gray-200">
-          <!-- Weekday Headers -->
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Minggu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Senin</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Selasa</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Rabu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Kamis</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Jumat</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Sabtu</div>
-
-          <!-- Calendar Days -->
-          <!-- Previous Month (empty) -->
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-
-          <!-- Current Month -->
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">1</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">2</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">3</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">4</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">5</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">6</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">7</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-red-500"></span>
-              </div>
-            </div>
-          </div>
-          <!-- More days... -->
-          <!-- I'm showing a partial month for brevity -->
-        </div>
-      </div>
-
-      <!-- Selected Date Details -->
-      <div class="mb-8">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Detail Ketersediaan: <span class="text-blue-600">5 Juli 2023</span></h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Dock A -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-green-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock A</h4>
-              <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full"> Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 150 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 30 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 8 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 5000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock B -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-yellow-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock B</h4>
-              <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded-full"> Terbatas </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 120 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 25 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 7 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 4000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock C -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-red-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock C</h4>
-              <span class="inline-block bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded-full"> Tidak Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 100 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 20 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 6 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 3000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-gray-400 text-white py-2 px-4 rounded-lg text-sm font-medium cursor-not-allowed" disabled>Tidak Tersedia</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Booking Information -->
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Booking</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Prosedur Booking:</h4>
-            <ol class="list-decimal list-inside text-gray-600 text-sm space-y-2">
-              <li>Pilih lokasi dan tanggal yang tersedia</li>
-              <li>Pilih dock yang ingin dipesan</li>
-              <li>Isi formulir pemesanan dengan data lengkap</li>
-              <li>Upload dokumen yang diperlukan</li>
-              <li>Konfirmasi pemesanan akan dikirim via email</li>
-            </ol>
-          </div>
-          <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Persyaratan:</h4>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-2">
-              <li>Surat Permohonan dari Perusahaan</li>
-              <li>SIUPAL/SIUP (untuk perusahaan)</li>
-              <li>Dokumen kapal yang akan di-docking</li>
-              <li>Rencana kerja selama di dock</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </main>
 
-    <!-- Footer -->
+    <!-- News Detail Modal -->
+    <div id="newsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto animate__animated animate__fadeInUp">
+            <div class="relative">
+                <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-2xl z-10">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="relative h-64 overflow-hidden">
+                    <img id="modalImage" src="" alt="News Image" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-wrap items-center mb-4">
+                        <span id="newsCategory" class="text-xs font-semibold px-2.5 py-0.5 rounded mr-2 mb-2"></span>
+                        <span id="newsDate" class="text-gray-500 text-sm mr-4 mb-2"></span>
+                        <span id="readTime" class="text-gray-500 text-sm mb-2"></span>
+                    </div>
+                    <h2 id="newsTitle" class="text-2xl md:text-3xl font-bold text-gray-800 mb-4"></h2>
+                    <div id="newsContent" class="prose max-w-none text-gray-700">
+                        <!-- Content will be inserted here by JavaScript -->
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <a href="#" class="inline-flex items-center text-blue-900 font-medium hover:text-blue-700">
+                            <i class="fas fa-arrow-left mr-2"></i> Kembali ke Berita
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer -->
     <footer class="text-black py-12 mt-1 w-full">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -624,49 +522,95 @@ Indonesia, 90211.</span>
       </div>
     </footer>
 
-    <script src="js/script.js"></script>
     <script>
-      // Tab functionality
-      document.querySelectorAll("[data-location]").forEach((tab) => {
-        tab.addEventListener("click", function () {
-          // Remove active class from all tabs
-          document.querySelectorAll(".nav-tabs button").forEach((t) => {
-            t.classList.remove("active");
-          });
+        // Sample news data
+        const newsData = {
+            news1: {
+                title: "Peluncuran Kapal Baru dengan Teknologi Ramah Lingkungan",
+                category: "Update",
+                categoryClass: "bg-blue-100 text-blue-800",
+                date: "15 Juni 2023",
+                readTime: "5 menit baca",
+                image: "https://source.unsplash.com/random/800x500/?ship,green",
+                content: `
+                    <p class="mb-4">PT Industri Kapal Indonesia (Persero) dengan bangga mengumumkan peluncuran kapal terbaru dengan teknologi ramah lingkungan yang revolusioner. Kapal ini merupakan hasil pengembangan selama 2 tahun oleh tim R&D kami.</p>
+                    
+                    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">Fitur Inovatif</h3>
+                    <ul class="list-disc pl-5 mb-4 space-y-2">
+                        <li>Sistem propulsi hybrid yang mengurangi konsumsi bahan bakar hingga 35%</li>
+                        <li>Material konstruksi daur ulang yang lebih ringan namun kuat</li>
+                        <li>Sistem pengolahan limbah terintegrasi</li>
+                        <li>Panel surya untuk kebutuhan daya tambahan</li>
+                    </ul>
+                    
+                    <p class="mb-4">"Ini adalah langkah besar menuju industri maritim yang lebih berkelanjutan," kata Direktur Utama IKI Shipyard dalam acara peluncuran.</p>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-blue-900 mb-2">Fakta Cepat:</h4>
+                        <p>Kapal ini mampu mengurangi emisi karbon hingga 30% dibandingkan kapal konvensional dengan ukuran yang sama.</p>
+                    </div>
+                    
+                    <p>Kapal pertama dari seri ini akan mulai beroperasi bulan depan dengan rute utama Surabaya-Makassar.</p>
+                `
+            },
+            news2: {
+                title: "IKI Shipyard Raih Penghargaan Industri Maritim Nasional 2023",
+                category: "Prestasi",
+                categoryClass: "bg-red-100 text-red-800",
+                date: "28 Mei 2023",
+                readTime: "8 menit baca",
+                image: "https://source.unsplash.com/random/800x500/?award,dock",
+                content: `
+                    <p class="mb-4">IKI Shipyard meraih penghargaan tertinggi dalam ajang Anugerah Industri Maritim Nasional 2023 untuk kategori "Inovasi Teknologi Kapal". Penghargaan ini diserahkan langsung oleh Menteri Perhubungan RI dalam acara yang digelar di Jakarta Convention Center.</p>
+                    
+                    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-3">Prestasi yang Membanggakan</h3>
+                    <p class="mb-4">Penghargaan ini diberikan atas keberhasilan IKI Shipyard dalam mengembangkan teknologi:</p>
+                    <ul class="list-disc pl-5 mb-4 space-y-2">
+                        <li>Sistem navigasi otonom untuk kapal ukuran menengah</li>
+                        <li>Metode konstruksi modular yang mempercepat waktu produksi</li>
+                        <li>Solusi anti-karat ramah lingkungan</li>
+                    </ul>
+                    
+                    <div class="bg-red-50 p-4 rounded-lg mb-4">
+                        <h4 class="font-bold text-red-900 mb-2">Kata Direktur:</h4>
+                        <p>"Penghargaan ini adalah bukti komitmen kami terhadap inovasi dan kualitas. Kami berdedikasi untuk terus memajukan industri maritim Indonesia."</p>
+                    </div>
+                    
+                    <p class="mb-4">Dengan penghargaan ini, IKI Shipyard semakin memperkuat posisinya sebagai salah satu galangan kapal terdepan di Asia Tenggara.</p>
+                `
+            }
+        };
 
-          // Add active class to clicked tab
-          this.classList.add("active");
-
-          // Here you would typically load data for the selected location
-          // For this example, we'll just log to console
-          console.log("Selected location:", this.dataset.location);
+        // Modal functionality
+        document.querySelectorAll('[href^="#news"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const newsId = this.getAttribute('href').substring(1);
+                const news = newsData[newsId];
+                
+                if (news) {
+                    document.getElementById('modalImage').src = news.image;
+                    document.getElementById('newsTitle').textContent = news.title;
+                    document.getElementById('newsCategory').textContent = news.category;
+                    document.getElementById('newsCategory').className = `text-xs font-semibold px-2.5 py-0.5 rounded mr-2 mb-2 ${news.categoryClass}`;
+                    document.getElementById('newsDate').textContent = news.date;
+                    document.getElementById('readTime').textContent = news.readTime;
+                    document.getElementById('newsContent').innerHTML = news.content;
+                    
+                    const modal = document.getElementById('newsModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
         });
-      });
 
-      // Calendar day selection
-      document.querySelectorAll(".calendar-day").forEach((day) => {
-        day.addEventListener("click", function () {
-          // Remove any existing selection
-          document.querySelectorAll(".calendar-day").forEach((d) => {
-            d.classList.remove("bg-blue-50", "border-blue-200");
-          });
-
-          // Highlight selected day
-          this.classList.add("bg-blue-50", "border-blue-200");
-
-          // Here you would typically load availability data for the selected date
-          // For this example, we'll just log to console
-          const dayNumber = this.querySelector("span").textContent;
-          console.log("Selected date: July", dayNumber, "2023");
+        document.getElementById('closeModal').addEventListener('click', function() {
+            const modal = document.getElementById('newsModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
         });
-      });
-
-      // Initialize AOS animations
-      AOS.init({
-        duration: 800,
-        easing: "ease-in-out",
-        once: true,
-      });
     </script>
-  </body>
+</body>
 </html>

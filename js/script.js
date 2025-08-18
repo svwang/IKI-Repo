@@ -46,6 +46,18 @@ function toggleMobileDropdown(button) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    const loadingScreen = document.getElementById('loading-screen')
+    const mainContent = document.getElementById('main-contents')
+
+    loadingScreen.style.opacity = '0'
+
+    setTimeout(() => {
+      loadingScreen.style.display = 'none'
+      mainContent.style.display = 'block'
+    }, 500)
+  }, 3000)
+
   const nav = document.querySelector('nav');
   let lastScroll = 0;
   
@@ -59,10 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to update navbar colors
   function updateNavColors(isTransparent) {
     if (isTransparent) {
-      // Navbar transparan - teks putih
-      nav.querySelectorAll('a:not(.dropdown-panel a), button:not(.dropdown-panel button), span:not(.dropdown-panel span), i:not(.dropdown-panel i)').forEach(el => {
-        el.style.color = 'white';
-      });
+      if (window.innerWidth >= 1024) { // lg breakpoint
+        nav.querySelectorAll('a:not(.dropdown-panel a), button:not(.dropdown-panel button), span:not(.dropdown-panel span), i:not(.dropdown-panel i)').forEach(el => {
+          el.style.color = 'white';
+        });
+      }
       
       // Logo dan teks perusahaan
       nav.querySelector('.text-blue-900').style.color = 'white';

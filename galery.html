@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ketersediaan Dock IKISHIPYARD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - IKI Shipyard</title>
     <link rel="icon" href="img/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -11,34 +11,139 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-      .calendar-day {
-        transition: all 0.2s ease;
-      }
-      .calendar-day:hover {
-        transform: translateY(-2px);
-      }
-      .dock-card {
-        transition: all 0.3s ease;
-      }
-      .dock-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-      }
-      .availability-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 5px;
-      }
-      .nav-tabs .active {
-        border-bottom: 3px solid #3b82f6;
-        color: #3b82f6;
-      }
+        .gallery-item {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .filter-btn.active {
+            background-color: #1e3a8a;
+            color: white;
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .video-thumbnail::after {
+            content: '\f04b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        .video-thumbnail:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .zoom-in {
+            animation: zoomIn 0.3s ease-out;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* New header animation styles */
+        .hero-wave {
+            position: absolute;
+            bottom: 100px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        
+        .hero-wave .shape-fill {
+            fill: #153a5f5a;
+        }
+        
+        @keyframes waveMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #a5b4fc);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientShift 3s linear infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        .floating-ship {
+            position: absolute;
+            right: 10%;
+            bottom: 20px;
+            width: 120px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="%23ffffff" d="M176 320c-61.9 0-112-50.1-112-112S114.1 96 176 96s112 50.1 112 112-50.1 112-112 112zm16-176c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm240 176c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112zm16-176c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zM592 288H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h16c8.8 0 16 7.2 16 16v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16h336v16c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-16c0-8.8 7.2-16 16-16h16c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16z"/></svg>');
+            background-repeat: no-repeat;
+            animation: floating 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+        }
+        
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+            100% {
+                bottom: 100%;
+                transform: translateX(-200px);
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body class="bg-gray-50">
     <!-- Navbar -->
     <nav class="bg-white shadow-md w-full z-30 border-b border-gray-200" role="navigation">
       <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
@@ -276,224 +381,210 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-16 bg-center bg-cover" style="background-image: url('image/Pemandangan_laut.jpeg')">
-      <!-- Overlay hitam full kanan kiri -->
-      <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
-
-      <!-- Konten -->
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center text-white">
-        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Docking</h1>
-        <p class="max-w-3xl mx-auto text-lg sm:text-xl font-light leading-relaxed">Sejarah dan perjalanan berdirinya perusahaan</p>
-      </div>
+    <!-- Hero Section with Animations -->
+    <section class="relative bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20 overflow-hidden">
+        <!-- Animated bubbles background -->
+        <div class="bubbles">
+            <!-- Bubbles will be generated by JS -->
+        </div>
+        
+        <!-- Floating ship animation -->
+        <div class="floating-ship"></div>
+        
+        <div class="container mx-auto px-6 text-center animate__animated animate__fadeIn relative z-10 pt-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="gradient-text">Galeri IKI Shipyard</span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90 animate__animated animate__fadeInUp">
+                Dokumentasi visual kegiatan dan pencapaian perusahaan
+            </p>
+        </div>
+        
+        <!-- Animated wave divider -->
+        <div class="hero-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
     </section>
 
-    <main class="py-4 px-12 sm:py-10">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 class="text-3xl font-extrabold text-gray-800">Ketersediaan Dock</h1>
-        <div class="mt-4 md:mt-0 flex items-center space-x-4">
-          <div class="flex items-center">
-            <span class="availability-indicator bg-green-500"></span>
-            <span class="text-sm text-gray-600">Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-red-500"></span>
-            <span class="text-sm text-gray-600">Tidak Tersedia</span>
-          </div>
-          <div class="flex items-center">
-            <span class="availability-indicator bg-yellow-500"></span>
-            <span class="text-sm text-gray-600">Terbatas</span>
-          </div>
+    <!-- Rest of your existing code remains the same -->
+    <!-- Gallery Navigation -->
+    <div class="container mx-auto px-6 py-8 -mt-8 z-10 relative">
+        <div class="bg-white rounded-lg shadow-md p-4 flex flex-wrap justify-center gap-2 animate__animated animate__fadeInUp">
+            <button class="filter-btn active px-4 py-2 rounded-full transition-all" data-filter="all">Semua</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="photo">Foto</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="video">Video</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="construction">Konstruksi</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="event">Acara</button>
+            <button class="filter-btn px-4 py-2 rounded-full transition-all" data-filter="award">Penghargaan</button>
         </div>
-      </div>
+    </div>
 
-      <!-- Location Tabs -->
-      <div class="bg-white rounded-lg shadow-sm mb-8">
-        <div class="border-b border-gray-200">
-          <nav class="flex nav-tabs -mb-px">
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm active" id="makassar-tab" data-location="makassar">Makassar</button>
-            <button class="py-4 px-6 text-center border-b-2 font-medium text-sm" id="bitung-tab" data-location="bitung">Bitung</button>
-          </nav>
+    <!-- Gallery Grid -->
+    <section class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Photo Item 1 -->
+            <div class="gallery-item photo construction animate__animated animate__fadeIn" data-category="photo construction">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?shipyard" alt="Ship Construction" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Proses Konstruksi Kapal</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Pembangunan Kapal Baru</h3>
+                        <p class="text-gray-600 text-sm">15 Juni 2023 - Galangan Utama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Item 1 -->
+            <div class="gallery-item video event animate__animated animate__fadeIn" data-category="video event" style="animation-delay: 0.1s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] video-thumbnail gallery-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <img src="https://source.unsplash.com/random/600x400/?ceremony" alt="Company Event" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Peluncuran Kapal Perdana</h3>
+                        <p class="text-gray-600 text-sm">28 Mei 2023 - Dermaga Utama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 2 -->
+            <div class="gallery-item photo award animate__animated animate__fadeIn" data-category="photo award" style="animation-delay: 0.2s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?award" alt="Award Ceremony" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Penghargaan Industri Maritim</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Penghargaan Nasional 2023</h3>
+                        <p class="text-gray-600 text-sm">10 Mei 2023 - Jakarta</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Item 2 -->
+            <div class="gallery-item video construction animate__animated animate__fadeIn" data-category="video construction" style="animation-delay: 0.3s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] video-thumbnail gallery-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <img src="https://source.unsplash.com/random/600x400/?construction" alt="Ship Construction" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Proses Pembangunan Kapal</h3>
+                        <p class="text-gray-600 text-sm">22 April 2023 - Workshop</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 3 -->
+            <div class="gallery-item photo event animate__animated animate__fadeIn" data-category="photo event" style="animation-delay: 0.4s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?meeting" alt="Company Meeting" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Rapat Tahunan Perusahaan</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Rapat Direksi 2023</h3>
+                        <p class="text-gray-600 text-sm">5 April 2023 - Ruang Rapat</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 4 -->
+            <div class="gallery-item photo construction animate__animated animate__fadeIn" data-category="photo construction" style="animation-delay: 0.5s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?dock" alt="Ship Dock" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Area Docking Kapal</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Fasilitas Docking Modern</h3>
+                        <p class="text-gray-600 text-sm">30 Maret 2023 - Pelabuhan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Item 3 -->
+            <div class="gallery-item video award animate__animated animate__fadeIn" data-category="video award" style="animation-delay: 0.6s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] video-thumbnail gallery-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <img src="https://source.unsplash.com/random/600x400/?trophy" alt="Award Ceremony" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Penghargaan Inovasi Teknologi</h3>
+                        <p class="text-gray-600 text-sm">15 Maret 2023 - Jakarta</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Item 5 -->
+            <div class="gallery-item photo event animate__animated animate__fadeIn" data-category="photo event" style="animation-delay: 0.7s">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
+                    <div class="relative overflow-hidden cursor-pointer aspect-[4/3] gallery-image">
+                        <img src="https://source.unsplash.com/random/600x400/?training" alt="Employee Training" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-white font-medium">Pelatihan Karyawan</span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="font-bold text-blue-900 mb-2">Program Pelatihan SDM</h3>
+                        <p class="text-gray-600 text-sm">1 Maret 2023 - Ruang Pelatihan</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- Month Navigation -->
-      <div class="flex justify-between items-center mb-6">
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <h2 class="text-xl font-bold text-gray-800">Juli 2023</h2>
-        <button class="p-2 rounded-full hover:bg-gray-100">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- Calendar Grid -->
-      <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
-        <div class="grid grid-cols-7 gap-px bg-gray-200">
-          <!-- Weekday Headers -->
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Minggu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Senin</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Selasa</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Rabu</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Kamis</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Jumat</div>
-          <div class="bg-gray-100 py-2 text-center text-sm font-medium text-gray-500">Sabtu</div>
-
-          <!-- Calendar Days -->
-          <!-- Previous Month (empty) -->
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-          <div class="bg-white h-16"></div>
-
-          <!-- Current Month -->
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">1</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">2</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">3</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-green-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">4</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">5</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">6</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-yellow-500"></span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-white calendar-day p-2 border-b border-gray-100">
-            <div class="flex flex-col h-full">
-              <span class="text-sm font-medium">7</span>
-              <div class="flex-1 flex items-end justify-center space-x-1 mt-1">
-                <span class="availability-indicator bg-green-500"></span>
-                <span class="availability-indicator bg-red-500"></span>
-              </div>
-            </div>
-          </div>
-          <!-- More days... -->
-          <!-- I'm showing a partial month for brevity -->
+        <!-- Load More Button -->
+        <div class="text-center mt-12 animate__animated animate__fadeIn">
+            <button id="loadMore" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-full transition-all transform hover:scale-105">
+                Muat Lebih Banyak
+            </button>
         </div>
-      </div>
+    </section>
 
-      <!-- Selected Date Details -->
-      <div class="mb-8">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Detail Ketersediaan: <span class="text-blue-600">5 Juli 2023</span></h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Dock A -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-green-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock A</h4>
-              <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full"> Tersedia </span>
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="relative max-w-4xl w-full max-h-[90vh]">
+            <button id="closeImageModal" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-400 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="bg-white rounded-lg overflow-hidden">
+                <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[80vh] object-contain">
+                <div class="p-4 bg-white">
+                    <h3 id="modalImageTitle" class="text-xl font-bold text-blue-900"></h3>
+                    <p id="modalImageDate" class="text-gray-600 text-sm"></p>
+                </div>
             </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 150 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 30 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 8 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 5000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock B -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-yellow-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock B</h4>
-              <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded-full"> Terbatas </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 120 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 25 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 7 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 4000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition">Pesan Sekarang</button>
-          </div>
-
-          <!-- Dock C -->
-          <div class="dock-card bg-white rounded-lg shadow-md p-6 flex flex-col border-l-4 border-red-500">
-            <div class="flex justify-between items-start mb-3">
-              <h4 class="text-xl font-bold">Dock C</h4>
-              <span class="inline-block bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded-full"> Tidak Tersedia </span>
-            </div>
-            <ul class="text-gray-700 text-sm mb-4">
-              <li class="mb-1"><span class="font-semibold">Panjang:</span> 100 m</li>
-              <li class="mb-1"><span class="font-semibold">Lebar:</span> 20 m</li>
-              <li class="mb-1"><span class="font-semibold">Kedalaman:</span> 6 m</li>
-              <li class="mb-1"><span class="font-semibold">Kapasitas:</span> 3000 Ton</li>
-            </ul>
-            <button class="mt-auto bg-gray-400 text-white py-2 px-4 rounded-lg text-sm font-medium cursor-not-allowed" disabled>Tidak Tersedia</button>
-          </div>
         </div>
-      </div>
+    </div>
 
-      <!-- Booking Information -->
-      <div class="bg-white rounded-lg shadow-sm p-6">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Booking</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Prosedur Booking:</h4>
-            <ol class="list-decimal list-inside text-gray-600 text-sm space-y-2">
-              <li>Pilih lokasi dan tanggal yang tersedia</li>
-              <li>Pilih dock yang ingin dipesan</li>
-              <li>Isi formulir pemesanan dengan data lengkap</li>
-              <li>Upload dokumen yang diperlukan</li>
-              <li>Konfirmasi pemesanan akan dikirim via email</li>
-            </ol>
-          </div>
-          <div>
-            <h4 class="font-semibold text-gray-700 mb-2">Persyaratan:</h4>
-            <ul class="list-disc list-inside text-gray-600 text-sm space-y-2">
-              <li>Surat Permohonan dari Perusahaan</li>
-              <li>SIUPAL/SIUP (untuk perusahaan)</li>
-              <li>Dokumen kapal yang akan di-docking</li>
-              <li>Rencana kerja selama di dock</li>
-            </ul>
-          </div>
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="relative max-w-4xl w-full">
+            <button id="closeVideoModal" class="absolute -top-12 right-0 text-white text-3xl hover:text-red-400 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden">
+                <iframe id="modalVideo" width="100%" height="100%" frameborder="0" allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                </iframe>
+            </div>
+            <div class="p-4 bg-white rounded-b-lg">
+                <h3 id="modalVideoTitle" class="text-xl font-bold text-blue-900"></h3>
+                <p id="modalVideoDate" class="text-gray-600 text-sm"></p>
+            </div>
         </div>
-      </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer class="text-black py-12 mt-1 w-full">
@@ -626,47 +717,141 @@ Indonesia, 90211.</span>
 
     <script src="js/script.js"></script>
     <script>
-      // Tab functionality
-      document.querySelectorAll("[data-location]").forEach((tab) => {
-        tab.addEventListener("click", function () {
-          // Remove active class from all tabs
-          document.querySelectorAll(".nav-tabs button").forEach((t) => {
-            t.classList.remove("active");
-          });
+        // Create bubbles for header animation
+        function createBubbles() {
+            const bubblesContainer = document.querySelector('.bubbles');
+            const bubbleCount = 15;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Random size between 10px and 40px
+                const size = Math.random() * 30 + 10;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Random position
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation duration between 5s and 15s
+                const duration = Math.random() * 10 + 5;
+                bubble.style.animationDuration = `${duration}s`;
+                
+                // Random delay
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createBubbles();
+            
+            // Filter functionality
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    const items = document.querySelectorAll('.gallery-item');
+                    
+                    items.forEach(item => {
+                        if (filter === 'all' || item.dataset.category.includes(filter)) {
+                            item.style.display = 'block';
+                            item.classList.add('animate__fadeIn');
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.remove('animate__fadeIn');
+                        }
+                    });
+                });
+            });
 
-          // Add active class to clicked tab
-          this.classList.add("active");
+            // Image modal functionality
+            document.querySelectorAll('.gallery-image').forEach(image => {
+                image.addEventListener('click', function() {
+                    const card = this.closest('.gallery-item');
+                    const imgSrc = this.querySelector('img').src;
+                    const title = card.querySelector('h3').textContent;
+                    const date = card.querySelector('p').textContent;
+                    
+                    document.getElementById('modalImage').src = imgSrc;
+                    document.getElementById('modalImageTitle').textContent = title;
+                    document.getElementById('modalImageDate').textContent = date;
+                    
+                    const modal = document.getElementById('imageModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex', 'fade-in');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
 
-          // Here you would typically load data for the selected location
-          // For this example, we'll just log to console
-          console.log("Selected location:", this.dataset.location);
+            // Video modal functionality
+            document.querySelectorAll('.gallery-video').forEach(video => {
+                video.addEventListener('click', function() {
+                    const card = this.closest('.gallery-item');
+                    const videoUrl = this.dataset.video;
+                    const title = card.querySelector('h3').textContent;
+                    const date = card.querySelector('p').textContent;
+                    
+                    document.getElementById('modalVideo').src = videoUrl;
+                    document.getElementById('modalVideoTitle').textContent = title;
+                    document.getElementById('modalVideoDate').textContent = date;
+                    
+                    const modal = document.getElementById('videoModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex', 'fade-in');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close modals
+            document.getElementById('closeImageModal').addEventListener('click', function() {
+                const modal = document.getElementById('imageModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            });
+
+            document.getElementById('closeVideoModal').addEventListener('click', function() {
+                const modal = document.getElementById('videoModal');
+                const iframe = document.getElementById('modalVideo');
+                iframe.src = '';
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close modals when clicking outside
+            document.getElementById('imageModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                    this.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            document.getElementById('videoModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    const iframe = document.getElementById('modalVideo');
+                    iframe.src = '';
+                    this.classList.add('hidden');
+                    this.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Load more functionality
+            document.getElementById('loadMore').addEventListener('click', function() {
+                // In a real implementation, this would load more items from an API
+                // For demo, we'll just show an alert
+                alert('Fitur "Muat Lebih Banyak" akan menampilkan item galeri tambahan dalam implementasi nyata.');
+            });
         });
-      });
-
-      // Calendar day selection
-      document.querySelectorAll(".calendar-day").forEach((day) => {
-        day.addEventListener("click", function () {
-          // Remove any existing selection
-          document.querySelectorAll(".calendar-day").forEach((d) => {
-            d.classList.remove("bg-blue-50", "border-blue-200");
-          });
-
-          // Highlight selected day
-          this.classList.add("bg-blue-50", "border-blue-200");
-
-          // Here you would typically load availability data for the selected date
-          // For this example, we'll just log to console
-          const dayNumber = this.querySelector("span").textContent;
-          console.log("Selected date: July", dayNumber, "2023");
-        });
-      });
-
-      // Initialize AOS animations
-      AOS.init({
-        duration: 800,
-        easing: "ease-in-out",
-        once: true,
-      });
     </script>
-  </body>
+</body>
 </html>
