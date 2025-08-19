@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Initial state - transparent with white text
   nav.style.backgroundColor = 'transparent';
+  nav.style.backgroundColor = 'white';
   nav.style.boxShadow = 'none';
   
   // Function to update navbar colors
@@ -74,12 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
       if (window.innerWidth >= 1024) { // lg breakpoint
         nav.querySelectorAll('a:not(.dropdown-panel a), button:not(.dropdown-panel button), span:not(.dropdown-panel span), i:not(.dropdown-panel i)').forEach(el => {
           el.style.color = 'white';
+          el.style.color = 'black';
         });
       }
       
       // Logo dan teks perusahaan
       nav.querySelector('.text-blue-900').style.color = 'white';
       nav.querySelector('.text-gray-600').style.color = 'rgba(255,255,255,0.8)';
+      nav.querySelector('.text-blue-900').style.color = 'rgba(47, 46, 46, 1)';
+      nav.querySelector('.text-gray-600').style.color = 'rgba(46, 46, 46, 0.8)';
       
       // Ikon hamburger
       document.getElementById('menu-btn').querySelector('i').style.color = 'white';
@@ -87,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Navbar solid - teks default
       nav.querySelectorAll('a, button, span, i').forEach(el => {
         el.style.color = '';
+        el.style.color = 'black';
       });
       
       // Kembalikan warna asli logo dan teks perusahaan
@@ -105,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentScroll <= scrollThreshold) {
       // At top of page - transparent with white text
       nav.style.backgroundColor = 'transparent';
+      nav.style.backgroundColor = 'white';
       nav.style.boxShadow = 'none';
       updateNavColors(true);
       nav.style.transform = 'translateY(0)';
@@ -178,6 +184,14 @@ if (typeof AOS !== 'undefined') {
   AOS.init();
 }
 
+// Tambahkan ini untuk memeriksa apakah AOS terdeteksi
+console.log('AOS detected:', typeof AOS !== 'undefined');
+
+// Periksa elemen yang seharusnya beranimasi
+document.querySelectorAll('[data-aos]').forEach(el => {
+  console.log('AOS element:', el, 'visible:', el.getAttribute('data-aos'));
+});
+
 
 // 1. Fix background image change functionality
   const background = document.getElementById('projectBackground');
@@ -226,3 +240,52 @@ if (typeof AOS !== 'undefined') {
       });
     });
   }
+
+  
+
+  function hideGoogleTranslateBanner() {
+    var iframe = document.querySelector(".goog-te-banner-frame.skiptranslate");
+    if (iframe) {
+      iframe.style.display = "none";
+    }
+    document.body.style.top = "0px";
+  }
+
+  // Jalankan setelah halaman load
+  document.addEventListener("DOMContentLoaded", function() {
+    hideGoogleTranslateBanner();
+    setInterval(hideGoogleTranslateBanner, 500); // ulangi untuk jaga-jaga
+  });
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'id',
+      includedLanguages: 'id,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
+  function changeLanguage(lang) {
+    const langPair = lang === 'id' ? '/id/id' : '/id/en';
+    document.cookie = `googtrans=${langPair};path=/;domain=${window.location.hostname}`;
+    updateLanguageUI(lang);
+    localStorage.setItem("preferredLanguage", lang);
+    location.reload();
+  }
+
+  function updateLanguageUI(lang) {
+    const languageMap = {
+      'id': { flag: 'https://flagcdn.com/w20/id.png', name: 'ID' },
+      'en': { flag: 'https://flagcdn.com/w20/gb.png', name: 'EN' }
+    };
+    const langData = languageMap[lang];
+    if (langData) {
+      document.getElementById('currentFlag').src = langData.flag;
+      document.getElementById('currentLang').textContent = langData.name;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedLang = localStorage.getItem("preferredLanguage") || "id";
+    updateLanguageUI(savedLang);
+  });
